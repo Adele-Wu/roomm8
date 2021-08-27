@@ -20,6 +20,6 @@
 | Jeffrey Friedrich | jfriedrich@mail.sfsu.edu | JeffreyFriedrich |
 | member4      |               |                 |
 | member5      |               |                 |
-| member6      |               |                 |
+| Eddy Yun | eyun1@mail.sfsu.edu | eyun1988 |
 
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
