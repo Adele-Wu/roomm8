@@ -18,7 +18,7 @@
 | Jeffrey Fulmer Gardner | jfulmergardner@mail.sfsu.edu | JeffreyFG |
 | member2      |               |                 |
 | Jeffrey Friedrich | jfriedrich@mail.sfsu.edu | JeffreyFriedrich |
-| member4      |               |                 |
+| Jose Quinteros | jquinteros@mail.sfsu.edu      |  jaq19         |
 | Adele Wu |  awu16@mail.sfsu.edu | adele-wu |
 | Eddy Yun | eyun1@mail.sfsu.edu | eyun1988 |
 
