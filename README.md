@@ -15,7 +15,7 @@
 
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
-| member1  Jeffrey Fulmer Gardner    | jfulmergardner@mail.sfsu.edu | JeffreyFG |
+| Jeffrey Fulmer Gardner | jfulmergardner@mail.sfsu.edu | JeffreyFG |
 | member2      |               |                 |
 | Jeffrey Friedrich | jfriedrich@mail.sfsu.edu | JeffreyFriedrich |
 | member4      |               |                 |
