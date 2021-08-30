@@ -16,7 +16,7 @@
 | Student Name | Student Email | GitHub Username |
 |    :---:     |     :---:     |     :---:       |
 | Jeffrey Fulmer Gardner | jfulmergardner@mail.sfsu.edu | JeffreyFG |
-| member2      |               |                 |
+| Kris Byington | kbyington@mail.sfsu.edu | krisbyington |
 | Jeffrey Friedrich | jfriedrich@mail.sfsu.edu | JeffreyFriedrich |
 | Jose Quinteros | jquinteros@mail.sfsu.edu      |  jaq19         |
 | Adele Wu |  awu16@mail.sfsu.edu | adele-wu |
