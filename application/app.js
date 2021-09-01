@@ -8,7 +8,9 @@ var sessions = require('express-session');
 var mysqlSession = require('express-mysql-session')(sessions);
 var flash = require('express-flash');
 var multer = require('multer');
-
+/**
+ * We are keeping MVC design pattern in mind to organize and divide the related program logic.
+ */
 // set each route 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
