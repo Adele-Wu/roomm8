@@ -1,0 +1,33 @@
+{
+  "name": "roomm8",
+  "version": "1.0.0",
+  "description": "This is the node and express application for CSC 648 Group 5 web site project",
+  "private": true,
+  "scripts": {
+    "test": "nodemon app.js",
+    "start": "node ./bin/www"
+  },
+  "author": "Jeffrey FG, Eddy Yun, Adele wu, Jeffrey Friedrich, Kris Byington, and Jose Quinteros",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "colors": "^1.4.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-flash": "^0.0.2",
+    "express-handlebars": "^5.3.3",
+    "express-mysql-session": "^2.1.6",
+    "express-session": "^1.17.2",
+    "express-validation": "^3.0.8",
+    "express-validator": "^6.12.1",
+    "hbs": "^4.1.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.3",
+    "mysql2": "^2.3.0",
+    "node-pre-gyp": "^0.17.0",
+    "nodemon": "^2.0.12",
+    "sharp": "^0.29.0"
+  }
+}

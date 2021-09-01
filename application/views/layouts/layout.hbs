@@ -1,0 +1,58 @@
+{{!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+  </head>
+  <body>
+    <nav>
+        <ul>
+          <li><a href="/registration" style="text-decoration:none">Sign Up</a></li>
+          <li><a href="/login" style="text-decoration:none">Log In</a></li>
+          <li><a href="/" style="text-decoration:none">Home</a></li>
+          <li><a href="/about" style="text-decoration:none">About Us</a></li>
+          {{#if logged}}
+          {{else}}
+          {{/if}}
+        </ul>
+    </nav>
+
+    {{{body}}}
+    
+  </body>
+</html> --}}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    {{!-- <link rel="icon" type="image/x-icon" href="/images/favicon.PNG" /> --}}
+    <link rel="icon" type="image/x-icon" href="/images/favi.png" />
+    {{!-- Put all CSS links here --}}
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    {{!-- Put all JS scripts --}}
+  </head>
+
+  <div class='logo'>
+    <img src="/images/roomM8_white.png" width="100rem"> 
+  </div>
+
+  <body>
+    <nav>
+        <ul>
+          <li><a href="/" style="text-decoration:none">Home</a></li>
+          {{!-- For sign up --}}
+          <li><a href="/registration" style="text-decoration:none">Sign Up</a></li>
+          {{!-- For log in --}}
+          <li><a href="/login" style="text-decoration:none">Log In</a></li>
+          <li><a href="/about" style="text-decoration:none">About Us</a></li>
+          {{#if logged}}
+          {{else}}
+          {{/if}}
+        </ul>
+    </nav>
+
+    {{{body}}}
+    
+  </body>
+</html>
