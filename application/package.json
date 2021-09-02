@@ -28,6 +28,7 @@
     "mysql2": "^2.3.0",
     "node-pre-gyp": "^0.17.0",
     "nodemon": "^2.0.12",
-    "sharp": "^0.29.0"
+    "sharp": "^0.29.0",
+    "tailwindcss": "^2.2.9"
   }
 }

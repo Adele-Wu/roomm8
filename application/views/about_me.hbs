@@ -1,11 +1,15 @@
 <link rel="stylesheet" href="/stylesheets/{{person.first_name}}.css">
 
-<div>
-    <h1>{{person.first_name}} {{person.last_name}}</h1>
+<div class='person_container'>
+    <h1 id='name'>{{person.first_name}} {{person.last_name}}</h1>
     <br>
-    <img src="/images/{{person.image}}" alt="imageNoWork" style="height:100px">
+    <img id='photo' src="/images/{{person.image}}" alt="imageNoWork" style="height:200px">
     <br>
+    <a id='github' href={{person.github_link}}>
     {{person.github}}
+    </a>
     <br>
-    {{person.information}}
+    <a id='info'>
+        {{person.information}}
+    </a>
 </div>
