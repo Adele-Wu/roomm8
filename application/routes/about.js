@@ -14,15 +14,17 @@ const person = [
     {
         first_name:"Adele",
         last_name: "Wu",
-        image: "Smiley_Face.JPG",
+        image: "/developer_pics/adele.JPEG",
         github: "adele-wu",
-        information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
+        github_link: 'https://github.com/Adele-Wu',
+        information: "Adele Wu is a senior at San Francisco State University studying Computer Science. Summer 2021, Adele worked as a QA Engineer at Zwift. Prior to SFSU, Adele recieved a degree in Mathematics from Skyline College. During her time at Skyline, Adele was an Engineering and Tech Scholar (ETS) and National Science Foundation (NSF) scholar. Adele interned with Strategic Energy Innovations (SEI) to develop a car counter prototype to track availablity of parking lots at Skyline College. Additionally, Adele worked as a bobarista at a family-owned boba shop."
     },
     {
         first_name : "Jeff",
         last_name:  "Fulmer Gardner",
         image: "Smiley_Face.JPG",
         github: "JeffreyFG",
+        github_link: 'https://github.com/JeffreyFG',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
     },
     {
@@ -30,6 +32,7 @@ const person = [
         last_name: "Byington",
         image: "Smiley_Face.JPG",
         github: "krisbyington",
+        github_link: 'https://github.com/krisbyington',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
     },
     {
@@ -37,6 +40,7 @@ const person = [
         last_name: "Friedrich",
         image: "Smiley_Face.JPG",
         github: "jeffreyfriedrich",
+        github_link: 'https://github.com/JeffreyFriedrich',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
     },
     {
@@ -44,13 +48,15 @@ const person = [
         last_name : "Yun",
         image: "Smiley_Face.JPG",
         github: "eyun1988",
+        github_link: 'https://github.com/eyun1988',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
     },
     {
         first_name : "Jose",
         last_name : "Quintero",
         image: "Smiley_Face.JPG",
-        github: "",
+        github: "jaq19",
+        github_link: 'https://github.com/jaq19',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
     }
 ];
