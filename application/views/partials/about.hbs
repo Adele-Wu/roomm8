@@ -1,0 +1,15 @@
+{{!-- <div class="profile" id="profile"> --}}
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3" id="profile">
+    {{#each person}}
+    <div class="hover_card" id="person_card" >
+        <a href="/about/{{this.first_name}}" style="text-decoration:none">
+            <img id='photo' src="/images/{{this.image}}" alt="imageNoWork" style="height:100px" class="center">
+            <p id='name'>{{this.first_name}} {{this.last_name}}</p>
+            <p>GitHub Name: {{this.github}}</p>
+            <p>About Me: {{this.information}}</p>
+        </a>
+    </div>
+    {{/each}}
+</div>

@@ -1,0 +1,62 @@
+*{
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+.person_container{
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 25px;
+
+}
+
+#name{
+    color: rgba(160, 102, 218);
+    font-size: 32px;
+    margin: auto;
+    margin-top: 0;
+    width: 50%;
+    text-align: center;
+}
+
+.person_container{
+    background-color: rgba(221, 212, 230, 0.918);
+    border-style: solid;
+    border-width: .5rem;
+    border-color: rgba(160, 102, 218, 0.603);
+    width: 50rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#photo{
+    display: block;
+    border-style: solid;
+    border-width: .5rem;
+    border-color: rgba(160, 102, 218, 0.603);
+    border-radius: 25px;
+}
+
+#text {
+    /* margin: auto; */
+    width: 50%;
+}
+
+#github{
+    background-color:rgba(160, 102, 218, 0.603);
+    padding:1rem;
+    border-radius: 25px;
+}
+
+#github:hover{
+    box-shadow: 
+    10px 10px 12px 0 rgba(0, 0, 0, .25) inset, 
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1) inset,
+    10px 10px 12px 0 rgba(0, 0, 0, 0), 
+    -8px -8px 12px 0 rgba(255, 255, 255, 0);
+}
+
+#info{
+    white-space: pre-line;
+}
