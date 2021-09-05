@@ -1,4 +1,7 @@
-<div class="profile" id="profile">
+{{!-- <div class="profile" id="profile"> --}}
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+<div class="md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3" id="profile">
     {{#each person}}
     <div class="hover_card" id="person_card" >
         <a href="/about/{{this.first_name}}" style="text-decoration:none">
