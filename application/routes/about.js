@@ -14,7 +14,7 @@ const person = [
     {
         first_name:"Adele",
         last_name: "Wu",
-        image: "/developer_pics/adele.JPEG",
+        image: "developer_pics/adele.JPEG",
         github: "adele-wu",
         github_link: 'https://github.com/Adele-Wu',
         information: "Adele Wu is a senior at San Francisco State University studying Computer Science. Summer 2021, Adele worked as a QA Engineer at Zwift. Prior to SFSU, Adele recieved a degree in Mathematics from Skyline College. During her time at Skyline, Adele was an Engineering and Tech Scholar (ETS) and National Science Foundation (NSF) scholar. Adele interned with Strategic Energy Innovations (SEI) to develop a car counter prototype to track availablity of parking lots at Skyline College. Additionally, Adele worked as a bobarista at a family-owned boba shop."
@@ -46,10 +46,10 @@ const person = [
     {
         first_name : "Eddy",
         last_name : "Yun",
-        image: "Smiley_Face.JPG",
+        image: "developer_pics/eddy.JPEG",
         github: "eyun1988",
         github_link: 'https://github.com/eyun1988',
-        information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
+        information: "Eddy Yun is a student at San Francisco State University who is aspiring to be a Software Engineer, or work in the field of cyber security. He has had prior experience working as a Front-end Engineer at Prizm-Labs, now called Table-Top Games. He plans to graduate at Spring of 2021 with a Bachelor's degree in Computer Science. His hobbies are shooting, hiking, taste testing different scotches, and is a former avid runner. Random fact: I finished the SF half marathon and won a 'green belt' award at Coding Dojo."
     },
     {
         first_name : "Jose",
