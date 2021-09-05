@@ -1,3 +1,37 @@
-h1{
-    color: cornflowerblue;
+#name{
+    color:black;
+    align-self:center;
+    
+}
+.person_container{
+    background-color: lightgray;
+    width: 75%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:10%;
+    border-radius:3%;
+}
+
+#photo{
+    align-self: center;
+}
+
+#github{
+    align-self: center;
+    color:black
+}
+
+#info{
+    align-self: center;
+    color:black;
+    text-shadow: 1px 1px 1px darkgray;
+}
+
+#github{
+    align-self: center;
+    text-decoration: solid;
+    text-decoration: underline;
 }

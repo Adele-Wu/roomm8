@@ -22,7 +22,7 @@ const person = [
     {
         first_name : "Jeff",
         last_name:  "Fulmer Gardner",
-        image: "Smiley_Face.JPG",
+        image: "/developer_pics/jeff.JPEG",
         github: "JeffreyFG",
         github_link: 'https://github.com/JeffreyFG',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
@@ -30,7 +30,7 @@ const person = [
     {
         first_name : "Kris",
         last_name: "Byington",
-        image: "Smiley_Face.JPG",
+        image: "/developer_pics/kris.jpg",
         github: "krisbyington",
         github_link: 'https://github.com/krisbyington',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
@@ -38,7 +38,7 @@ const person = [
     {
         first_name : "Jeffrey",
         last_name: "Friedrich",
-        image: "Smiley_Face.JPG",
+        image: "/developer_pics/jeffrey.png",
         github: "jeffreyfriedrich",
         github_link: 'https://github.com/JeffreyFriedrich',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
@@ -54,7 +54,7 @@ const person = [
     {
         first_name : "Jose",
         last_name : "Quintero",
-        image: "Smiley_Face.JPG",
+        image: "/developer_pics/jose.jpg",
         github: "jaq19",
         github_link: 'https://github.com/jaq19',
         information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
