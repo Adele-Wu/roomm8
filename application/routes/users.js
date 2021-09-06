@@ -53,8 +53,8 @@ router.post('/register', [body("email").isEmail()], async (req, res, next) => {
       successPrint("Registration Success: User was created!");
       res.redirect("/login");
     } catch(err){
-      errorPrint("User couldn't be made", err);
       if (err instanceof UserError) {
+        errorPrint("User couldn't be made", err);
         errorPrint(err.getMessage());
         // flash on browser | will not work without session
         req.flash('error', err.getMessage());
@@ -121,65 +121,69 @@ router.post('/register', [body("email").isEmail()], async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;  
-
-  // we can go for either a try catch block with async 
-  // let loginUserId;
-  // try{
-  //   if(await (loginUserId = User.authenticate(username, password))){
-  //     console.log(loginUserId);
-  //     throw new UserError(
-  //       "Server Failed: User doesn't exist",
-  //       "/login",
-  //       200
-  //     );
-  //   }
-  //   console.log(loginUserId);
-  //   // res.session.username = username;
-  //   // res.session.userId = results
-
-  //   res.redirect('/login');
-  // } catch(err) {
-  //   if(err instanceof UserError){
-  //     console.log('errrrr');
-  //     errorPrint(err.getMessage);
-  //     res.status(err.getStatus());
-  //     res.redirect('/login');
-  //   } else {
-  //     next(err);
-  //   }
-  // }
-
-  // then promise method
-  User.authenticate(username, password)
-  .then((loggedUserId) => {
-    if(loggedUserId > 0){
-      successPrint(`User ${username} was able to log in.`);
-      req.session.username = username;
-      req.session.userId = loggedUserId;
-      res.locals.logged = true;
-      req.flash('success', 'You are logged in.');
-      console.log("am i getting to this line");
-      res.redirect('/');
-    } else {
+  let loggedUserId = await User.authenticate(username, password);
+  try{
+    if(loggedUserId <= 0){
       throw new UserError(
-        "Invalid username or password",
+        "Login failed: User doesn't exist or password doesn't match.",
         "/login",
         200
-      )
+      );
     }
-  })
-  .catch((err) => {
-    if(err instanceof UserError){
+    req.session.username = username;
+    req.session.userId = loggedUserId;
+    res.locals.logged = true; // hide things in navbar
+    req.flash('success', `${username} is logged in.`);
+    res.redirect('/');
+  } catch(err){
+    if (err instanceof UserError) {
       errorPrint(err.getMessage());
+      // flash on browser | will not work without session
       req.flash('error', err.getMessage());
-      res.status(err.getStatus);
-      res.redirect("/login");
+      res.status(err.getStatus());
+      res.redirect('/login');
     } else {
       next(err);
     }
-  })
+  }
+
+  // then promise method
+  // User.authenticate(username, password)
+  // .then((loggedUserId) => {
+  //   if(loggedUserId > 0){
+  //     successPrint(`User ${username} was able to log in.`);
+  //     req.session.username = username;
+  //     req.session.userId = loggedUserId;
+  //     res.locals.logged = true;
+  //     req.flash('success', 'You are logged in.');
+  //     console.log("am i getting to this line");
+  //     res.redirect('/');
+  //   } else {
+  //     throw new UserError(
+  //       "Invalid username or password",
+  //       "/login",
+  //       200
+  //     )
+  //   }
+  // })
+  // .catch((err) => {
+  //   if(err instanceof UserError){
+  //     errorPrint(err.getMessage());
+  //     req.flash('error', err.getMessage());
+  //     res.status(err.getStatus());
+  //     res.redirect("/login");
+  //   } else {
+  //     next(err);
+  //   }
+  // })
 });
 
+
+// TODO add logout // destroy session from db, cookie from browser.
+// router.post('/logout', (req, res, next) => {
+//   let logout_session = document.getElementById("logout");
+
+// });
 
 // purely here to test if the db is connect
 // manually type or copypasta url below to test db

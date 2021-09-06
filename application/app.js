@@ -49,11 +49,12 @@ var mysqlSessionStore = new mysqlSession(
   
   app.use(sessions({
     // key will give a default value of connect.sid but we want to a little more control thus 
-    key: "csid",
+    key: "this is my special key",
     secret: "shhh it's a secret.",
     store: mysqlSessionStore,
     resave: false,
     saveUninitialized: false
+    // cookie: { secure: true }
   }));
   app.use(flash());
   
@@ -76,12 +77,13 @@ var mysqlSessionStore = new mysqlSession(
   });
   
   app.use((req, res, next) => {
+    // console.log("req.session.username");
+    // console.log(req.session.username);
     if(req.session.username){
       res.locals.logged = true;
     }
     next();
-  })
-  
+  });
   
   // renders index.hbs
   app.use('/', indexRouter);

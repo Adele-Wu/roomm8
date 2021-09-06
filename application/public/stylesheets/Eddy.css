@@ -2,6 +2,11 @@
     text-align: center;
 }
 
+.person_container {
+  width: 700px;
+  margin: auto;
+}
+
 #name {
     font-size: 69px;
     background: red; /* For browsers that do not support gradients */
@@ -9,7 +14,7 @@
     background: -o-linear-gradient(right, red, orange,  green, cyan, blue, violet); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(right, red, orange, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right, red, orange , green, cyan, blue, violet); /* Standard syntax (must be last) */
-    border-radius: 50px;
+    border-radius: 18px;
 }
 
 #photo {
