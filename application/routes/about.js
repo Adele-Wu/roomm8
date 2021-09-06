@@ -25,7 +25,7 @@ const person = [
         image: "Smiley_Face.JPG",
         github: "JeffreyFG",
         github_link: 'https://github.com/JeffreyFG',
-        information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
+        information: "Hey my name is Jeff I am a senior Student at SFSU. I am currently a TA and a grader .  I love programing , biking, and working on my car."
     },
     {
         first_name : "Kris",
@@ -33,7 +33,7 @@ const person = [
         image: "Smiley_Face.JPG",
         github: "krisbyington",
         github_link: 'https://github.com/krisbyington',
-        information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
+        information: "Kris Byington is a Junior at San Francisco State University studying Computer Science with plans to be a Software devoloper after graduating in late 2022. He is a fitness and outdoor enthusiast who loves to camp off the grid. When in the city he spends his off time at farmers markets, bars with pooltables, reading, playing tabletop and video games."
     },
     {
         first_name : "Jeffrey",
@@ -41,7 +41,7 @@ const person = [
         image: "Smiley_Face.JPG",
         github: "jeffreyfriedrich",
         github_link: 'https://github.com/JeffreyFriedrich',
-        information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
+        information: "Jeffrey Friedrich is a senior at San Francisco State University majoring in Computer Science with a minor in Mathematics. Prior to SFSU, Jeffrey was a paratrooper Combat Medic Specialist in the U.S. Army and an Information Technology Specialist in the California National Guard. Additionally, during COVID, Jeffrey worked as an Administrative Assistant at a sub-contractor doing data entry. In his free time, Jeffrey likes to play sports such as soccer, play video games such as Age of Empires, and find new everyday uses for Google Sheets."
     },
     {
         first_name : "Eddy",
@@ -57,7 +57,7 @@ const person = [
         image: "Smiley_Face.JPG",
         github: "jaq19",
         github_link: 'https://github.com/jaq19',
-        information: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras molestie felis dui, suscipit commodo ligula egestas ac. In sit amet magna vel est ullamcorper commodo sit amet non nulla. Nunc vulputate orci mauris, a aliquam ligula commodo et. Suspendisse potenti. Vestibulum in condimentum felis. Sed semper leo in neque elementum fringilla. Maecenas elementum ornare ipsum placerat mattis. Maecenas non porta arcu, eget suscipit felis. Aenean nec eros quis nisi pretium viverra. Quisque a rhoncus quam. "
+        information: "Jose Andres Quinteros is a senior at San Francisco State University studying Computer Science. During the Summer of 2021, he interned with the Dreamers in Tech.  Conducted deep research into 15+ top careers in tech to facilitate resources for undocumented students."
     }
 ];
 

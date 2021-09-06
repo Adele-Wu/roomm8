@@ -62,6 +62,7 @@ User.authenticate = async (username, password) => {
     return db.execute(baseSQL, [username])
     .then(([results, field]) => {
         // here we want a result from our query then have the id persist through once logged in.
+        console.log(results);
         if(results && results.length == 1){
             userId = results[0].id;
             // To learn more about bcrypt, you can go to this link https://github.com/kelektiv/node.bcrypt.js
