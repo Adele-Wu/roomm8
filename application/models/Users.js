@@ -1,4 +1,4 @@
-var db = require('../conf/database');
+var database = require('../conf/database');
 var bcrypt = require('bcrypt');
 const User = {}
 
