@@ -53,7 +53,7 @@ const person = [
     },
     {
         first_name : "Jose",
-        last_name : "Quintero",
+        last_name : "Quinteros",
         image: "/developer_pics/jose.jpg",
         github: "jaq19",
         github_link: 'https://github.com/jaq19',

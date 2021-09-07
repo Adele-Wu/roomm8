@@ -1,3 +1,94 @@
-h1{
-    color: pink;
+*{
+    margin-left: auto;
+    margin-right: auto; 
 }
+
+.person_container{
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 25px;
+
+}
+
+#name{
+    font-family: "Georgia",Times New Roman,Times,serif;
+    color: rgb(55, 55, 59);
+    font-size: 32px;
+    margin: auto;
+    margin-top: 0;
+    width: 50%;
+    text-align: center;
+}
+
+.person_container{
+    background-color: rgba(221, 212, 230, 0.918);
+    border-style: solid;
+    border-width: .5rem;
+    border-color: rgba(180, 157, 28, 0.603);
+    width: 50rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#photo{
+    display: block;
+    border-style: solid;
+    border-width: .5rem;
+    border-color: rgba(180, 157, 28, 0.603);
+    border-radius: 25px;
+}
+
+#text {
+    /* margin: auto; */
+    width: 50%;
+}
+
+#github{
+    margin-left: 330px;
+    margin-right: 50px;
+    background-color:rgba(139, 204, 131, 0.911);
+    padding:.5rem;
+    border-radius: 15px; 
+}
+
+#info{
+    font-family: "Georgia",Times New Roman,Times,serif;
+    font-size: 16px;
+    white-space: pre-line;
+}
+
+
+/* Scratch code for testing purposes only */
+/* 
+body {
+    background-color: #efeee7;
+    font-family: "Georgia",Times New Roman,Times,serif;
+    color: #333333;
+    margin: 0;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 0;
+     text-align: center;
+
+}
+
+.person_container github{
+    font-size: 26px;
+    border-radius: 25px;
+    text-align: center;
+}
+   .github_link{
+    display: block;
+    border-radius: 25px;
+    border-style: solid;
+    text-align: center; 
+} 
+
+color: white;
+	font-size: 28px;
+	text-align: center;
+    padding: 20px;
+
+
+*/
