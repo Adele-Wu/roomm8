@@ -35,7 +35,6 @@ app.engine(
     })
   );
   // app.listen(3000);
-
   // node module express-mysql-session
 // https://www.npmjs.com/package/express-mysql-session
 // session store will create a connection pool which will handle the connection
