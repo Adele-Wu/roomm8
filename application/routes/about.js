@@ -22,7 +22,7 @@ const person = [
     {
         first_name : "Jeff",
         last_name:  "Fulmer Gardner",
-        image: "/developer_pics/jeff.JPEG",
+        image: "/developer_pics/jeff.png",
         github: "JeffreyFG",
         github_link: 'https://github.com/JeffreyFG',
         information: "Hey my name is Jeff I am a senior Student at SFSU. I am currently a TA and a grader .  I love programing , biking, and working on my car."

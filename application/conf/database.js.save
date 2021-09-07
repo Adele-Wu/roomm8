@@ -1,0 +1,53 @@
+const mysql = require('mysql2');
+
+const { Client } = require('ssh2'); 
+const sshClient = new Client();
+require('dotenv').config()
+
+const dbServer = { host: process.env.DB_HOST, port: process.env.DB_PORT, user: process.env.DB_USERNAME, password: process.env.DB_PASSWORD, database: process.env.DB_DATABASE} 
+const tunnelConfig = { host: process.env.DB_SSH_HOST, port: process.env.SSH_PORT, username: process.env.DB_SSH_USER, password: process.env.DB_SSH_PASSWORD} 
+const forwardConfig = { srcHost: '127.0.0.1', srcPort: 3306, dstHost: dbServer.host, dstPort: dbServer.port};
+const connection = null;
+console.log(dbServer);
+const SSHConnection = new Promise((resolve, reject) => {
+sshClient.on('ready', () => {
+sshClient.forwardOut(
+forwardConfig.srcHost,
+forwardConfig.srcPort,
+forwardConfig.dstHost,
+forwardConfig.dstPort,
+(err, stream) => {
+if (err) reject(err);
+const updatedDbServer = {
+...dbServer,
+stream
+};
+
+connection =  mysql.createConnection(updatedDbServer);
+connection.connect((error) => {
+if (error) {
+reject(error);
+}
+resolve(connection);
+});
+});
+}).connect(tunnelConfig);
+//});
+//module.exports = SSHConnection;
+//module.exports = ;
+/* const connection = mysql.createConnection(updatedDbServer); connection.connect((error) => { if (error) { reject(error);// create a pool connection. this will use a sql statement but you have free up the 
+                connection afterwards. pool will handle this.
+            }const pool = mysql.createPool( // connectionLimit: 50,
+            resolve(connection); host: "172.31.21.38", user: "root", password: "password", database: "csc648db", connectionLimit: 50,
+            }); // debug: false // error from database to see login and password error
+        });});
+    }).connect(tunnelConfig);
+// don't use the line below as it will not work
+// module.exports = pool; 
+// this will convert our api to promises based connection objects or non-promised space connection objects
+const promisePool = pool.promise();
+module.exports = promisePool;
+*/
+
+
+// TODO Jeff, I put back this such that we have an old copy please don't delete this. -Eddy
