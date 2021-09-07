@@ -1,3 +1,22 @@
 h1{
     color: red;
 }
+body
+{
+    background-image: url('/images/knightsky.jpg');
+}
+p
+{
+    background-color: aliceblue;
+    border-radius: 1rem;
+    padding:1rem;
+}
+.person_container
+{
+    text-align: center;
+}
+#photo
+{
+    height: 500px !important;
+    width: auto ;
+}
