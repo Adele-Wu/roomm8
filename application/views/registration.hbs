@@ -1,24 +1,113 @@
-<form action="/users/register" method="POST" enctype="application/x-www-form-urlencoded">
+<form
+  id="registration_form"
+  action="/users/register"
+  method="POST"
+  enctype="application/x-www-form-urlencoded"
+>
+  <div class="form-validation">
     <label for="first_name">First Name</label>
-    <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2" required>
-    
+    <input
+      type="text"
+      class="hover_card"
+      id="first_name"
+      name="first_name"
+      placeholder="Enter first name"
+      minlength="2"
+      required
+    />
+
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
     <label for="last_name">Last Name</label>
-    <input type="text" class="hover_card" id="last_name" name="last_name" placeholder="Enter last name" minlength="2" required>
-    
+    <input
+      type="text"
+      class="hover_card"
+      id="last_name"
+      name="last_name"
+      placeholder="Enter last name"
+      minlength="2"
+      required
+    />
+
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
     <label for="address">Address</label>
-    <input type="text" class="hover_card" id="address" name="address" placeholder="Enter address" required>
-    
+    <input
+      type="text"
+      class="hover_card"
+      id="address"
+      name="address"
+      placeholder="Enter address"
+      required
+    />
+
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
     <label for="email">Email</label>
-    <input type="email" class="hover_card" id="email" name="email" placeholder="Enter valid e-mail address" required>
+    <input
+      type="email"
+      class="hover_card"
+      id="email"
+      name="email"
+      placeholder="Enter valid e-mail address"
+      required
+    />
 
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
     <label for="username">Username</label>
-    <input type="text" class="hover_card" id="username" name="username" placeholder="Enter username" required>
+    <input
+      type="text"
+      class="hover_card"
+      id="username"
+      name="username"
+      placeholder="Enter username"
+      required
+    />
 
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
     <label for="password">Password</label>
-    <input type="password" class="hover_card" id="password" name="password" placeholder="Enter password" required>
-    
-    <label for="confirm_password">Confirm Password</label>
-    <input type="password" class="hover_card" id="confirm_password" name="confirm_password" placeholder="Enter confirm password" required>
+    <input
+      type="password"
+      class="hover_card"
+      id="password"
+      name="password"
+      placeholder="Enter password"
+      required
+    />
 
-    <input type="submit" class="hover_card"  id="registration_submit" value="Submit" required>
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
+    <label for="confirm_password">Confirm Password</label>
+    <input
+      type="password"
+      class="hover_card"
+      id="confirm_password"
+      name="confirm_password"
+      placeholder="Enter confirm password"
+      required
+    />
+
+    <small>Error message</small>
+  </div>
+  <button
+    type="submit"
+    class="hover_card"
+    id="registration_submit"
+    value="Submit"
+    required
+  >Submit</button>
 </form>
+
+{{!-- <script
+  defer
+  type="text/javascript"
+  src="javascripts/registration-validation.js"
+></script> --}}
