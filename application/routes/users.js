@@ -180,10 +180,18 @@ router.post('/login', async (req, res, next) => {
 
 
 // TODO add logout // destroy session from db, cookie from browser.
-// router.post('/logout', (req, res, next) => {
-//   let logout_session = document.getElementById("logout");
-
-// });
+router.post('/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      errorPrint('Session could not be destroyed.')
+      next(err);
+    } else {
+      successPrint('Session is destroyed.');
+      res.clearCookie('csid');
+      res.json({ status: "OK", message: "User is logged out." });
+    }
+  })
+});
 
 // purely here to test if the db is connect
 // manually type or copypasta url below to test db

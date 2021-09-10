@@ -63,7 +63,7 @@ const person = [
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.locals.logged = true;
+    // res.locals.logged = true;
     res.render('about_us', { title: "About Page", person }); // can only pass an array
 });
 
