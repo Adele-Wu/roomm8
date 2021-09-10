@@ -50,7 +50,7 @@ var mysqlSessionStore = new mysqlSession(
   app.use(sessions({
     // key will give a default value of connect.sid but we want to a little more control thus 
     key: "this is my special key",
-    secret: "shhh it's a secret.",
+    secret: "shhh_its_a_secret.",
     store: mysqlSessionStore,
     resave: false,
     saveUninitialized: false

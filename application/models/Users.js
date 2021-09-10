@@ -4,7 +4,7 @@ const User = {}
 
 // Base cases to check if username, email, and address is distinct.
 User.usernameExists = async (username) => {
-    return db.execute("SELECT * FROM users where username=?", [username])
+    return database.execute("SELECT * FROM users where username=?", [username])
     .then(([results, field]) => {
         return (!(results && results.length == 0));
     })
@@ -12,7 +12,7 @@ User.usernameExists = async (username) => {
 };
 
 User.emailExists = async (email) => {
-    return db.execute("SELECT * FROM users WHERE email=?", [email])
+    return database.execute("SELECT * FROM users WHERE email=?", [email])
     .then(([results, field]) => {
         return (!(results && results.length == 0));
     })
@@ -20,7 +20,7 @@ User.emailExists = async (email) => {
 };
 
 User.addressExists = async (address) => {
-    return db.execute("SELECT * FROM users WHERE address=?", [address])
+    return database.execute("SELECT * FROM users WHERE address=?", [address])
     .then(([results, field]) => {
         return (!(results && results.length == 0));
     })
@@ -41,7 +41,7 @@ User.create = async (first_name, last_name, address, email, username, password) 
         // the reason for no checks here is because we have already done so in the base cases.
         let baseSQL = "INSERT INTO users (`first_name`, `last_name`, `address`, `email`, `username`, `password`, `created`) VALUES (?, ?, ?, ?, ?, ?, now())";
         // in the return statement we're passing the hashed_password and not the original!!!
-        return db.execute(baseSQL, [first_name, last_name, address, email, username, hashed_password]);
+        return database.execute(baseSQL, [first_name, last_name, address, email, username, hashed_password]);
     })
     .then(([results, fields]) => {
         if(results && results.affectedRows){
@@ -59,7 +59,7 @@ User.create = async (first_name, last_name, address, email, username, password) 
 User.authenticate = async (username, password) => {
     let baseSQL = "SELECT id, username, password FROM users WHERE username=?;";
     let userId; // <-- don't change to id or it'll mess up with mysql
-    return db.execute(baseSQL, [username])
+    return database.execute(baseSQL, [username])
     .then(([results, field]) => {
         // here we want a result from our query then have the id persist through once logged in.
         console.log(results);
