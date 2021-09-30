@@ -1,48 +1,66 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var db = require('../conf/database');
-const User = require('../models/Users');
-const UserError = require('../helpers/error/UserError');
-const { successPrint, errorPrint } = require('../helpers/debug/debugprinters');
-var bcrypt = require('bcrypt');
-var flash = require('express-flash');
-var { body, validationResult } = require('express-validator');
+var db = require("../conf/database");
+const User = require("../models/Users");
+const UserError = require("../helpers/error/UserError");
+const { successPrint, errorPrint } = require("../helpers/debug/debugprinters");
+var bcrypt = require("bcrypt");
+var flash = require("express-flash");
+var { body, validationResult } = require("express-validator");
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
 //   res.send('respond with a resource');
 // });
 
-router.post('/register', [body("email").isEmail()], async (req, res, next) => {
+router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   const errors = validationResult(req);
-  if(!errors.isEmpty()){
+  if (!errors.isEmpty()) {
     res.redirect("/");
   } else {
-    const { first_name, last_name, address, email, username, password, confirm_password } = req.body;
-    
-    try{
-      if(await User.usernameExists(username)){
+    // const { first_name, last_name, address, email, username, password, confirm_password } = req.body;
+    const {
+      first_name,
+      last_name,
+      date_of_birth,
+      email,
+      username,
+      password,
+      confirm_password,
+    } = req.body;
+
+    try {
+      if (await User.usernameExists(username)) {
         throw new UserError(
           "Registration Failed: Username already exist",
           "/registration",
           200
         );
       }
-      if(await User.emailExists(email)){
+      if (await User.emailExists(email)) {
         throw new UserError(
           "Registration Failed: Email already exist",
           "/registration",
           200
         );
       }
-      if(await User.addressExists(address)){
-        throw new UserError(
-          "Registration Failed: Address already exist",
-          "/registration",
-          200
-        );
-      }
-      if(await User.create(first_name, last_name, address, email, username, password) < 0) {
+      // if(await User.addressExists(address)){
+      //   throw new UserError(
+      //     "Registration Failed: Address already exist",
+      //     "/registration",
+      //     200
+      //   );
+      // }
+      if (
+        (await User.create(
+          first_name,
+          last_name,
+          date_of_birth,
+          email,
+          username,
+          password
+        )) < 0
+      ) {
         throw new UserError(
           "Server Error: User failed to be created.",
           "/registration",
@@ -52,12 +70,12 @@ router.post('/register', [body("email").isEmail()], async (req, res, next) => {
       // else print you gucci and redirect to login
       successPrint("Registration Success: User was created!");
       res.redirect("/login");
-    } catch(err){
+    } catch (err) {
       if (err instanceof UserError) {
         errorPrint("User couldn't be made", err);
         errorPrint(err.getMessage());
         // flash on browser | will not work without session
-        req.flash('error', err.getMessage());
+        req.flash("error", err.getMessage());
         // res.status(err.getStatus());
         res.redirect(err.getRedirectURL());
       } else {
@@ -119,11 +137,11 @@ router.post('/register', [body("email").isEmail()], async (req, res, next) => {
   }
 });
 
-router.post('/login', async (req, res, next) => {
-  const { username, password } = req.body;  
+router.post("/login", async (req, res, next) => {
+  const { username, password } = req.body;
   let loggedUserId = await User.authenticate(username, password);
-  try{
-    if(loggedUserId <= 0){
+  try {
+    if (loggedUserId <= 0) {
       throw new UserError(
         "Login failed: User doesn't exist or password doesn't match.",
         "/login",
@@ -133,15 +151,16 @@ router.post('/login', async (req, res, next) => {
     req.session.username = username;
     req.session.userId = loggedUserId;
     res.locals.logged = true; // hide things in navbar
-    req.flash('success', `${username} is logged in.`);
-    res.redirect('/');
-  } catch(err){
+    req.flash("success", `${username} is logged in.`);
+    successPrint(`${username} is logged in.`);
+    res.redirect("/");
+  } catch (err) {
     if (err instanceof UserError) {
       errorPrint(err.getMessage());
       // flash on browser | will not work without session
-      req.flash('error', err.getMessage());
+      req.flash("error", err.getMessage());
       res.status(err.getStatus());
-      res.redirect('/login');
+      res.redirect("/login");
     } else {
       next(err);
     }
@@ -178,19 +197,18 @@ router.post('/login', async (req, res, next) => {
   // })
 });
 
-
 // TODO add logout // destroy session from db, cookie from browser.
-router.post('/logout', (req, res, next) => {
+router.post("/logout", (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
-      errorPrint('Session could not be destroyed.')
+      errorPrint("Session could not be destroyed.");
       next(err);
     } else {
-      successPrint('Session is destroyed.');
-      res.clearCookie('csid');
+      successPrint("Session is destroyed.");
+      res.clearCookie("this is my special key");
       res.json({ status: "OK", message: "User is logged out." });
     }
-  })
+  });
 });
 
 // purely here to test if the db is connect
@@ -200,7 +218,7 @@ router.post('/logout', (req, res, next) => {
 // router.get('/getUsers', (req, res, next) => {
 //   let baseSQL = "SELECT * FROM users";
 //   db.execute(baseSQL).then(([results, fields]) => {
-//     if(results && results.length == 0){ 
+//     if(results && results.length == 0){
 //       console.log('error');
 //       // res.render(results);
 //     }

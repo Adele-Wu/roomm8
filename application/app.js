@@ -15,6 +15,7 @@ var multer = require("multer");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var aboutRouter = require("./routes/about");
+var postRouter = require("./routes/post");
 
 var requestPrint = require("./helpers/debug/debugprinters").requestPrint;
 
@@ -92,6 +93,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // renders about.hbs
 app.use("/about", aboutRouter);
+app.use("/post", postRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

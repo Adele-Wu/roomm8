@@ -156,6 +156,8 @@ input.hover_card {
   border-radius: 25px;
 }
 
+/* front end validation css */
+
 .form-validation {
   margin-bottom: 10px;
   padding-bottom: 10px;
@@ -207,4 +209,13 @@ input.hover_card {
 .form-validation.error small {
   color: white;
   visibility: visible;
+}
+
+/* end of front end validation css */
+
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
 }

@@ -7,6 +7,14 @@
     {{!-- Put all CSS links here --}}
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     {{!-- Put all JS scripts --}}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    {{!-- Testing google maps for the landing page OLD IGNORE --}}
+    {{!-- <script defer src="javascripts/google-map.js"></script> --}}
   </head>
 
   <div class='logo'>
@@ -14,18 +22,7 @@
   </div>
 
   <body>
-    {{!-- <nav>
-        <ul>
-          <li><a href="/" style="text-decoration:none">Home</a></li>
-          <li><a href="/about" style="text-decoration:none">About Us</a></li>
-          <li><a href="/registration" style="text-decoration:none">Sign Up</a></li>
-          {{#if logged}}
-          <li><a id="logout">Log Out</a></li>
-          {{else}}
-          <li><a href="/login" style="text-decoration:none">Log In</a></li>
-          {{/if}}
-        </ul>
-    </nav> --}}
+    
     {{> header}}
 
     {{{body}}}
