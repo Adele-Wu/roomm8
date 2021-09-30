@@ -1,14 +1,16 @@
 <header>
-    <nav>
-        <ul>
-          <li><a href="/" style="text-decoration:none">Home</a></li>
-          <li><a href="/about" style="text-decoration:none">About Us</a></li>
-          <li><a href="/registration" style="text-decoration:none">Sign Up</a></li>
-          {{#if logged}}
-          <li><a id="logout">Log Out</a></li>
-          {{else}}
-          <li><a href="/login" style="text-decoration:none">Log In</a></li>
-          {{/if}}
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="/" style="text-decoration:none">Home</a></li>
+      <li><a href="/about" style="text-decoration:none">About Us</a></li>
+      <li><a href="/browse-room" style="text-decoration:none">Browse Rooms</a></li>
+      {{#if logged}}
+        <li><a href="/post" style="text-decoration: none;">Post Room</a></li>
+        <li><a id="logout">Log Out</a></li>
+      {{else}}
+        <li><a href="/registration" style="text-decoration:none">Sign Up</a></li>
+        <li><a href="/login" style="text-decoration:none">Log In</a></li>
+      {{/if}}
+    </ul>
+  </nav>
 </header>
