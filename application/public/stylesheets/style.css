@@ -219,3 +219,9 @@ input.hover_card {
   width: 100%;
   /* The width is the width of the web page */
 }
+
+footer{
+  bottom: 0; 
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
