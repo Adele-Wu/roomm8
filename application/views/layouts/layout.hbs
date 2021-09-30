@@ -6,6 +6,7 @@
     <link rel="icon" type="image/x-icon" href="/images/favi.png" />
     {{!-- Put all CSS links here --}}
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     {{!-- Put all JS scripts --}}
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
@@ -16,6 +17,8 @@
     {{!-- Testing google maps for the landing page OLD IGNORE --}}
     {{!-- <script defer src="javascripts/google-map.js"></script> --}}
   </head>
+
+  <div id="demonstration-only-tag" class="flex flex-col justify-center items-center bg-white">SFSU Software Engineering Project CSC 648-848, Fall 2021. For Demonstration Only</div>
 
   <div class='logo'>
     <img src="/images/roomM8_white.png" width="100rem"> 
@@ -31,6 +34,7 @@
     <script defer src="/javascripts/logout.js"></script>
     {{/if}}
 
+    {{> footer}}
 
   </body>
 </html>
