@@ -77,6 +77,11 @@ email.addEventListener("input", (e) => {
 username.addEventListener("input", (e) => {
   if (username.value === "") {
     setErrorFor(username, "Username can't be blank.");
+  } else if (username.value[0] >= "0" && username.value[0] <= "9") {
+    setErrorFor(
+      username,
+      "Username cannot have a number as the first character."
+    );
   } else if (username.value.length < 3 || username.value.length > 12) {
     setErrorFor(
       username,

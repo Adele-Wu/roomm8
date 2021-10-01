@@ -70,4 +70,63 @@ router.post("/createPost", upload.single("fileUpload"), (req, res, next) => {
     });
 });
 
+// /post/search?search=value // need to come back to this and
+router.get("/search", async (req, res, next) => {
+  try {
+    let searchTerm = req.query.search;
+    if (!searchTerm) {
+      res.send({
+        results: [],
+      });
+    } else {
+      let results = await PostModel.search(searchTerm);
+      if (results.length) {
+        res.send({
+          results: results,
+        });
+      } else {
+        let results = await PostModel.getTenMostRecent(10);
+        res.send({
+          results: results,
+        });
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/:id(\\d+)", async (req, res, next) => {
+  try {
+    let usernameTitle = "";
+    let baseSQL =
+      "SELECT u.username, p.title, p.description, p.photopath, p.created \
+    FROM users u \
+    JOIN posts p \
+    on u.user_id = p.users_user_id \
+    WHERE p.post_id = ?";
+    let [results, fields] = await db.execute(baseSQL, [req.params.id]);
+    if (results && results.length) {
+      let baseSQL2 =
+        "SELECT m.users_user_id, m.description, m.posts_post_id, m.created \
+      FROM posts p \
+      JOIN messages m\
+      on p.post_id = posts_post_id \
+      WHERE p.post_id = ? \
+      ORDER BY m.created DESC;";
+      let [results2, fields2] = await db.execute(baseSQL2, [req.params.id]);
+      req.session.viewing = req.params.id;
+      usernameTitle += results[0].username + "'s Room Profile";
+      res.render("room-profile", {
+        title: usernameTitle,
+        currentPost: results[0],
+        comments: results2,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.redirect("/browse-room");
+  }
+});
+
 module.exports = router;
