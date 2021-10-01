@@ -110,7 +110,7 @@ router.get("/:id(\\d+)", async (req, res, next) => {
       let baseSQL2 =
         "SELECT m.users_user_id, m.description, m.posts_post_id, m.created \
       FROM posts p \
-      JOIN messages m\
+      JOIN messages m \
       on p.post_id = posts_post_id \
       WHERE p.post_id = ? \
       ORDER BY m.created DESC;";

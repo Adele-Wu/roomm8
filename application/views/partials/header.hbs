@@ -6,8 +6,10 @@
       <li><a href="/browse-room" style="text-decoration:none">Browse Rooms</a></li>
       {{#if search}}
         <li>
+          {{! <form id="navBarForm" action="executeSearch()"> }}
           <input type="text" id="search-text" name="search-text" />
           <button id="search-button">Search</button>
+          {{! </form> }}
         </li>
       {{/if}}
       {{#if logged}}

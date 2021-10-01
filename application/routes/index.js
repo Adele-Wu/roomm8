@@ -24,8 +24,4 @@ router.get("/browse-room", getRecentPosts, function (req, res, next) {
   res.render("browse-room", { title: "Browse Room Page", search: true });
 });
 
-// router.get("/post/:id(\\d+)", async (req, res, next) => {
-
-// });
-
 module.exports = router;

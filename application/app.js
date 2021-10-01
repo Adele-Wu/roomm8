@@ -8,9 +8,15 @@ var sessions = require("express-session");
 var mysqlSession = require("express-mysql-session")(sessions);
 var flash = require("express-flash");
 var multer = require("multer");
+var cors = require("cors");
 /**
  * We are keeping MVC design pattern in mind to organize and divide the related program logic.
  */
+
+var app = express();
+
+app.use(cors({ origin: true }));
+
 // set each route
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -18,8 +24,6 @@ var aboutRouter = require("./routes/about");
 var postRouter = require("./routes/post");
 
 var requestPrint = require("./helpers/debug/debugprinters").requestPrint;
-
-var app = express();
 
 app.engine(
   "hbs",
@@ -71,7 +75,6 @@ app.use(cookieParser());
 // path to static content
 app.use(express.static(path.join(__dirname, "public")));
 
-// used for helper functions
 // these are not self-terminating middlewares thus you must call next()
 app.use((req, res, next) => {
   requestPrint(req.url);
@@ -79,13 +82,26 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  // console.log("req.session.username");
-  // console.log(req.session.username);
   if (req.session.username) {
     res.locals.logged = true;
   }
   next();
 });
+
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   next();
+// });
 
 // renders index.hbs
 app.use("/", indexRouter);

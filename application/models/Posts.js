@@ -43,7 +43,7 @@ PostModel.getTenMostRecent = async (numberOfPosts) => {
 
 PostModel.search = async (searchTerm) => {
   let baseSQL =
-    "SELECT post_id, title, description, thumbnail, concat_ws(' ', title, description) \
+    "SELECT post_id, title, address, rent, description, thumbnail, concat_ws(' ', title, description) \
   AS haystack\
   FROM posts\
   HAVING haystack like ?";

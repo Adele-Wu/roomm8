@@ -1,10 +1,18 @@
 {{!-- generate all the necessary cards --}}
 
 {{!-- <form action="">
-
 </form> --}}
-<div id="cardContainer">
+
+<div id="map"></div>
+<div id="postContainer">
 {{#each results}}
 {{> roomcard this}}
 {{/each}}
 </div>
+
+
+
+<script defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUQ84KIyy3GqKppaP1-GI_MTZ5-mhrhgQ&callback=initMap">
+    type="text/javascript"
+</script>
