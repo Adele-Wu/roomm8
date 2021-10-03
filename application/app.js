@@ -39,8 +39,7 @@ app.engine(
     },
   })
 );
-// app.listen(3000);
-// node module express-mysql-session
+
 // https://www.npmjs.com/package/express-mysql-session
 // session store will create a connection pool which will handle the connection
 // to the database. With the default options, a session table will be automatically generated
@@ -87,21 +86,6 @@ app.use((req, res, next) => {
   }
   next();
 });
-
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   next();
-// });
 
 // renders index.hbs
 app.use("/", indexRouter);

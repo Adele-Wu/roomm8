@@ -32,11 +32,13 @@ PostModel.create = async (
 
 PostModel.getTenMostRecent = async (numberOfPosts) => {
   let baseSQL =
-    "SELECT post_id, title, address, rent, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT 10;";
+    "SELECT post_id, title, address, rent, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT " +
+    numberOfPosts +
+    ";";
   return db
     .execute(baseSQL, [numberOfPosts])
     .then(([results, fields]) => {
-      return Promise.resolve(results);
+      return results;
     })
     .catch((err) => Promise.reject(err));
 };
@@ -44,14 +46,14 @@ PostModel.getTenMostRecent = async (numberOfPosts) => {
 PostModel.search = async (searchTerm) => {
   let baseSQL =
     "SELECT post_id, title, address, rent, description, thumbnail, concat_ws(' ', title, description) \
-  AS haystack\
-  FROM posts\
+  AS haystack \
+  FROM posts \
   HAVING haystack like ?";
   let sqlReadySearchTerm = "%" + searchTerm + "%";
   return db
     .execute(baseSQL, [sqlReadySearchTerm])
     .then(([results, fields]) => {
-      return Promise.resolve(results);
+      return results;
     })
     .catch((err) => Promise.reject(err));
 };

@@ -53,6 +53,7 @@ function initMap() {
     zoom: 12,
     center: { lat: 37.775, lng: -122.419 },
   });
+  // uncomment these if we want to have a initial marker.
   // new google.maps.Marker({
   //   position: { lat: 37.775, lng: -122.419 },
   //   map,
@@ -92,7 +93,7 @@ class GoogleMap {
     let api = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=`;
     // add api key | may need to add a different one so I don't get charged like a billion dollars
     // TODO WE NEED AN API KEY FOR THIS TO WORK!!!!!!!!!!!!
-    api += "";
+    api += "AIzaSyDIE-MIgEos6ePPbsLh9gQ7nJqEX_TwfuU";
     let response = await axios.get(api);
     this.addMarker(
       response.data.results[0].geometry.location.lat,

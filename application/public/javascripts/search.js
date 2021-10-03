@@ -5,7 +5,7 @@ if (searchButton) {
   searchButton.onclick = executeSearch;
 }
 
-function executeSearch() {
+async function executeSearch() {
   let searchTerm = document.getElementById("search-text");
   // if the users doesn't search for anything redirect back to the same room
   if (!searchTerm) {
@@ -19,18 +19,25 @@ function executeSearch() {
   if (isUser) {
     let mainContent = document.getElementById("postContainer");
     let searchURL = `post/search?search=${searchTerm.value}`;
-    fetch(searchURL)
-      .then((data) => {
-        return data.json();
-      })
-      .then((data_json) => {
-        let newMainContentHMTL = "";
-        data_json.results.forEach((results) => {
-          newMainContentHMTL += createPost(results);
-          gmap.pinpointLocation(results.address);
-        });
-        mainContent.innerHTML = newMainContentHMTL;
-      });
+    let response = await axios.get(searchURL);
+    let newMainContentHTML = "";
+    response.data.results.forEach((post) => {
+      newMainContentHTML += createPost(post);
+      gmap.pinpointLocation(post.address);
+    });
+    mainContent.innerHTML = newMainContentHTML;
+    // fetch(searchURL)
+    //   .then((data) => {
+    //     return data.json();
+    //   })
+    //   .then((data_json) => {
+    //     let newMainContentHMTL = "";
+    //     data_json.results.forEach((results) => {
+    //       newMainContentHMTL += createPost(results);
+    //       gmap.pinpointLocation(results.address);
+    //     });
+    //     mainContent.innerHTML = newMainContentHMTL;
+    //   });
   } else {
     gmap.pinpointLocation(searchTerm.value);
   }
@@ -43,6 +50,7 @@ function createPost(post) {
         <div class="cardBody">
             <p class="cardTitle">${post.title}</p>
             <p class="cardAddress">${post.address}</p>
+            <p class="cardRent">${post.rent}</p>
             <p class="cardDescription">${post.description}</p>
             <a class="postButton" href="/post/${post.post_id}">Check Post</a>
         </div>
