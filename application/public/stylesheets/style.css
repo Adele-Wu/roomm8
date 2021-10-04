@@ -1,6 +1,6 @@
 .logo {
+  margin: 1rem;
   margin-left: 2rem;
-  margin-bottom: 1rem;
 }
 
 @font-face {
@@ -78,8 +78,8 @@ nav {
     0 0 2000px rgba(255, 255, 255, 0.5) inset;
   backdrop-filter: blur(10px);
   border-radius: 25px;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 nav :hover {
   box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25) inset,
@@ -92,18 +92,19 @@ nav li {
   list-style-type: none;
   float: left;
 
-  /* color: #f2f2f2; */
   text-align: center;
 
   text-decoration: none;
   font-size: 17px;
-
-  padding: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 nav li :hover {
   box-shadow: 0 0 0 0;
+}
+
+.nav_item{
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 ul {
@@ -132,7 +133,6 @@ form {
 
 .hover_card {
   background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
   padding: 1rem;
   margin: 0.5rem;
 
@@ -219,14 +219,98 @@ input.hover_card {
 /* end of front end validation css */
 
 #map {
-  height: 400px;
+  /* height: 400px; */
   /* The height is 400 pixels */
-  width: 100%;
+  /* width: 100%; */
   /* The width is the width of the web page */
+  margin: 0.5rem;
+  border-radius: 20px;
+  height: 50rem;
+  
+  background-color: darkslateblue;
 }
 
 footer{
   bottom: 0; 
   padding-left: 8rem;
   padding-right: 8rem;
+}
+
+/* for browse pages */
+.filters_panel{
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+  margin: 0.5rem;
+
+  border: 0.5rem;
+  border-radius: 20px;
+
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1),
+    0 0 2000px rgba(255, 255, 255, 0.5) inset;
+  backdrop-filter: blur(10px);
+
+}
+.search{
+  display: flex;
+  justify-content: space-between;
+}
+#search_text{
+  vertical-align: middle;
+  padding-left: 5px;
+}
+#search_button{
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+#room_results{
+  flex-grow: 1;
+}
+
+.card{
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0.5rem;
+
+  border: 0.5rem;
+  border-radius: 20px;
+
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1),
+    0 0 2000px rgba(255, 255, 255, 0.5) inset;
+  backdrop-filter: blur(10px);
+
+  padding-bottom: 1rem;
+  position: relative;
+}
+.cardImage{
+  margin-top: 1rem;
+}
+.cardBody{
+  margin: 1rem;
+  padding-bottom: 1rem;
+}
+.postButton{
+  background-color: darkslateblue;
+  color: #f0f0f0;
+
+  padding: 5px;
+
+  width: 50%;
+  text-align: center;
+  border-radius: 20px;
+
+  margin-left: 25%;
+
+  position: absolute;
+  bottom: .5rem;;
+}
+.postButton:hover{
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25) inset,
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1) inset,
+    12px 12px 16px 0 rgba(0, 0, 0, 0), -8px -8px 12px 0 rgba(255, 255, 255, 0);
+}
+
+.noHover:hover{
+  box-shadow: 0 0 0 0;
 }

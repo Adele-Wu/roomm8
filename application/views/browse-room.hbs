@@ -1,4 +1,26 @@
-{{!-- generate all the necessary cards --}}
-{{#each results}}
-{{> roomcard this}}
-{{/each}}
+<div class="relative min-h-screen md:flex">
+
+    {{!-- filters panel --}}
+    <div class="filters_panel">
+        <div class="search">
+
+        {{!-- placeholder for search --}}
+        <input type="text" id="search_text" placeholder="search" class="w-11/12"></input>
+        <button id="search_button">
+            <img src="/images/search_icon.png" width="20px">
+        </button>
+        
+        </div>
+    </div>
+
+    {{!-- generate all the necessary cards --}}
+    <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" id="room_results">
+        {{#each results}}
+        {{> roomcard this}}
+        {{/each}}
+    </div>
+
+    {{!-- placeholder for map --}}
+    <div id="map" class=".w-screen md:w-1/3"> </div>
+
+</div>

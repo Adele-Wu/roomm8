@@ -1,17 +1,64 @@
 <header>
-  <nav>
-    <ul>
-      <li><a href="/" style="text-decoration:none">Home</a></li>
-      <li><a href="/browse-room" style="text-decoration:none">Browse Rooms</a></li>
-      <div class="float-right" id="header-right">
-        {{#if logged}}
-          <li><a href="/post" style="text-decoration: none;">Post Room</a></li>
-          <li><a id="logout">Log Out</a></li>
-        {{else}}
-          <li><a href="/registration" style="text-decoration:none">Sign Up</a></li>
-          <li><a href="/login" style="text-decoration:none">Log In</a></li>
-        {{/if}}
+
+  <div class="logo ">
+    <img src="/images/roomM8_white.png" width="100rem">
+  </div>
+
+  {{!-- nav bar --}}
+  <nav class="m-2 md:mx-auto md:w-11/12 center">
+    <div class="noHover flex flex-wrap items-center md:flex-no-wrap">
+      {{!-- home button always visible --}}
+      <li><a href="/" style="text-decoration:none" class="block nav_item">Home</a></li>
+
+      {{!-- hamburger menu --}}
+      <div class="ml-auto md:hidden noHover">
+        <button onclick="menuToggle()" class="flex items-center px-3 py-2 border-0 rounded m-4" type="button">
+          <svg class="h-3 w-3 noHover" viewBox="0 0 20 20">
+            <path fill="currentColor" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
       </div>
-    </ul>
+
+      {{!-- other nav menu itmes --}}
+      <div id="menu"
+        class="noHover w-full h-0 transition-all ease-out duration-500 md:transition-none md:flex md:items-center">
+        <ul
+          class="noHover flex flex-col duration-300 ease-out sm:transition-none md:flex-row md:items-center md:ml-auto">
+          {{!-- home button --}}
+          <li><a href="/browse-room" style="text-decoration:none" class="block nav_item">Browse Rooms</a></li>
+
+          {{#if logged}}
+          <div class="md:ml-auto" id="header-right">
+            <li><a href="/post" style="text-decoration: none;" class="block nav_item">Post Room</a></li>
+            <li><a id="logout">Log Out</a></li>
+            {{else}}
+            <li><a href="/registration" style="text-decoration:none" class="block nav_item">Sign Up</a></li>
+            <li><a href="/login" style="text-decoration:none" class="block nav_item">Log In</a></li>
+            {{/if}}
+          </div>
+        </ul>
+      </div>
+    </div>
   </nav>
+
 </header>
+
+{{!-- hamburger menu for small screens --}}
+<script>
+  const menu = document.getElementById("menu");
+
+  function menuToggle() {
+    menu.classList.toggle('h-full')
+  }
+
+  // browser resize listener
+  window.addEventListener("resize", menuResize);
+
+  // responsive resize menu
+  function menuResize() {
+    const window_size = window.innerWidth || document.body.clientWidth;
+    if (window_size > 640) {
+      menu.classList.remove('h-32');
+    }
+  }
+</script>
