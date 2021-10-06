@@ -7,6 +7,8 @@ const { successPrint, errorPrint } = require("../helpers/debug/debugprinters");
 var bcrypt = require("bcrypt");
 var flash = require("express-flash");
 var { body, validationResult } = require("express-validator");
+const session = require("express-session");
+const { sessionSave, delay } = require("../utils/promisification");
 
 /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -69,7 +71,12 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       }
       // else print you gucci and redirect to login
       successPrint("Registration Success: User was created!");
-      res.redirect("/login");
+
+      req.session.save((err) => {
+        res.redirect("/login");
+      });
+
+      // res.redirect("/login");
     } catch (err) {
       if (err instanceof UserError) {
         errorPrint("User couldn't be made", err);
@@ -137,6 +144,8 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   }
 });
 
+// souza's promisified example // create a folder named utils and require this.
+
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   let loggedUserId = await User.authenticate(username, password);
@@ -148,12 +157,23 @@ router.post("/login", async (req, res, next) => {
         200
       );
     }
+
     req.session.username = username;
     req.session.userId = loggedUserId;
     res.locals.logged = true; // hide things in navbar
-    req.flash("success", `${username} is logged in.`);
+
     successPrint(`${username} is logged in.`);
+
+    // whenever you're storing sessions
+    // req.session.save((err) => {
+    //   res.redirect("/");
+    // });
+
+    // look up promisify for utils
+    await sessionSave(req.session);
     res.redirect("/");
+    // await promiseSave(req);
+    // res.redirect("/");
   } catch (err) {
     if (err instanceof UserError) {
       errorPrint(err.getMessage());
@@ -198,13 +218,14 @@ router.post("/login", async (req, res, next) => {
 });
 
 // TODO add logout // destroy session from db, cookie from browser.
-router.post("/logout", (req, res, next) => {
-  req.session.destroy((err) => {
+router.post("/logout", async (req, res, next) => {
+  await req.session.destroy((err) => {
     if (err) {
       errorPrint("Session could not be destroyed.");
       next(err);
     } else {
       successPrint("Session is destroyed.");
+      res.end();
       res.clearCookie("this is my special key");
       res.json({ status: "OK", message: "User is logged out." });
     }

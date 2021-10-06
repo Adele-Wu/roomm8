@@ -80,8 +80,14 @@ app.use((req, res, next) => {
   next();
 });
 
+/**
+ * request.save
+ * wrap res.redirect() with req.session.save(function(err){ res.direct()})
+ * */
 app.use((req, res, next) => {
+  // console.log(req.session);
   if (req.session.username) {
+    // console.log(req.session);
     res.locals.logged = true;
   }
   next();
