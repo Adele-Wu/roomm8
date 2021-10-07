@@ -6,8 +6,35 @@
 <div id="map"></div> }}
 
 <!-- Geocode API  -->
-{{! <script
+{{!
+<script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUQ84KIyy3GqKppaP1-GI_MTZ5-mhrhgQ&callback=initMap&libraries=&v=weekly"
-  async
-  defer
-></script> }}
+  async defer></script> }}
+
+{{!--
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> --}}
+
+
+<div class='home_body'>
+
+  <div class="home_sect1_background ">
+    <div class="home_sect1 lg:w-3/4 xl:w-1/2">
+      <p class="home_sect1_text text-3xl lg:text-4xl xl:text-5xl m-8">Welcome to RoomM8! Tell us how we can help you.</p>
+      <div class="home_options flex my-auto">
+        <button href="/browse-room" class="cta flex-auto m-8 sm:m-14 lg:m-15 xl:m-16">I need a room</button>
+        <button href="/browse-user" class="cta flex-auto m-8 sm:m-14 lg:m-15 xl:m-16">I have a room</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="home_sect2">
+    <p class="home_sect2_text">RoomM8 is dedicated to helping you find your perfect roommate</p>
+    <div class="flex my-auto">
+      <div class="home_sect2_container flex-auto text-center"> reason 1 </div>
+      <div class="home_sect2_container flex-auto text-center"> reason 2 </div>
+      <div class="home_sect2_container flex-auto text-center"> reason 3 </div>
+    </div>
+  </div>
+
+</div>

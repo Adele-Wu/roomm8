@@ -70,6 +70,7 @@ p {
   margin-right: auto;
 }
 
+/* nav bar */
 nav {
   background-color: rgba(174, 174, 175, 0.05);
   overflow: hidden;
@@ -134,7 +135,7 @@ form {
 .hover_card {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 1rem;
-  margin: 0.5rem;
+  margin: 0.25rem;
 
   border: 0.5rem;
   border-radius: 20px;
@@ -162,7 +163,6 @@ input.hover_card {
 }
 
 /* front end validation css */
-
 .form-validation {
   margin-bottom: 10px;
   padding-bottom: 10px;
@@ -223,7 +223,8 @@ input.hover_card {
   /* The height is 400 pixels */
   /* width: 100%; */
   /* The width is the width of the web page */
-  margin: 0.5rem;
+  margin: 0.25rem;
+  margin-right: 0.5rem;
   border-radius: 20px;
   height: 50rem;
   
@@ -237,40 +238,13 @@ footer{
 }
 
 /* for browse pages */
-.filters_panel{
-  background-color: rgba(255, 255, 255, 0.3);
-  padding: 1rem;
-  margin: 0.5rem;
-
-  border: 0.5rem;
-  border-radius: 20px;
-
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
-    -8px -8px 12px 0 rgba(255, 255, 255, 0.1),
-    0 0 2000px rgba(255, 255, 255, 0.5) inset;
-  backdrop-filter: blur(10px);
-
-}
-.search{
-  display: flex;
-  justify-content: space-between;
-}
-#search_text{
-  vertical-align: middle;
-  padding-left: 5px;
-}
-#search_button{
-  vertical-align: middle;
-  margin-left: 2px;
-}
-
 #room_results{
   flex-grow: 1;
 }
 
 .card{
   background-color: rgba(255, 255, 255, 0.3);
-  margin: 0.5rem;
+  margin: 0.25rem;
 
   border: 0.5rem;
   border-radius: 20px;
@@ -313,4 +287,119 @@ footer{
 
 .noHover:hover{
   box-shadow: 0 0 0 0;
+}
+
+/* filter panel */
+.filter_panel{
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+  margin: 0.25rem;
+  margin-left: 0.5rem;
+
+  border: 0.5rem;
+  border-radius: 20px;
+
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1),
+    0 0 2000px rgba(255, 255, 255, 0.5) inset;
+  backdrop-filter: blur(10px);
+
+}
+.search{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.rem;
+}
+#search_text{
+  vertical-align: middle;
+  padding-left: 5px;
+}
+#search_button{
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+.filter_form{
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+  backdrop-filter: none;
+}
+.range{
+  width: 15rem;
+  display: flex;
+}
+.filter_category{
+  margin-left: 0.5rem;
+}
+.search_category{
+  margin: 0.25rem;
+}
+.filterButton{
+  background-color: darkslateblue;
+  color: #f0f0f0;
+
+  padding: 5px;
+
+  width: 50%;
+  text-align: center;
+  border-radius: 20px;
+
+  margin-left: 25%;
+}
+.filterButton:hover{
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25) inset,
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1) inset,
+    12px 12px 16px 0 rgba(0, 0, 0, 0), -8px -8px 12px 0 rgba(255, 255, 255, 0);
+}
+
+/* home page */
+.home_sect1_background{
+  background-image: url("http://cdn.home-designing.com/wp-content/uploads/2017/08/white-bedroom-with-plants.jpg");
+  background-repeat: no-repeat;
+  background-position-x:center;
+  background-position-y: bottom;
+  background-size: cover;
+  margin: 0.25rem;
+  height: 50rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+.home_sect1{
+  margin: auto;
+  padding-top: 15rem;
+}
+.home_sect1_text{
+  text-align: center;
+  border: 5rem;
+}
+.cta{
+  background-color: darkslateblue;
+  color: #f0f0f0;
+  font-size: 200%;
+
+  padding: 5px;
+  width: 10rem;
+
+  border-radius: 20px;
+}
+.cta:hover{
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25) inset,
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1) inset,
+    12px 12px 16px 0 rgba(0, 0, 0, 0), -8px -8px 12px 0 rgba(255, 255, 255, 0);
+}
+.home_sect2{
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+  margin: 0.25rem;
+  border: 0.5rem;
+
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1),
+    0 0 2000px rgba(255, 255, 255, 0.5) inset;
+  backdrop-filter: blur(10px);
+}
+.home_sect2_text{
+  font-size: 150%;
+  text-align: center;
 }
