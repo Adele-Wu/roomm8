@@ -356,18 +356,27 @@ footer{
 
 /* home page */
 .home_sect1_background{
-  background-image: url("http://cdn.home-designing.com/wp-content/uploads/2017/08/white-bedroom-with-plants.jpg");
+  background-image: url("https://images.unsplash.com/photo-1595526051245-4506e0005bd0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80");
   background-repeat: no-repeat;
   background-position-x:center;
   background-position-y: bottom;
   background-size: cover;
+
   margin: 0.25rem;
-  height: 50rem;
-  color: rgba(255, 255, 255, 0.3);
+  background-attachment: fixed;
 }
 .home_sect1{
   margin: auto;
-  padding-top: 15rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+
+  border: 0.5rem;
+  border-radius: 20px;
+
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgba(255, 255, 255, 0.1),
+    0 0 2000px rgba(255, 255, 255, 0.5) inset;
+  backdrop-filter: blur(6px);
 }
 .home_sect1_text{
   text-align: center;
@@ -376,7 +385,6 @@ footer{
 .cta{
   background-color: darkslateblue;
   color: #f0f0f0;
-  font-size: 200%;
 
   padding: 5px;
   width: 10rem;
@@ -402,4 +410,8 @@ footer{
 .home_sect2_text{
   font-size: 150%;
   text-align: center;
+}
+.home_sect2_container{
+  margin: 0.75rem;
+  padding: 2rem;
 }

@@ -233,7 +233,7 @@
                         <option>Welsh </option>
                     </select>
                 </div>
-                <div class="text-xs mx-2">(scroll for for more, hold cmd to select multiple)</div>
+                <div class="text-xs mx-2">(scroll for more, hold cmd to select multiple)</div>
             </div>
 
             <div class="search_category">
@@ -254,7 +254,7 @@
     </div>
 
     {{!-- generate all the necessary cards --}}
-    <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" id="room_results">
+    <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3" id="room_results">
         {{#each results}}
         {{> roomcard this}}
         {{/each}}
