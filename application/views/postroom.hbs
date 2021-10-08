@@ -1,10 +1,10 @@
-<form action="/post/createPost" method="POST" enctype="multipart/form-data">
+<form action="/post/createPost" method="POST" enctype="multipart/form-data" >
   <label for="title">Title</label>
   <input
     type="text"
     name="title"
     id="title"
-    class="title"
+    class="title hover_card"
     placeholder="Enter an title."
     required
   />
@@ -13,7 +13,7 @@
     type="text"
     name="address"
     id="address"
-    class="address"
+    class="address hover_card"
     placeholder="Enter an address."
     required
   />
@@ -22,7 +22,7 @@
     type="text"
     name="rent"
     id="rent"
-    class="rent"
+    class="rent hover_card"
     placeholder="Enter an rent."
     required
   />
@@ -31,7 +31,7 @@
       type="checkbox"
       name="privacy"
       id="privacy"
-      class="privacy"
+      class="privacy hover_card hover_input"
       placeholder="Enter an privacy."
     />
   </label>
@@ -41,7 +41,7 @@
     type="text"
     name="description"
     id="description"
-    class="description"
+    class="description hover_card"
     placeholder="Enter an description."
     required
   ></textarea>
@@ -52,8 +52,9 @@
     name="fileUpload"
     id="fileUpload"
     value="fileUpload"
+    class="card p-5"
     required
   />
 
-  <button type="submit" id="submit">Submit</button>
+  <button type="submit" id="submit" class="hover_card">Submit</button>
 </form>

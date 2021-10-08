@@ -23,6 +23,7 @@ p
 {
     height: 500px !important;
     width: auto ;
+    margin: auto;
 }
 
 #github

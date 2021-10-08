@@ -19,19 +19,26 @@
   outline: none;
 }
 
+.bold{
+  font-family: chillax_bold;
+}
+
 body {
   background-color: rgb(18, 23, 70);
   background-image: url('/images/background3.jpeg');
 
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  /* background-size: cover; */
 }
 
 .about_us {
   padding: 1rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
+}
+.team_images{
+  /* width: 50%; */
+  width: 150px;
+  height: 150px;
 }
 
 #profile {
@@ -151,11 +158,23 @@ form {
     -8px -8px 12px 0 rgba(255, 255, 255, 0.1) inset,
     12px 12px 16px 0 rgba(0, 0, 0, 0), -8px -8px 12px 0 rgba(255, 255, 255, 0);
 }
-
 input.hover_card {
   margin-left: 0;
   margin-right: 0;
   margin-bottom: 1rem;
+  border-radius: 4px;
+}
+textarea.hover_card {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+input.card {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1rem;
+  border-radius: 4px;
 }
 
 #photo {
