@@ -24,4 +24,8 @@ router.get("/browse-room", getRecentPosts, function (req, res, next) {
   res.render("browse-room", { title: "Browse Room Page", search: true });
 });
 
+router.get("/browse-user", function (req, res, next) {
+  res.render("browse-user", { title: "Browse User Page" });
+});
+
 module.exports = router;

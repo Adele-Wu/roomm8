@@ -5,44 +5,13 @@
         <div class="search ">
 
             {{!-- placeholder for search --}}
-            <input type="text" id="search-text" placeholder="search" class="w-11/12"></input>
-            <button id="search-button">
+            <input type="text" id="search_text" placeholder="search" class="w-11/12"></input>
+            <button id="search_button">
                 <img src="/images/search_icon.png" width="20px">
             </button>
         </div>
 
         <form action="/filter" class="filter_form w-56">
-
-            {{!-- room preferences --}}
-            <div class="search_category">
-                <label for="price">Price Range: </label>
-                <div class="range">
-                    <input id="minRange" type="text" name="priceRange" placeholder="Min Price" class="w-5/12 mx-3">-
-                    <input id="maxRange" type="text" name="priceRange" placeholder="Max Price" class="w-5/12 mx-3">
-                </div>
-            </div>
-
-            <div class="search_category">
-                <label for="privacy">Privacy:</label>
-                <div class="filter_category">
-                    <div class="item">
-                        <input type="checkbox" name="privacy" id="privateroom" class="filter_option" />Private Room
-                    </div>
-                    <div class="item">
-                        <input type="checkbox" name="privacy" id="sharedroom" class="filter_option" />Shared Room
-                    </div>
-                </div>
-            </div>
-
-            <div class="search_category">
-                <label for="amenities"> Amenities </label>
-                <div class="filter_category">
-                    <div class="item">
-                        <input id="parking" type="checkbox" name="parking">Parking
-                        <input id="disability" type="checkbox" name="disability">Disability
-                    </div>
-                </div>
-            </div>
 
             {{!-- roommate preferances --}}
             <div class="search_category">
@@ -68,7 +37,7 @@
             </div>
 
             <div class="search_category">
-                <label for="occupationsc">Occupation:</label>
+                <label for="occupation">Occupation:</label>
                 <div class="filter_category">
                     <div class="item">
                         <input type="checkbox" name="student" id="student" class="occupation" />Student
@@ -273,7 +242,7 @@
                     <div class="item">
                         <input type="checkbox" name="interests" id="art" class="filter_option" />Art
                         <input type="checkbox" name="interests" id="cooking" class="filter_option" />Cooking
-                        <input type="checkbox" name="interests" id="excercising" class="filter_option" />Excercising
+                        <input type="checkbox" name="interests" id="exercising" class="filter_option" />Exercising
                         <input type="checkbox" name="interests" id="gaming" class="filter_option" />Gaming
                         <input type="checkbox" name="interests" id="music" class="filter_option" />Music
                     </div>
@@ -285,13 +254,10 @@
     </div>
 
     {{!-- generate all the necessary cards --}}
-    <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" id="room_results">
+    <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3" id="room_results">
         {{#each results}}
         {{> roomcard this}}
         {{/each}}
     </div>
-
-    {{!-- placeholder for map --}}
-    <div id="map" class=".w-screen md:w-1/3"> </div>
 
 </div>

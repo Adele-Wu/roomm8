@@ -7,6 +7,7 @@ if (searchButton) {
 
 async function executeSearch() {
   let searchTerm = document.getElementById("search-text");
+  console.log("jeff");
   // if the users doesn't search for anything redirect back to the same room
   if (!searchTerm) {
     location.replace("/browse-room");
