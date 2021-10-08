@@ -13,8 +13,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    {{!-- Testing google maps for the landing page OLD IGNORE --}}
-    {{!-- <script defer src="javascripts/google-map.js"></script> --}}
+    {{#if search}}
+    <script defer src="javascripts/google-map.js"></script>
+    <script defer src="javascripts/search.js"></script>
+    {{/if}}
   </head>
 
   <div class='logo'>

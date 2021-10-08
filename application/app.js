@@ -8,9 +8,15 @@ var sessions = require("express-session");
 var mysqlSession = require("express-mysql-session")(sessions);
 var flash = require("express-flash");
 var multer = require("multer");
+var cors = require("cors");
 /**
  * We are keeping MVC design pattern in mind to organize and divide the related program logic.
  */
+
+var app = express();
+
+app.use(cors({ origin: true }));
+
 // set each route
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -18,8 +24,6 @@ var aboutRouter = require("./routes/about");
 var postRouter = require("./routes/post");
 
 var requestPrint = require("./helpers/debug/debugprinters").requestPrint;
-
-var app = express();
 
 app.engine(
   "hbs",
@@ -35,8 +39,7 @@ app.engine(
     },
   })
 );
-// app.listen(3000);
-// node module express-mysql-session
+
 // https://www.npmjs.com/package/express-mysql-session
 // session store will create a connection pool which will handle the connection
 // to the database. With the default options, a session table will be automatically generated
@@ -71,17 +74,20 @@ app.use(cookieParser());
 // path to static content
 app.use(express.static(path.join(__dirname, "public")));
 
-// used for helper functions
 // these are not self-terminating middlewares thus you must call next()
 app.use((req, res, next) => {
   requestPrint(req.url);
   next();
 });
 
+/**
+ * request.save
+ * wrap res.redirect() with req.session.save(function(err){ res.direct()})
+ * */
 app.use((req, res, next) => {
-  // console.log("req.session.username");
-  // console.log(req.session.username);
+  // console.log(req.session);
   if (req.session.username) {
+    // console.log(req.session);
     res.locals.logged = true;
   }
   next();

@@ -1,4 +1,29 @@
 {{!-- generate all the necessary cards --}}
+<div id="map"></div>
+<div id="sidePanel">
+    <form action="/filter">
+        <label for="price">Price Range</label>
+        <input id="minRange" type="text" name="minRange" placeholder="Min Price">
+        <input id="maxRange" type="text" name="maxRange" placeholder="Max Price">
+        <label for="privacy">Privacy
+            <input type="checkbox" name="privacy" id="privacy" class="privacy" />
+        </label>
+        <label for="amenities">
+            Parking
+            <input id="parking" type="checkbox" name="parking">
+            Disability
+            <input id="disability" type="checkbox" name="disability">
+        </label>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+<div id="postContainer">
 {{#each results}}
 {{> roomcard this}}
 {{/each}}
+</div>
+
+<script defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUQ84KIyy3GqKppaP1-GI_MTZ5-mhrhgQ&callback=initMap">
+    type="text/javascript"
+</script>
