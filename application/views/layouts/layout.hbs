@@ -14,8 +14,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    {{!-- Testing google maps for the landing page OLD IGNORE --}}
-    {{!-- <script defer src="javascripts/google-map.js"></script> --}}
+    {{#if search}}
+    <script defer src="javascripts/google-map.js"></script>
+    <script defer src="javascripts/search.js"></script>
+    {{/if}}
   </head>
 
   <div id="demonstration-only-tag" class="flex flex-col justify-center items-center bg-white">SFSU Software Engineering Project CSC 648-848, Fall 2021. For Demonstration Only</div>

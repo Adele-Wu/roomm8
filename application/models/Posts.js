@@ -1,7 +1,7 @@
 var db = require("../conf/database");
 const PostModel = {};
 
-PostModel.create = (
+PostModel.create = async (
   title,
   address,
   rent,
@@ -13,7 +13,6 @@ PostModel.create = (
 ) => {
   let baseSQL =
     "INSERT INTO posts (title, address, rent, privacy, description, photopath, thumbnail, created, users_user_id) VALUE (?, ?, ?, ?, ?, ?, ?, now(), ?)";
-
   return db
     .execute(baseSQL, [
       title,
@@ -31,15 +30,30 @@ PostModel.create = (
     .catch((err) => err);
 };
 
-PostModel.search = (searchTerm) => {};
-
 PostModel.getTenMostRecent = async (numberOfPosts) => {
   let baseSQL =
-    "SELECT post_id, title, address, rent, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT 10;";
+    "SELECT post_id, title, address, rent, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT " +
+    numberOfPosts +
+    ";";
   return db
     .execute(baseSQL, [numberOfPosts])
     .then(([results, fields]) => {
-      return Promise.resolve(results);
+      return results;
+    })
+    .catch((err) => Promise.reject(err));
+};
+
+PostModel.search = async (searchTerm) => {
+  let baseSQL =
+    "SELECT post_id, title, address, rent, description, thumbnail, concat_ws(' ', title, description) \
+  AS haystack \
+  FROM posts \
+  HAVING haystack like ?";
+  let sqlReadySearchTerm = "%" + searchTerm + "%";
+  return db
+    .execute(baseSQL, [sqlReadySearchTerm])
+    .then(([results, fields]) => {
+      return results;
     })
     .catch((err) => Promise.reject(err));
 };

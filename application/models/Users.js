@@ -1,10 +1,10 @@
-var database = require("../conf/database");
+var db = require("../conf/database");
 var bcrypt = require("bcrypt");
 const User = {};
 
 // Base cases to check if username, email, and address is distinct.
 User.usernameExists = async (username) => {
-  return database
+  return db
     .execute("SELECT * FROM users where username=?", [username])
     .then(([results, field]) => {
       return !(results && results.length == 0);
@@ -13,7 +13,7 @@ User.usernameExists = async (username) => {
 };
 
 User.emailExists = async (email) => {
-  return database
+  return db
     .execute("SELECT * FROM users WHERE email=?", [email])
     .then(([results, field]) => {
       return !(results && results.length == 0);
@@ -22,7 +22,7 @@ User.emailExists = async (email) => {
 };
 
 User.addressExists = async (address) => {
-  return database
+  return db
     .execute("SELECT * FROM users WHERE address=?", [address])
     .then(([results, field]) => {
       return !(results && results.length == 0);
@@ -53,7 +53,8 @@ User.create = async (
       let baseSQL =
         "INSERT INTO users (`first_name`, `last_name`, `dob`, `email`, `username`, `password`, `usertype`, `created`) VALUES (?, ?, ?, ?, ?, ?, ?, now())";
       // in the return statement we're passing the hashed_password and not the original!!!
-      return database.execute(baseSQL, [
+      // TODO
+      return db.execute(baseSQL, [
         first_name,
         last_name,
         date_of_birth,
@@ -80,7 +81,7 @@ User.authenticate = async (username, password) => {
   let baseSQL =
     "SELECT user_id, username, password FROM users WHERE username=?;";
   let userId; // <-- don't change to id or it'll mess up with mysql
-  return database
+  return db
     .execute(baseSQL, [username])
     .then(([results, field]) => {
       // here we want a result from our query then have the id persist through once logged in.
