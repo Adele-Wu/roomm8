@@ -278,8 +278,9 @@ footer{
 }
 .cardImage{
   margin-top: 1rem;
-  height: 15rem;
-  width: auto;
+  width: 15rem;
+  height: auto;
+  
 }
 .cardBody{
   margin: 1rem;
