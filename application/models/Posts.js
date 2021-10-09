@@ -1,7 +1,7 @@
 var db = require("../conf/database");
-const PostModel = {};
+const Post = {};
 
-PostModel.create = async (
+Post.create = async (
   title,
   address,
   rent,
@@ -30,7 +30,7 @@ PostModel.create = async (
     .catch((err) => err);
 };
 
-PostModel.getTenMostRecent = async (numberOfPosts) => {
+Post.getTenMostRecent = async (numberOfPosts) => {
   let baseSQL =
     "SELECT post_id, title, address, rent, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT " +
     numberOfPosts +
@@ -43,7 +43,7 @@ PostModel.getTenMostRecent = async (numberOfPosts) => {
     .catch((err) => Promise.reject(err));
 };
 
-PostModel.search = async (searchTerm) => {
+Post.search = async (searchTerm) => {
   let baseSQL =
     "SELECT post_id, title, address, rent, description, thumbnail, concat_ws(' ', title, description) \
   AS haystack \
@@ -58,4 +58,4 @@ PostModel.search = async (searchTerm) => {
     .catch((err) => Promise.reject(err));
 };
 
-module.exports = PostModel;
+module.exports = Post;

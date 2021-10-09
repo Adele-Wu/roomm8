@@ -1,15 +1,23 @@
 <h1 class="bold text-center text-6xl font-bold text-white">Meet Our Team</h1>
-<div class="md:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 m-1" id="profile">
-    {{#each person}}
-    <div class="hover_card text-center m-2" id="person_card" >
-        <a href="/about/{{this.first_name}}" style="text-decoration:none">
-            <img id='photo' src="/images/{{this.image}}" alt="imageNoWork" class="team_images center object-cover">
-            <p id='name'>{{this.first_name}} {{this.last_name}}</p>
-            <p>GitHub Name: {{this.github}}</p>
-            <p>Role: {{this.role}}</p>
-            {{!-- <p>About Me: {{this.information}}</p> --}}
-            {{!-- <details>About Me: {{this.information}}</details> --}}
-        </a>
+<div
+  class="md:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 m-1"
+  id="profile"
+>
+  {{#each person}}
+    <div class="hover_card text-center m-2" id="person_card">
+      <a href="/about/{{this.first_name}}" style="text-decoration:none">
+        <img
+          id="photo"
+          src="/images/{{this.image}}"
+          alt="imageNoWork"
+          class="team_images center object-cover"
+        />
+        <p id="name">{{this.first_name}} {{this.last_name}}</p>
+        <p>GitHub Name: {{this.github}}</p>
+        <p>Role: {{this.role}}</p>
+        {{!-- <p>About Me: {{this.information}}</p> --}}
+        {{!-- <details>About Me: {{this.information}}</details> --}}
+      </a>
     </div>
-    {{/each}}
+  {{/each}}
 </div>
