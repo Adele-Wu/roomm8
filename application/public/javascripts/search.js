@@ -12,13 +12,22 @@ async function executeSearch() {
     location.replace("/browse-room");
     return;
   }
+  let minPricerange = document.getElementById("minRange");
+  let languages = document.getElementById("language");
+  var selected = "";
+  for (var option of languages.options)
+    {
+        if (option.selected) {
+            selected= selected+","+option.value;
+        }
+    }
 
   // if the users is looking for a users than we know that the username starts with an alphabet
   // else will be an address
   let isUser = /[a-zA-Z]/.test(searchTerm.value.charAt(0));
   if (isUser) {
     let mainContent = document.getElementById("room_results");
-    let searchURL = `post/search?search=${searchTerm.value}`;
+    let searchURL = `post/search?search=keyTerm=${searchTerm.value}?minRange=${minPricerange.value}?languages=${selected}`;
     let response = await axios.get(searchURL);
     let newMainContentHTML = "";
     response.data.results.forEach((post) => {
@@ -39,6 +48,7 @@ async function executeSearch() {
     //     mainContent.innerHTML = newMainContentHMTL;
     //   });
   } else {
+
     gmap.pinpointLocation(searchTerm.value);
   }
 }
