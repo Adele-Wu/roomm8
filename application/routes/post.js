@@ -74,6 +74,8 @@ router.post("/createPost", upload.single("fileUpload"), (req, res, next) => {
 
 // /post/search?search=value // need to come back to this and
 router.get("/search", async (req, res, next) => {
+  console.log(req.query);
+  /*
   try {
     let searchTerm = req.query.search;
     if (!searchTerm) {
@@ -96,6 +98,7 @@ router.get("/search", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+  */
 });
 
 // TODO: need to add messaging system for individual posts by users (or email)
