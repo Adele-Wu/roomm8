@@ -1,0 +1,23 @@
+<div id="{{user_id}}" class="item card">
+  <img
+    class="cardImage max-w-screen-lg mx-auto"
+    {{!-- src="images/uploads/posts/{{photopath}}" --}}
+    src="images/Smiley_Face.JPG"
+    id="{{user_id}}"
+    alt="face"
+  />
+  <div class="break-words">
+    <p class="font-bold text-lg">{{first_name}} {{last_name}}</p>
+    <p class="">{{gender}}</p>
+    <p class="">{{dob}}</p>
+    <p class="">{{fields}}</p>
+    <p class="">{{school}}</p>
+    <p class="">{{email}}</p>
+    <p class="">{{username}}</p>
+    <p class="">{{description}}</p>
+  </div>
+  {{! do not change this or at least keep a similar format. buttons do NOT have href properties. You can't fire a route with only a button if there's no form tag }}
+  <button class="postButton">
+    <a href="/users/{{user_id}}">Display
+      {{username}}</a></button>
+</div>

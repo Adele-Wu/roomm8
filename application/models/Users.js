@@ -39,7 +39,10 @@ User.addressExists = async (address) => {
 User.create = async (
   first_name,
   last_name,
+  gender,
   date_of_birth,
+  fields,
+  schools,
   email,
   username,
   password
@@ -51,13 +54,16 @@ User.create = async (
     .then((hashed_password) => {
       // the reason for no checks here is because we have already done so in the base cases.
       let baseSQL =
-        "INSERT INTO users (`first_name`, `last_name`, `dob`, `email`, `username`, `password`, `usertype`, `created`) VALUES (?, ?, ?, ?, ?, ?, ?, now())";
+        "INSERT INTO users (`first_name`, `last_name`, `gender`, `dob`, `fields`,`school`, `email`, `username`, `password`, `usertype`, `created`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
       // in the return statement we're passing the hashed_password and not the original!!!
       // TODO
       return db.execute(baseSQL, [
         first_name,
         last_name,
+        gender,
         date_of_birth,
+        fields,
+        schools,
         email,
         username,
         hashed_password,
@@ -68,6 +74,7 @@ User.create = async (
       if (results && results.affectedRows) {
         // results.insertId is the id of the new user and will always be greater than one.
         // insertId is a keyword used for mySql
+        console.log(results);
         return results.insertId;
       } else {
         return -1;
@@ -102,6 +109,19 @@ User.authenticate = async (username, password) => {
       } else {
         return -1;
       }
+    })
+    .catch((err) => Promise.reject(err));
+};
+
+User.getTenMostRecent = async (numberOfPosts) => {
+  let baseSQL =
+    "SELECT user_id, first_name, last_name, gender, dob, fields, school, email, username, photopath, description FROM users ORDER BY created DESC LIMIT " +
+    numberOfPosts +
+    ";";
+  return db
+    .execute(baseSQL, [numberOfPosts])
+    .then(([results, fields]) => {
+      return results;
     })
     .catch((err) => Promise.reject(err));
 };

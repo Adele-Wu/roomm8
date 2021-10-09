@@ -20,6 +20,11 @@ async function executeSearch() {
     let mainContent = document.getElementById("room_results");
     let searchURL = `post/search?search=${searchTerm.value}`;
     let response = await axios.get(searchURL);
+    console.log(response);
+    if (!response) {
+      location.replace("/browse-room");
+      return;
+    }
     let newMainContentHTML = "";
     response.data.results.forEach((post) => {
       newMainContentHTML += createPost(post);
@@ -65,9 +70,11 @@ function createPost(post) {
     <p class="cardAddress">${post.address}</p>
     <p class="cardDescription">${post.description}</p>
     </div>
-    <button class="postButton" href="/post/${post.post_id}">Check Post</button>
+    <button class="postButton">
+    <a href="/post/${post.post_id}">
+    Check Post
+    </a>
+    </button>
     </div>
-    `
-
-
+    `;
 }

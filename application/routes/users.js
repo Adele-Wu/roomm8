@@ -24,7 +24,10 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
     const {
       first_name,
       last_name,
+      gender,
       date_of_birth,
+      fields,
+      schools,
       email,
       username,
       password,
@@ -57,7 +60,10 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
         (await User.create(
           first_name,
           last_name,
+          gender,
           date_of_birth,
+          fields,
+          schools,
           email,
           username,
           password
@@ -71,7 +77,6 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       }
       // else print you gucci and redirect to login
       successPrint("Registration Success: User was created!");
-
       req.session.save((err) => {
         res.redirect("/login");
       });
@@ -230,6 +235,18 @@ router.post("/logout", async (req, res, next) => {
       res.json({ status: "OK", message: "User is logged out." });
     }
   });
+});
+
+router.get("/:id(\\d+)", async (req, res, next) => {
+  let baseSQL = "SELECT * FROM users where user_id = ?;";
+  let [results, fields] = await db.execute(baseSQL, [req.params.id]);
+  // console.log(results);
+  if (results && results.length) {
+    res.render("user-profile", {
+      title: results[0].first_name,
+      currentUser: results[0],
+    });
+  }
 });
 
 // purely here to test if the db is connect

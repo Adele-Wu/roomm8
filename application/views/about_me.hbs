@@ -1,15 +1,20 @@
-<link rel="stylesheet" href="/stylesheets/{{person.first_name}}.css">
+<link rel="stylesheet" href="/stylesheets/{{person.first_name}}.css" />
 
-<div class='person_container'>
-    <h1 id='name'>{{person.first_name}} {{person.last_name}}</h1>
-    <br>
-    <img id='photo' src="/images/{{person.image}}" alt="imageNoWork" style="height:200px">
-    <br>
-    <a id='github' href={{person.github_link}}>
+<div class="person_container">
+  <h1 id="name">{{person.first_name}} {{person.last_name}}</h1>
+  <br />
+  <img
+    id="photo"
+    src="/images/{{person.image}}"
+    alt="imageNoWork"
+    style="height:200px"
+  />
+  <br />
+  <a id="github" href={{person.github_link}}>
     {{person.github}}
-    </a>
-    <br>
-    <p id='info'>
-        {{person.information}}
-    </p>
+  </a>
+  <br />
+  <p id="info">
+    {{person.information}}
+  </p>
 </div>

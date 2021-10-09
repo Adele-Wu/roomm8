@@ -98,25 +98,24 @@ router.get("/search", async (req, res, next) => {
   }
 });
 
-// TODO: need to add messaging system for individual posts by users (or email)
 router.get("/:id(\\d+)", async (req, res, next) => {
   try {
     let usernameTitle = "";
     let baseSQL =
       "SELECT u.username, p.title, p.description, p.photopath, p.created \
-    FROM users u \
-    JOIN posts p \
-    on u.user_id = p.users_user_id \
-    WHERE p.post_id = ?";
+  FROM users u \
+  JOIN posts p \
+  on u.user_id = p.users_user_id \
+  WHERE p.post_id = ?";
     let [results, fields] = await db.execute(baseSQL, [req.params.id]);
     if (results && results.length) {
       let baseSQL2 =
         "SELECT m.users_user_id, m.description, m.posts_post_id, m.created \
-      FROM posts p \
-      JOIN messages m \
-      on p.post_id = posts_post_id \
-      WHERE p.post_id = ? \
-      ORDER BY m.created DESC;";
+    FROM posts p \
+    JOIN messages m \
+    on p.post_id = posts_post_id \
+    WHERE p.post_id = ? \
+    ORDER BY m.created DESC;";
       let [results2, fields2] = await db.execute(baseSQL2, [req.params.id]);
       req.session.viewing = req.params.id;
       usernameTitle += results[0].username + "'s Room Profile";
