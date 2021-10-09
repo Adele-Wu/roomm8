@@ -7,7 +7,7 @@ const email = document.getElementById("email");
 const username = document.getElementById("username");
 const password = document.getElementById("password");
 const confirm_password = document.getElementById("confirm_password");
-const registration_submit = document.getElementById("registration_submit");
+const registration_submit = document.getElementById("registration_submit"); 
 
 var final_test_before_sql_query = new Array(7).fill(false);
 
@@ -147,6 +147,7 @@ registration_submit.addEventListener("click", (e) => {
   if (!final_test_before_sql_query.every((e) => e === true)) {
     e.preventDefault();
   }
+  console.log("Eddy has nice hair");
   // e.preventDefault();
   // checkInputs();
 });

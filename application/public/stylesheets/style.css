@@ -278,6 +278,8 @@ footer{
 }
 .cardImage{
   margin-top: 1rem;
+  height: 15rem;
+  width: auto;
 }
 .cardBody{
   margin: 1rem;
@@ -433,4 +435,8 @@ footer{
 .home_sect2_container{
   margin: 0.75rem;
   padding: 2rem;
+}
+.item .card
+{
+  max-height: 500px;
 }
