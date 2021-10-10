@@ -122,21 +122,27 @@ ul {
 form {
   display: grid;
 
-  width: 600px;
+  /* width: 600px; */
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 2rem;
 
   padding: 3rem;
-  padding-left: 10rem;
-  padding-right: 10rem;
+  padding-left: 5%;
+  padding-right: 5%;
 
   border-radius: 50px;
 
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+  background-color: rgba(255, 255, 255, 0.2);
+
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.3),
     -8px -8px 12px 0 rgba(255, 255, 255, 0.1),
     0 0 2000px rgba(255, 255, 255, 0.5) inset;
   backdrop-filter: blur(10px);
+}
+
+#registration_form{
+  max-width: 50rem;
 }
 
 .hover_card {
@@ -159,16 +165,26 @@ form {
     12px 12px 16px 0 rgba(0, 0, 0, 0), -8px -8px 12px 0 rgba(255, 255, 255, 0);
 }
 input.hover_card {
-  margin-left: 0;
-  margin-right: 0;
+  /* margin-left: 0;
+  margin-right: 0; */
   margin-bottom: 1rem;
   border-radius: 4px;
+  max-width: 35rem;
+  margin: auto;
 }
 textarea.hover_card {
   margin-left: 0;
   margin-right: 0;
   margin-bottom: 1rem;
   border-radius: 4px;
+}
+select.hover_card{
+  /* margin-left: 0; */
+  margin-right: 0;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+
+  width: 80%;
 }
 input.card {
   margin-left: 0;
@@ -466,4 +482,11 @@ footer{
 .filter_option{
   margin-left: 1px;
   margin-right: 1px;
+}
+
+input.radio{
+  display: inline;
+  width: 12px;
+  margin: 0;
+  margin-left: 2rem;
 }
