@@ -41,6 +41,7 @@ User.create = async (
   last_name,
   gender,
   date_of_birth,
+  occupation,
   fields,
   schools,
   email,
@@ -54,7 +55,7 @@ User.create = async (
     .then((hashed_password) => {
       // the reason for no checks here is because we have already done so in the base cases.
       let baseSQL =
-        "INSERT INTO users (`first_name`, `last_name`, `gender`, `dob`, `fields`,`school`, `email`, `username`, `password`, `usertype`, `created`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
+        "INSERT INTO users (`first_name`, `last_name`, `gender`, `dob`, `occupation`, `fields`,`school`, `email`, `username`, `password`, `usertype`, `created`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now())";
       // in the return statement we're passing the hashed_password and not the original!!!
       // TODO
       return db.execute(baseSQL, [
@@ -62,6 +63,7 @@ User.create = async (
         last_name,
         gender,
         date_of_birth,
+        occupation,
         fields,
         schools,
         email,
@@ -74,7 +76,7 @@ User.create = async (
       if (results && results.affectedRows) {
         // results.insertId is the id of the new user and will always be greater than one.
         // insertId is a keyword used for mySql
-        console.log(results);
+        // console.log(results);
         return results.insertId;
       } else {
         return -1;
@@ -115,11 +117,23 @@ User.authenticate = async (username, password) => {
 
 User.getTenMostRecent = async (numberOfPosts) => {
   let baseSQL =
-    "SELECT user_id, first_name, last_name, gender, dob, fields, school, email, username, photopath, description FROM users ORDER BY created DESC LIMIT " +
+    "SELECT user_id, first_name, last_name, gender, dob, occupation, fields, school, email, username, photopath, description FROM users ORDER BY created DESC LIMIT " +
     numberOfPosts +
     ";";
   return db
     .execute(baseSQL, [numberOfPosts])
+    .then(([results, fields]) => {
+      return results;
+    })
+    .catch((err) => Promise.reject(err));
+};
+
+User.search = async (searchTerm) => {
+  let baseSQL =
+    "SELECT user_id, first_name, last_name, gender, dob, occupation, fields, school, email, username, photopath, description, CONCAT(' ', username) AS haystack FROM users HAVING haystack like ?;";
+  searchTerm = "%" + searchTerm + "%";
+  return await db
+    .execute(baseSQL, [searchTerm])
     .then(([results, fields]) => {
       return results;
     })

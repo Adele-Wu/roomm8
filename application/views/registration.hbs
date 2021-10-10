@@ -35,24 +35,12 @@
   <div class="form-validation">
     <label for="gender">Gender</label>
     <div id="gender">
-      <input type="radio" value="male" id="male" name="gender" value="male" />
+      <input type="radio" id="male" name="gender" value="Male" />
       <label for="male">Male</label>
-      <input
-        type="radio"
-        value="female"
-        id="female"
-        name="gender"
-        value="female"
-      />
+      <input type="radio" id="female" name="gender" value="Female" />
       <label for="female">Female</label>
-      <input
-        type="radio"
-        value="other"
-        id="other"
-        name="gender"
-        value="other"
-      />
-      <label for="male">Other</label>
+      <input type="radio" id="other" name="gender" value="Other" />
+      <label for="other">Other</label>
     </div>
 
     <small>Error message</small>
@@ -68,6 +56,24 @@
       value="2018-07-22"
       required
     />
+
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="occupation">Occupation</label>
+    <div id="occupation">
+      <input type="radio" id="student" name="occupation" value="Student" />
+      <label for="student">Student</label>
+
+      <input
+        type="radio"
+        id="professional"
+        name="occupation"
+        value="Professional"
+      />
+      <label for="professional">Professional</label>
+    </div>
 
     <small>Error message</small>
   </div>

@@ -3,7 +3,6 @@
     {{!-- filters panel --}}
     <div class="filter_panel" class="w-4/6">
         <div class="search ">
-
             {{!-- placeholder for search --}}
             <input type="text" id="search-text" placeholder="search" class="w-11/12"></input>
             <button id="search-button">
@@ -26,10 +25,10 @@
                 <label for="privacy">Privacy:</label>
                 <div class="filter_category">
                     <div class="item">
-                        <input type="checkbox" name="privacy" id="privateroom" class="filter_option" />Private Room
+                        <input type="checkbox" name="privacy" id="privateroom" class="filter_option" value="private" />Private Room
                     </div>
                     <div class="item">
-                        <input type="checkbox" name="privacy" id="sharedroom" class="filter_option" />Shared Room
+                        <input type="checkbox" name="privacy" id="sharedroom" class="filter_option" value="shared" />Shared Room
                     </div>
                 </div>
             </div>
@@ -38,8 +37,8 @@
                 <label for="amenities"> Amenities </label>
                 <div class="filter_category">
                     <div class="item">
-                        <input id="parking" type="checkbox" name="parking">Parking
-                        <input id="disability" type="checkbox" name="disability">Disability
+                        <input id="parking" type="checkbox" name="parking" value="parking">Parking
+                        <input id="disability" type="checkbox" name="disability" value="disability">Disability
                     </div>
                 </div>
             </div>
@@ -79,72 +78,103 @@
             <div class="search_category">
                 <label for="fields">Fields:</label>
                 <select name="fields" id="fields" class="w-2/3">
-                    <option value="1">Agriculture, Agriculture Operations, and Related Sciences</option>
-                    <option value="2">Architecture and Related Services</option>
-                    <option value="3">Area, Ethnic, Cultural, Gender, and Group Studies</option>
-                    <option value="4">Aviation</option>
-                    <option value="5">Biological and Biomedical Sciences</option>
-                    <option value="6">Business, Management, Marketing, and Related Support Services</option>
-                    <option value="7">Communication, Journalism, and Related Programs</option>
-                    <option value="8">Communications Technologies/technicians and Support Services</option>
-                    <option value="9">Computer and Information Sciences and Support Services</option>
-                    <option value="10">Construction Trades</option>
-                    <option value="11">Education</option>
-                    <option value="12">Engineering Technologies and Engineering-Related Fields</option>
-                    <option value="13">Engineering</option>
-                    <option value="14">English Language and Literature/letters</option>
-                    <option value="15">Family and Consumer Sciences/human Sciences</option>
-                    <option value="16">Foreign Languages, Literatures, and Linguistics</option>
-                    <option value="17">Health Professions and Related Programs</option>
-                    <option value="18">History</option>
-                    <option value="19">Homeland Security, Law Enforcement, Firefighting</option>
-                    <option value="20">Human Services</option>
-                    <option value="21">Legal Professions and Studies</option>
-                    <option value="22">Liberal Arts and Sciences Studies and Humanities</option>
-                    <option value="23">Library Science</option>
-                    <option value="24">Mathematics and Statistics</option>
-                    <option value="25">Mechanic and Repair Technologies/technicians</option>
-                    <option value="26">Military Technologies and Applied Sciences</option>
-                    <option value="27">Multi/interdisciplinary Studies</option>
-                    <option value="28">Natural Resources and Conservation</option>
-                    <option value="29">Parks, Recreation, Leisure, and Fitness Studies</option>
-                    <option value="30">Personal and Culinary Services</option>
-                    <option value="31">Philosophy and Religious Studies</option>
-                    <option value="32">Physical Sciences</option>
-                    <option value="33">Precision Production</option>
-                    <option value="34">Psychology</option>
-                    <option value="35">Science Technologies/technicians</option>
-                    <option value="36">Social Sciences</option>
-                    <option value="37">Theology and Religious Vocations</option>
-                    <option value="38">Transportation and Materials Moving</option>
-                    <option value="39">Visual and Performing Arts</option>
+                    <option value="Agriculture, Agriculture Operations, and Related Sciences"
+                    >Agriculture, Agriculture Operations, and Related Sciences</option>
+                    <option value="Architecture and Related Services">Architecture and Related
+                        Services</option>
+                    <option value="Area, Ethnic, Cultural, Gender, and Group Studies">Area,
+                        Ethnic, Cultural, Gender, and Group Studies</option>
+                    <option value="Aviation">Aviation</option>
+                    <option value="Biological and Biomedical Sciences">Biological and
+                        Biomedical Sciences</option>
+                    <option
+                        value="Business, Management, Marketing, and Related Support Services"
+                    >Business, Management, Marketing, and Related Support Services</option>
+                    <option
+                        value="Communication, Journalism, and Related Programs"
+                    >Communication, Journalism, and Related Programs</option>
+                    <option
+                        value="Communications Technologies/technicians and Support Services"
+                    >Communications Technologies/technicians and Support Services</option>
+                    <option
+                        value="Computer and Information Sciences and Support Services"
+                    >Computer and Information Sciences and Support Services</option>
+                    <option value="Construction Trades">Construction Trades</option>
+                    <option value="Education">Education</option>
+                    <option
+                        value="Engineering Technologies and Engineering-Related Fields"
+                    >Engineering Technologies and Engineering-Related Fields</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="English Language and Literature/letters">English Language
+                        and Literature/letters</option>
+                    <option value="Family and Consumer Sciences/human Sciences">Family and
+                        Consumer Sciences/human Sciences</option>
+                    <option value="Foreign Languages, Literatures, and Linguistics">Foreign
+                        Languages, Literatures, and Linguistics</option>
+                    <option value="Health Professions and Related Programs">Health Professions
+                        and Related Programs</option>
+                    <option value="History">History</option>
+                    <option value="Homeland Security, Law Enforcement, Firefighting">Homeland
+                        Security, Law Enforcement, Firefighting</option>
+                    <option value="Human Services">Human Services</option>
+                    <option value="Legal Professions and Studies">Legal Professions and
+                        Studies</option>
+                    <option value="Liberal Arts and Sciences Studies and Humanities">Liberal
+                        Arts and Sciences Studies and Humanities</option>
+                    <option value="Library Science">Library Science</option>
+                    <option value="Mathematics and Statistics">Mathematics and Statistics</option>
+                    <option value="Mechanic and Repair Technologies/technicians">Mechanic and
+                        Repair Technologies/technicians</option>
+                    <option value="Military Technologies and Applied Sciences">Military
+                        Technologies and Applied Sciences</option>
+                    <option value="Multi/interdisciplinary Studies">Multi/interdisciplinary
+                        Studies</option>
+                    <option value="Natural Resources and Conservation">Natural Resources and
+                        Conservation</option>
+                    <option value="Parks, Recreation, Leisure, and Fitness Studies">Parks,
+                        Recreation, Leisure, and Fitness Studies</option>
+                    <option value="Personal and Culinary Services">Personal and Culinary
+                        Services</option>
+                    <option value="Philosophy and Religious Studies">Philosophy and Religious
+                        Studies</option>
+                    <option value="Physical Sciences">Physical Sciences</option>
+                    <option value="Precision Production">Precision Production</option>
+                    <option value="Psychology">Psychology</option>
+                    <option value="Science Technologies/technicians">Science
+                        Technologies/technicians</option>
+                    <option value="Social Sciences">Social Sciences</option>
+                    <option value="Theology and Religious Vocations">Theology and Religious
+                        Vocations</option>
+                    <option value="Transportation and Materials Moving">Transportation and
+                        Materials Moving</option>
+                    <option value="Visual and Performing Arts">Visual and Performing Arts</option>
                 </select>
             </div>
 
             <div class="search_category">
                 <label for="school">School:</label>
                 <select name="schools" id="schools" class="w-2/3">
-                    <option value="1">College of San Francisco</option>
-                    <option value="2">San Francisco State University</option>
-                    <option value="3">University of California, San Francisco</option>
-                    <option value="4">Academy of Art University</option>
-                    <option value="5">Alliant International University</option>
-                    <option value="6">Art Institute of California</option>
-                    <option value="7">California Institute of Integral Studies</option>
-                    <option value="8">DeVry University</option>
-                    <option value="9">The Fashion Institute of Design and Merchandising (FIDM)</option>
-                    <option value="10">Golden Gate University</option>
-                    <option value="11">Heald College</option>
-                    <option value="12">Hult International Business School</option>
-                    <option value="13">Minerva Schools at KGI</option>
-                    <option value="14">Presidio Graduate School</option>
-                    <option value="15">San Francisco Art Institute</option>
-                    <option value="16">San Francisco Conservatory of Music</option>
-                    <option value="17">San Francisco Law School</option>
-                    <option value="18">San Francisco School of Digital Filmmaking</option>
-                    <option value="19">Saybrook University</option>
-                    <option value="20">University of San Francisco</option>
-                    <option value="21">Wharton School of the University of Pennsylvania</option>
+                    <option value="College of San Francisco">College of San Francisco</option>
+                    <option value="San Francisco State University">San Francisco State University</option>
+                    <option value="University of California, San Francisco">University of California, San Francisco</option>
+                    <option value="Academy of Art University">Academy of Art University</option>
+                    <option value="Alliant International University">Alliant International University</option>
+                    <option value="Art Institute of California">Art Institute of California</option>
+                    <option value="California Institute of Integral Studies">California Institute of Integral Studies</option>
+                    <option value="DeVry University">DeVry University</option>
+                    <option value="The Fashion Institute of Design and Merchandising (FIDM)">The Fashion Institute of Design and Merchandising (FIDM)</option>
+                    <option value=">Golden Gate University">Golden Gate University</option>
+                    <option value=">Heald College">Heald College</option>
+                    <option value=">Hult International Business School">Hult International Business School</option>
+                    <option value=">Minerva Schools at KGI">Minerva Schools at KGI</option>
+                    <option value=">Presidio Graduate School">Presidio Graduate School</option>
+                    <option value=">San Francisco Art Institute">San Francisco Art Institute</option>
+                    <option value=">San Francisco Conservatory of Music">San Francisco Conservatory of Music</option>
+                    <option value=">San Francisco Law School">San Francisco Law School</option>
+                    <option value=">San Francisco School of Digital Filmmaking">San Francisco School of Digital Filmmaking</option>
+                    <option value=">Saybrook University">Saybrook University</option>
+                    <option value=">University of San Francisco">University of San Francisco</option>
+                    <option value=">Wharton School of the University of Pennsylvania">Wharton School of the University of Pennsylvania</option>
                 </select>
             </div>
 
@@ -152,36 +182,34 @@
                 <label for="pets">Pets:</label>
                 <div class="filter_category">
                     <div class="item">
-                        <input type="checkbox" name="pets" id="dog" class="filter_option" />Dog
-                        <input type="checkbox" name="pets" id="cat" class="filter_option" />Cat
-                        <input type="checkbox" name="pets" id="fish" class="filter_option" />Fish
-                        <input type="checkbox" name="pets" id="reptile" class="filter_option" />Reptile
-                        <input type="checkbox" name="pets" id="bird" class="filter_option" />Bird
-                        <input type="checkbox" name="pets" id="other" class="filter_option" />Other
-                        <input type="checkbox" name="pets" id="none" class="filter_option" />None
+                        <input type="checkbox" name="pets" id="dog" class="filter_option" value="dog" />Dog
+                        <input type="checkbox" name="pets" id="cat" class="filter_option" value="cat" />Cat
+                        <input type="checkbox" name="pets" id="fish" class="filter_option" value="fish" />Fish
+                        <input type="checkbox" name="pets" id="reptile" class="filter_option" value="reptile" />Reptile
+                        <input type="checkbox" name="pets" id="bird" class="filter_option" value="bird" />Bird
                     </div>
                 </div>
             </div>
 
             <div class="search_category">
                 <label for="smoking">Smoking:
-                    <input type="radio" name="smoke" id="yessmoke" class="filter_option" />Yes
-                    <input type="radio" name="smoke" id="nosmoke" class="filter_option" />No
+                    <input type="radio" name="smoke" id="yessmoke" class="filter_option" value="1" />Yes
+                    <input type="radio" name="smoke" id="nosmoke" class="filter_option" value="0" />No
                 </label>
             </div>
 
             <div class="search_category">
                 <label for="lifestyle">Lifestyle:
-                    <input type="radio" name="lifestyle" id="clean" class="filter_option" />Clean
-                    <input type="radio" name="lifestyle" id="messy" class="filter_option" />Messy
+                    <input type="radio" name="lifestyle" id="clean" class="filter_option" value="clean" />Clean
+                    <input type="radio" name="lifestyle" id="messy" class="filter_option" value="messy" />Messy
                 </label>
             </div>
 
             <div class="search_category">
                 <label for="schedule">Schedule:
                     <div class="item">
-                        <input type="radio" name="schedule" id="earlybird" class="filter_option" />Early Bird
-                        <input type="radio" name="schedule" id="nightowl" class="filter_option" />Night Owl
+                        <input type="radio" name="schedule" id="earlybird" class="filter_option" value="early bird" />Early Bird
+                        <input type="radio" name="schedule" id="nightowl" class="filter_option" value="night owl" />Night Owl
                     </div>
                 </label>
             </div>
@@ -190,78 +218,78 @@
                 <label for="language">Language(s):</label>
                 <div class="filter_category">
                     <select name="language" id="language" class="w-2/3" multiple>
-                        <option>Afrikaans</option>
-                        <option>Albanian</option>
-                        <option>Arabic</option>
-                        <option>Armenian</option>
-                        <option>Basque </option>
-                        <option>Bengali </option>
-                        <option>Bulgarian </option>
-                        <option>Catalan </option>
-                        <option>Cambodian </option>
-                        <option>Chinese (Cantonese) </option>
-                        <option>Chinese (Mandarin) </option>
-                        <option>Croatian </option>
-                        <option>Czech </option>
-                        <option>Danish </option>
-                        <option>Dutch </option>
-                        <option>English </option>
-                        <option>Estonian </option>
-                        <option>Fiji </option>
-                        <option>Finnish </option>
-                        <option>French </option>
-                        <option>Georgian </option>
-                        <option>German </option>
-                        <option>Greek </option>
-                        <option>Gujarati </option>
-                        <option>Hebrew </option>
-                        <option>Hindi </option>
-                        <option>Hungarian </option>
-                        <option>Icelandic </option>
-                        <option>Indonesian</option>
-                        <option>Irish</option>
-                        <option>Italian</option>
-                        <option>Japanese</option>
-                        <option>Javanese</option>
-                        <option>Korean</option>
-                        <option>Latin</option>
-                        <option>Latvian</option>
-                        <option>Lithuanian</option>
-                        <option>Macedonian</option>
-                        <option>Malay</option>
-                        <option>Malayalam</option>
-                        <option>Maltese</option>
-                        <option>Maori</option>
-                        <option>Marathi</option>
-                        <option>Mongolian</option>
-                        <option>Nepali </option>
-                        <option>Norwegian</option>
-                        <option>Persian </option>
-                        <option>Polish </option>
-                        <option>Portugues</option>
-                        <option>Punjabi </option>
-                        <option>Quechua </option>
-                        <option>Romanian </option>
-                        <option>Russian</option>
-                        <option>Samoan</option>
-                        <option>Serbian</option>
-                        <option>Slovak</option>
-                        <option>Slovenian</option>
-                        <option>Spanish</option>
-                        <option>Swahili</option>
-                        <option>Swedish</option>
-                        <option>Tamil</option>
-                        <option>Tatar</option>
-                        <option>Telugu</option>
-                        <option>Thai</option>
-                        <option>Tibetan</option>
-                        <option>Tonga</option>
-                        <option>Turkish</option>
-                        <option>Ukrainian</option>
-                        <option>Urdu</option>
-                        <option>Uzbek</option>
-                        <option>Vietnamese</option>
-                        <option>Welsh </option>
+                        <option value="Afrikaans">Afrikaans</option>
+                        <option value="Albanian">Albanian</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Armenian">Armenian</option>
+                        <option value="Basque">Basque</option>
+                        <option value="Bengali">Bengali</option>
+                        <option value="Bulgarian">Bulgarian</option>
+                        <option value="Catalan">Catalan</option>
+                        <option value="Cambodian">Cambodian</option>
+                        <option value="Chinese (Cantonese)">Chinese (Cantonese)</option>
+                        <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                        <option value="Croatian">Croatian</option>
+                        <option value="Czech">Czech</option>
+                        <option value="Danish">Danish</option>
+                        <option value="Dutch">Dutch</option>
+                        <option value="English">English</option>
+                        <option value="Estonian">Estonian</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Finnish">Finnish</option>
+                        <option value="French">French</option>
+                        <option value="Georgian">Georgian</option>
+                        <option value="German">German</option>
+                        <option value="Greek">Greek</option>
+                        <option value="Gujarati">Gujarati</option>
+                        <option value="Hebrew">Hebrew</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Hungarian">Hungarian</option>
+                        <option value="Icelandic">Icelandic</option>
+                        <option value="Indonesian">Indonesian</option>
+                        <option value="Irish">Irish</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Javanese">Javanese</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Latin">Latin</option>
+                        <option value="Latvian">Latvian</option>
+                        <option value="Lithuanian">Lithuanian</option>
+                        <option value="Macedonian">Macedonian</option>
+                        <option value="Malay">Malay</option>
+                        <option value="Malayalam">Malayalam</option>
+                        <option value="Maltese">Maltese</option>
+                        <option value="Maori">Maori</option>
+                        <option value="Marathi">Marathi</option>
+                        <option value="Mongolian">Mongolian</option>
+                        <option value="Nepali">Nepali</option>
+                        <option value="Norwegian">Norwegian</option>
+                        <option value="Persian">Persian</option>
+                        <option value="Polish">Polish</option>
+                        <option value="Portugues">Portugues</option>
+                        <option value="Punjabi">Punjabi</option>
+                        <option value="Quechua">Quechua</option>
+                        <option value="Romanian">Romanian</option>
+                        <option value="Russian">Russian</option>
+                        <option value="Samoan">Samoan</option>
+                        <option value="Serbian">Serbian</option>
+                        <option value="Slovak">Slovak</option>
+                        <option value="Slovenian">Slovenian</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Swahili">Swahili</option>
+                        <option value="Swedish">Swedish</option>
+                        <option value="Tamil">Tamil</option>
+                        <option value="Tatar">Tatar</option>
+                        <option value="Telugu">Telugu</option>
+                        <option value="Thai">Thai</option>
+                        <option value="Tibetan">Tibetan</option>
+                        <option value="Tonga">Tonga</option>
+                        <option value="Turkish">Turkish</option>
+                        <option value="Ukrainian">Ukrainian</option>
+                        <option value="Urdu">Urdu</option>
+                        <option value="Uzbek">Uzbek</option>
+                        <option value="Vietnamese">Vietnamese</option>
+                        <option value="Welsh">Welsh</option>
                     </select>
                 </div>
                 <div class="text-xs mx-2">(scroll for more, hold cmd to select multiple)</div>
@@ -271,11 +299,11 @@
                 <label for="interests">Interests:</label>
                 <div class="filter_category">
                     <div class="item">
-                        <input type="checkbox" name="interests" id="art" class="filter_option" />Art
-                        <input type="checkbox" name="interests" id="cooking" class="filter_option" />Cooking
-                        <input type="checkbox" name="interests" id="excercising" class="filter_option" />Excercising
-                        <input type="checkbox" name="interests" id="gaming" class="filter_option" />Gaming
-                        <input type="checkbox" name="interests" id="music" class="filter_option" />Music
+                        <input type="checkbox" name="interests" value="art" id="art" class="filter_option" />Art
+                        <input type="checkbox" name="interests" value="cooking" id="cooking" class="filter_option" />Cooking
+                        <input type="checkbox" name="interests" value="exercising" id="exercising" class="filter_option" />Excercising
+                        <input type="checkbox" name="interests" value="gaming" id="gaming" class="filter_option" />Gaming
+                        <input type="checkbox" name="interests" value="music" id="music" class="filter_option" />Music
                     </div>
                 </div>
             </div>
@@ -292,6 +320,9 @@
     </div>
 
     {{!-- placeholder for map --}}
-    <div id="map" class=".w-screen md:w-1/3"> </div>
+    {{!-- <div id="map" class=".w-screen md:w-1/3"> </div> --}}
+    <div id="map" style="width: 1000px"> </div>
 
 </div>
+
+

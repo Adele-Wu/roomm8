@@ -12,7 +12,6 @@ async function executeSearch() {
     location.replace("/browse-room");
     return;
   }
-
   // if the users is looking for a users than we know that the username starts with an alphabet
   // else will be an address
   let isUser = /[a-zA-Z]/.test(searchTerm.value.charAt(0));

@@ -26,6 +26,7 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       last_name,
       gender,
       date_of_birth,
+      occupation,
       fields,
       schools,
       email,
@@ -62,6 +63,7 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
           last_name,
           gender,
           date_of_birth,
+          occupation,
           fields,
           schools,
           email,
@@ -149,8 +151,6 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   }
 });
 
-// souza's promisified example // create a folder named utils and require this.
-
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   let loggedUserId = await User.authenticate(username, password);
@@ -222,7 +222,6 @@ router.post("/login", async (req, res, next) => {
   // })
 });
 
-// TODO add logout // destroy session from db, cookie from browser.
 router.post("/logout", async (req, res, next) => {
   await req.session.destroy((err) => {
     if (err) {
@@ -246,6 +245,31 @@ router.get("/:id(\\d+)", async (req, res, next) => {
       title: results[0].first_name,
       currentUser: results[0],
     });
+  }
+});
+
+router.get("/search", async (req, res, next) => {
+  try {
+    let searchTerm = req.query.search;
+    if (!searchTerm) {
+      res.send({
+        results: [],
+      });
+    } else {
+      let results = await User.search(searchTerm);
+      if (results.length) {
+        res.send({
+          results: results,
+        });
+      } else {
+        let results = await User.getTenMostRecent(10);
+        res.send({
+          results: results,
+        });
+      }
+    }
+  } catch (err) {
+    next(err);
   }
 });
 

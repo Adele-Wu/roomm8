@@ -18,11 +18,11 @@
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
     "express-flash": "^0.0.2",
-    "express-handlebars": "^5.3.3",
-    "express-mysql-session": "^2.1.6",
+    "express-handlebars": "^5.3.4",
+    "express-mysql-session": "^2.1.7",
     "express-session": "^1.17.2",
     "express-validation": "^3.0.8",
-    "express-validator": "^6.12.1",
+    "express-validator": "^6.12.2",
     "hbs": "^4.1.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
@@ -30,13 +30,13 @@
     "mysql2": "^2.3.0",
     "node-pre-gyp": "^0.17.0",
     "nodemon": "^2.0.13",
-    "pm2": "^5.1.1",
-    "sharp": "^0.29.0",
+    "pm2": "^5.1.2",
+    "sharp": "^0.29.1",
     "ssh2": "^1.4.0"
   },
   "devDependencies": {
-    "autoprefixer": "^10.3.4",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.9"
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.9",
+    "tailwindcss": "^2.2.16"
   }
 }
