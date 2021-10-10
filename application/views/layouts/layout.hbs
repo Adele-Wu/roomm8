@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    {{!-- <link rel="icon" type="image/x-icon" href="/images/favicon.PNG" /> --}}
-    <link rel="icon" type="image/x-icon" href="/images/favi.png" />
-    {{!-- Put all CSS links here --}}
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    {{!-- Put all JS scripts --}}
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    {{#if searchPost}}
-    <script defer src="javascripts/google-map.js"></script>
-    <script defer src="javascripts/search.js"></script>
-    {{/if}}
-  </head>
 
-  <div id="demonstration-only-tag" class="flex flex-col justify-center items-center bg-white">SFSU Software Engineering Project CSC 648-848, Fall 2021. For Demonstration Only</div>
+<head>
+  <title>{{title}}</title>
+  {{!--
+  <link rel="icon" type="image/x-icon" href="/images/favicon.PNG" /> --}}
+  <link rel="icon" type="image/x-icon" href="/images/favi.png" />
+  {{!-- Put all CSS links here --}}
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  {{!-- Put all JS scripts --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
 
-  <body>
-    
-    {{> header}}
+  {{#if searchPost}}
+  {{!--
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUQ84KIyy3GqKppaP1-GI_MTZ5-mhrhgQ&callback=initMap&libraries=&v=weekly"
+    async defer></script> --}}
+  <script defer src="javascripts/google-map.js"></script>
+  <script defer src="javascripts/search.js"></script>
+  {{/if}}
+</head>
 
-    {{{body}}}
+<div id="demonstration-only-tag" class="flex flex-col justify-center items-center bg-white">SFSU Software Engineering
+  Project CSC 648-848, Fall 2021. For Demonstration Only</div>
 
-    {{#if logged}}
-    <script defer src="/javascripts/logout.js"></script>
-    {{/if}}
+<body>
 
-    {{> footer}}
+  {{> header}}
 
-  </body>
+  {{{body}}}
+
+  {{#if logged}}
+  <script defer src="/javascripts/logout.js"></script>
+  {{/if}}
+
+  {{> footer}}
+
+</body>
+
 </html>
