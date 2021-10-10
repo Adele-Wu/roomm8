@@ -1,22 +1,17 @@
 <div id="{{post_id}}" class="item card">
-<<<<<<< HEAD
-  <img class="cardImage max-w-screen-lg mx-auto object-scale-down" src="images/uploads/posts/{{thumbnail}}" id="{{post_id}}" alt="room" />
-=======
   <img
-    class="cardImage max-w-screen-lg mx-auto"
+    class="cardImage roomImage max-w-screen-lg mx-auto"
     src="images/uploads/posts/{{thumbnail}}"
     id="{{post_id}}"
     alt="room"
   />
->>>>>>> BackEnd
   <div class="cardBody break-words">
     <p class="cardTitle font-bold text-lg">{{title}}</p>
     <p class="cardAddress">{{address}}</p>
     <p class="cardDescription">{{description}}</p>
   </div>
   {{! do not change this or at least keep a similar format. buttons do NOT have href properties. You can't fire a route with only a button if there's no form tag }}
-  <button class="postButton"><a href="/post/{{post_id}}">Check Post</a>
-  </button>
+  <button class="postButton"><a href="/post/{{post_id}}">Check Post</a></button>
 
   {{!-- <button class="postButton" href="/post/{{post_id}}">Check Post</button> --}}
 </div>

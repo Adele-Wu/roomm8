@@ -69,7 +69,7 @@ function createPost(post) {
     */
   return `
     <div id="${post.post_id}" class="item card" style="height: 300px">
-    <img class="cardImage  max-w-screen-lg mx-auto" src="images/uploads/posts/${post.thumbnail}" id="${post.post_id}" alt="room" />
+    <img class="cardImage roomImage max-w-screen-lg mx-auto" src="images/uploads/posts/${post.thumbnail}" id="${post.post_id}" alt="room" />
     <div class="cardBody break-words">
     <p class="cardTitle font-bold text-lg">${post.title}</p>
     <p class="cardAddress">${post.address}</p>

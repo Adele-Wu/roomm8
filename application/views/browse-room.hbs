@@ -11,7 +11,7 @@
             </button>
         </div>
 
-        <form action="/filter" class="filter_form w-56">
+        <form action="/filter" class="filter_form w-64">
 
             {{!-- room preferences --}}
             <div class="search_category">
@@ -49,9 +49,9 @@
                 <label for="privacy">Gender:</label>
                 <div class="filter_category">
                     <div class="item">
-                        <input type="checkbox" name="gender" id="female" class="filter_option" />Female
-                        <input type="checkbox" name="gender" id="male" class="filter_option" />Male
-                        <input type="checkbox" name="gender" id="other" class="filter_option" />Other
+                        <input type="radio" name="gender" id="female" class="filter_option" />Female
+                        <input type="radio" name="gender" id="male" class="filter_option" />Male
+                        <input type="radio" name="gender" id="other" class="filter_option" />Other
                     </div>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                 <label for="occupationsc">Occupation:</label>
                 <div class="filter_category">
                     <div class="item">
-                        <input type="checkbox" name="student" id="student" class="occupation" />Student
-                        <input type="checkbox" name="professional" id="professional" class="occupation" />Professional
+                        <input type="radio" name="student" id="student" class="occupation" />Student
+                        <input type="radio" name="professional" id="professional" class="occupation" />Professional
                     </div>
                 </div>
             </div>
@@ -157,8 +157,6 @@
                         <input type="checkbox" name="pets" id="fish" class="filter_option" />Fish
                         <input type="checkbox" name="pets" id="reptile" class="filter_option" />Reptile
                         <input type="checkbox" name="pets" id="bird" class="filter_option" />Bird
-                        <input type="checkbox" name="pets" id="other" class="filter_option" />Other
-                        <input type="checkbox" name="pets" id="none" class="filter_option" />None
                     </div>
                 </div>
             </div>
@@ -285,13 +283,14 @@
     </div>
 
     {{!-- generate all the necessary cards --}}
-    <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" id="room_results">
+    <div class="cardGrid grid md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3" id="room_results">
         {{#each results}}
         {{> roomcard this}}
         {{/each}}
     </div>
 
-    {{!-- placeholder for map --}}
-    <div id="map" class=".w-screen md:w-1/3"> </div>
+    {{!-- placeholder for map. not: map can't use classes --}}
+    {{!-- <div id="map" class=".w-screen md:w-1/3"> </div> --}}
+    <div id="map"> </div>
 
 </div>
