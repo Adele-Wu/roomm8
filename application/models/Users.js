@@ -151,6 +151,14 @@ const userCol = [
 const prefCol = ["pets", "smoking", "lifestyle", "schedule", "language"];
 const interestCol = ["interests"];
 
+const partitionObj = (parseObject, column) => {
+  return Object.keys(parseObject)
+    .filter((k) => column.some((el) => k.includes(el)))
+    .reduce((cur, k) => {
+      return Object.assign(cur, { [k]: parseObject[k] });
+    }, {});
+};
+
 User.filter = async (parseObject, parseObjectKey) => {
   let age = false;
   let baseSQL =
@@ -162,21 +170,9 @@ User.filter = async (parseObject, parseObjectKey) => {
   const detectInterestCol = interestCol.some((r) => parseObjectKey.includes(r));
 
   // separate object to their corresponding tables (user, pref, interest)
-  const userObj = Object.keys(parseObject)
-    .filter((k) => userCol.some((el) => k.includes(el)))
-    .reduce((cur, k) => {
-      return Object.assign(cur, { [k]: parseObject[k] });
-    }, {});
-  const prefObj = Object.keys(parseObject)
-    .filter((k) => prefCol.some((el) => k.includes(el)))
-    .reduce((cur, k) => {
-      return Object.assign(cur, { [k]: parseObject[k] });
-    }, {});
-  const interestObj = Object.keys(parseObject)
-    .filter((k) => interestCol.some((el) => k.includes(el)))
-    .reduce((cur, k) => {
-      return Object.assign(cur, { [k]: parseObject[k] });
-    }, {});
+  const userObj = partitionObj(parseObject, userCol);
+  const prefObj = partitionObj(parseObject, prefCol);
+  const interestObj = partitionObj(parseObject, interestCol);
 
   // special case due to having different query syntax this one must be tailored made
   // this is done!!!!!!!!
@@ -196,7 +192,6 @@ User.filter = async (parseObject, parseObjectKey) => {
       detectUserCol
     );
   }
-
   if (detectInterestCol) {
     [baseSQL, fields] = addFilter(
       userObj,
@@ -209,7 +204,6 @@ User.filter = async (parseObject, parseObjectKey) => {
     );
   }
   baseSQL += ";"; // add terminating operator
-  // return "";
   return (
     db
       .execute(baseSQL, fields)
@@ -230,10 +224,8 @@ let addFilter = (
   interestPref,
   detectUserCol
 ) => {
-  // TODO: interest and pref need their own abbr for when you join user_preferences and user_interests
   const withS = interestPref + "s";
   const initialChar = interestPref.charAt(0);
-  // only doing this cause prettier does some weird shit
   baseSQL +=
     "JOIN user_" +
     withS +
@@ -255,8 +247,6 @@ let addFilter = (
     "." +
     interestPref +
     "_id";
-
-  console.log(baseSQL);
 
   // add user filters, note that you stack for both on statements in mysql queries which will NOT effect the results
   // therefore we can
