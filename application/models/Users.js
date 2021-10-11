@@ -177,7 +177,14 @@ User.filter = async (parseObject, parseObjectKey) => {
   // special case due to having different query syntax this one must be tailored made
   // this is done!!!!!!!!
   if (detectUserCol && !detectPrefCol && !detectInterestCol) {
-    [baseSQL, fields] = filterUser(parseObject, baseSQL, age, fields);
+    [baseSQL, fields] = filterUserModularized(
+      parseObject,
+      baseSQL,
+      age,
+      fields,
+      true
+    );
+    // [baseSQL, fields] = filterUser(parseObject, baseSQL, age, fields);
   }
 
   // TODO: fix pref and interest (fizzbuzz) try to split object based on pref and interest
@@ -252,7 +259,14 @@ let addFilter = (
   // therefore we can
   if (detectUserCol) {
     baseSQL += " AND";
-    [baseSQL, fields] = filterUserWithAnd(userObj, baseSQL, age, fields);
+    // [baseSQL, fields] = filterUserWithAnd(userObj, baseSQL, age, fields);
+    [baseSQL, fields] = filterUserModularized(
+      userObj,
+      baseSQL,
+      age,
+      fields,
+      false
+    );
   }
   // since we know that this function is triggered ONLY when a user selects either pref or interest we can always add this.
   baseSQL += " AND " + interestPref + " IN (";
@@ -279,49 +293,72 @@ let addFilter = (
   return [baseSQL, fields];
 };
 
-const filterUserWithAnd = (userObj, baseSQL, age, fields) => {
-  for (const column in userObj) {
+const filterUserModularized = (obj, baseSQL, age, fields, flag) => {
+  if (flag) baseSQL += `WHERE`;
+  for (const column in obj) {
     if (column == "minAgeRange" || column == "maxAgeRange") {
       // we should change this to age++ such that the if statement is age === 2 reason: if front end validation allows only one than it breaks
       age = true;
       continue;
     }
     baseSQL += ` u.${column} = ? AND`;
-    fields.push(userObj[column]);
+    fields.push(obj[column]);
   }
   if (age) {
-    baseSQL += ` (YEAR(NOW()) - YEAR(u.dob) BETWEEN ${
-      userObj[userCol[1]]
-    } AND ${userObj[userCol[2]]}) `;
+    baseSQL += ` (YEAR(NOW()) - YEAR(u.dob) BETWEEN ${obj[userCol[1]]} AND ${
+      obj[userCol[2]]
+    }) `;
   } else {
     // trim extra and add semi-colon. MAY NOT NEED TRIM IF PREF OR INTEREST EXIST
     baseSQL = baseSQL.substring(0, baseSQL.length - 4);
+    if (flag) baseSQL += ";";
   }
   return [baseSQL, fields];
 };
 
-// atomity function to filter when a user preference in the user table is to be filtered.
-const filterUser = (parseObject, baseSQL, age, fields) => {
-  baseSQL += `WHERE`;
-  for (const column in parseObject) {
-    if (column == "minAgeRange" || column == "maxAgeRange") {
-      // we should change this to age++ such that the if statement is age === 2 reason: if front end validation allows only one than it breaks
-      age = true;
-      continue;
-    }
-    baseSQL += ` u.${column} = ? AND`;
-    fields.push(parseObject[column]);
-  }
-  if (age) {
-    baseSQL += ` (YEAR(NOW()) - YEAR(u.dob) BETWEEN ${
-      parseObject[userCol[1]]
-    } AND ${parseObject[userCol[2]]});`;
-  } else {
-    // trim extra and add semi-colon.
-    baseSQL = baseSQL.substring(0, baseSQL.length - 4);
-    baseSQL += `;`;
-  }
-  return [baseSQL, fields];
-};
+// const filterUserWithAnd = (userObj, baseSQL, age, fields) => {
+//   for (const column in userObj) {
+//     if (column == "minAgeRange" || column == "maxAgeRange") {
+//       // we should change this to age++ such that the if statement is age === 2 reason: if front end validation allows only one than it breaks
+//       age = true;
+//       continue;
+//     }
+//     baseSQL += ` u.${column} = ? AND`;
+//     fields.push(userObj[column]);
+//   }
+//   if (age) {
+//     baseSQL += ` (YEAR(NOW()) - YEAR(u.dob) BETWEEN ${
+//       userObj[userCol[1]]
+//     } AND ${userObj[userCol[2]]}) `;
+//   } else {
+//     // trim extra and add semi-colon. MAY NOT NEED TRIM IF PREF OR INTEREST EXIST
+//     baseSQL = baseSQL.substring(0, baseSQL.length - 4);
+//   }
+//   return [baseSQL, fields];
+// };
+
+// // atomity function to filter when a user preference in the user table is to be filtered.
+// const filterUser = (parseObject, baseSQL, age, fields) => {
+//   baseSQL += `WHERE`;
+//   for (const column in parseObject) {
+//     if (column == "minAgeRange" || column == "maxAgeRange") {
+//       // we should change this to age++ such that the if statement is age === 2 reason: if front end validation allows only one than it breaks
+//       age = true;
+//       continue;
+//     }
+//     baseSQL += ` u.${column} = ? AND`;
+//     fields.push(parseObject[column]);
+//   }
+//   if (age) {
+//     baseSQL += ` (YEAR(NOW()) - YEAR(u.dob) BETWEEN ${
+//       parseObject[userCol[1]]
+//     } AND ${parseObject[userCol[2]]});`;
+//   } else {
+//     // trim extra and add semi-colon.
+//     baseSQL = baseSQL.substring(0, baseSQL.length - 4);
+//     baseSQL += `;`;
+//   }
+//   return [baseSQL, fields];
+// };
 
 module.exports = User;
