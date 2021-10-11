@@ -140,4 +140,198 @@ User.search = async (searchTerm) => {
     .catch((err) => Promise.reject(err));
 };
 
+const userCol = [
+  "gender",
+  "minAgeRange",
+  "maxAgeRange",
+  "occupation",
+  "fields",
+  "school",
+];
+const prefCol = ["pets", "smoking", "lifestyle", "schedule", "language"];
+const interestCol = ["interests"];
+
+User.filter = async (parseObject, parseObjectKey) => {
+  let age = false;
+  let baseSQL =
+    "SELECT DISTINCT u.user_id, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.description, u.photopath FROM users u ";
+  let fields = [];
+  // bool values to check if they exist in respective tables (user,pref,interest)
+  const detectUserCol = userCol.some((r) => parseObjectKey.includes(r));
+  const detectPrefCol = prefCol.some((r) => parseObjectKey.includes(r));
+  const detectInterestCol = interestCol.some((r) => parseObjectKey.includes(r));
+
+  // separate object to their corresponding tables (user, pref, interest)
+  const userObj = Object.keys(parseObject)
+    .filter((k) => userCol.some((el) => k.includes(el)))
+    .reduce((cur, k) => {
+      return Object.assign(cur, { [k]: parseObject[k] });
+    }, {});
+  const prefObj = Object.keys(parseObject)
+    .filter((k) => prefCol.some((el) => k.includes(el)))
+    .reduce((cur, k) => {
+      return Object.assign(cur, { [k]: parseObject[k] });
+    }, {});
+  const interestObj = Object.keys(parseObject)
+    .filter((k) => interestCol.some((el) => k.includes(el)))
+    .reduce((cur, k) => {
+      return Object.assign(cur, { [k]: parseObject[k] });
+    }, {});
+
+  // special case due to having different query syntax this one must be tailored made
+  // this is done!!!!!!!!
+  if (detectUserCol && !detectPrefCol && !detectInterestCol) {
+    [baseSQL, fields] = filterUser(parseObject, baseSQL, age, fields);
+  }
+
+  // TODO: fix pref and interest (fizzbuzz) try to split object based on pref and interest
+  if (detectPrefCol) {
+    [baseSQL, fields] = addFilter(
+      userObj,
+      prefObj,
+      baseSQL,
+      age,
+      fields,
+      "preference",
+      detectUserCol
+    );
+  }
+
+  if (detectInterestCol) {
+    [baseSQL, fields] = addFilter(
+      userObj,
+      interestObj,
+      baseSQL,
+      age,
+      fields,
+      "interest",
+      detectUserCol
+    );
+  }
+  baseSQL += ";"; // add terminating operator
+  // return "";
+  return (
+    db
+      .execute(baseSQL, fields)
+      .then(([results, fields]) => {
+        return results;
+      })
+      // note that in the catch you can just return err without Promise.reject() I only do this for clarity purposes when you read my code - E.Y.
+      .catch((err) => Promise.reject(err))
+  );
+};
+
+let addFilter = (
+  userObj,
+  interestProfObj,
+  baseSQL,
+  age,
+  fields,
+  interestPref,
+  detectUserCol
+) => {
+  // TODO: interest and pref need their own abbr for when you join user_preferences and user_interests
+  const withS = interestPref + "s";
+  const initialChar = interestPref.charAt(0);
+  // only doing this cause prettier does some weird shit
+  baseSQL +=
+    "JOIN user_" +
+    withS +
+    " u" +
+    initialChar +
+    " ON u.user_id = u" +
+    initialChar +
+    ".users_user_id ";
+  baseSQL += "JOIN " + withS + " " + initialChar + " ON ";
+  baseSQL +=
+    "u" +
+    initialChar +
+    "." +
+    withS +
+    "_" +
+    interestPref +
+    "_id = " +
+    initialChar +
+    "." +
+    interestPref +
+    "_id";
+
+  console.log(baseSQL);
+
+  // add user filters, note that you stack for both on statements in mysql queries which will NOT effect the results
+  // therefore we can
+  if (detectUserCol) {
+    baseSQL += " AND";
+    [baseSQL, fields] = filterUserWithAnd(userObj, baseSQL, age, fields);
+  }
+  // since we know that this function is triggered ONLY when a user selects either pref or interest we can always add this.
+  baseSQL += " AND " + interestPref + " IN (";
+
+  // add the number of ? need and push to fields array return bSQL and fields
+  for (const item in interestProfObj) {
+    if (Array.isArray(interestProfObj[item])) {
+      for (let i = 0; i < interestProfObj[item].length; i++) {
+        baseSQL += "?, ";
+        fields.push(interestProfObj[item][i]);
+      }
+      // bug is here need conditonal state but which conditional statement
+    } else {
+      baseSQL += "?, ";
+      fields.push(interestProfObj[item]);
+    }
+  }
+
+  // doesn't matter what scenario that you have if it's list, str, str, str, list OR str, str, list, OR list, str OR list, str, str, OR str, str, str, list.
+  // the only thing we need to remove is the trailing comma AT THE END, STUPID MFER GOD so much time wasted overthinking this..
+  baseSQL = baseSQL.substring(0, baseSQL.length - 2);
+
+  baseSQL += ") "; // add closing
+  return [baseSQL, fields];
+};
+
+const filterUserWithAnd = (userObj, baseSQL, age, fields) => {
+  for (const column in userObj) {
+    if (column == "minAgeRange" || column == "maxAgeRange") {
+      // we should change this to age++ such that the if statement is age === 2 reason: if front end validation allows only one than it breaks
+      age = true;
+      continue;
+    }
+    baseSQL += ` u.${column} = ? AND`;
+    fields.push(userObj[column]);
+  }
+  if (age) {
+    baseSQL += ` (YEAR(NOW()) - YEAR(u.dob) BETWEEN ${
+      userObj[userCol[1]]
+    } AND ${userObj[userCol[2]]}) `;
+  } else {
+    // trim extra and add semi-colon. MAY NOT NEED TRIM IF PREF OR INTEREST EXIST
+    baseSQL = baseSQL.substring(0, baseSQL.length - 4);
+  }
+  return [baseSQL, fields];
+};
+
+// atomity function to filter when a user preference in the user table is to be filtered.
+const filterUser = (parseObject, baseSQL, age, fields) => {
+  baseSQL += `WHERE`;
+  for (const column in parseObject) {
+    if (column == "minAgeRange" || column == "maxAgeRange") {
+      // we should change this to age++ such that the if statement is age === 2 reason: if front end validation allows only one than it breaks
+      age = true;
+      continue;
+    }
+    baseSQL += ` u.${column} = ? AND`;
+    fields.push(parseObject[column]);
+  }
+  if (age) {
+    baseSQL += ` (YEAR(NOW()) - YEAR(u.dob) BETWEEN ${
+      parseObject[userCol[1]]
+    } AND ${parseObject[userCol[2]]});`;
+  } else {
+    // trim extra and add semi-colon.
+    baseSQL = baseSQL.substring(0, baseSQL.length - 4);
+    baseSQL += `;`;
+  }
+  return [baseSQL, fields];
+};
+
 module.exports = User;

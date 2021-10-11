@@ -273,6 +273,24 @@ router.get("/search", async (req, res, next) => {
   }
 });
 
+router.get("/filter", async (req, res, next) => {
+  // remove any key value pair that have empty values
+  // console.log(req);
+  // console.log(req.query);
+  let parseObject = Object.fromEntries(
+    Object.entries(req.query).filter(([_, v]) => v != "")
+  );
+  // uncomment this and make sure we get an empty object and shows nothing when the filter is given nothing.
+  if (Object.keys(parseObject).length === 0) {
+    res.render("browse-user");
+  } else {
+    let results = await User.filter(parseObject, Object.keys(parseObject));
+    res.render("browse-user", {
+      results: results,
+    });
+  }
+});
+
 // purely here to test if the db is connect
 // manually type or copypasta url below to test db
 // localhost:3000/users/getUsers

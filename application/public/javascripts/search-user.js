@@ -18,7 +18,6 @@ async function executeSearch() {
     let searchURL = `users/search?search=${searchTerm.value}`;
     let response = await axios.get(searchURL);
     if (!response) {
-      console.log("asdfkljasdklf");
       location.replace("/browse-user");
       return;
     }
