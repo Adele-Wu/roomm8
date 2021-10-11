@@ -209,6 +209,7 @@ User.filter = async (parseObject, parseObjectKey) => {
     );
   }
   baseSQL += ";"; // add terminating operator
+  console.log(fields);
   return (
     db
       .execute(baseSQL, fields)
@@ -220,9 +221,14 @@ User.filter = async (parseObject, parseObjectKey) => {
   );
 };
 
+// let sqlbases = {
+//   userSelect: `
+//   `,
+// };
+
 let addFilter = (
   userObj,
-  interestProfObj,
+  interestPrefObj,
   baseSQL,
   age,
   fields,
@@ -231,27 +237,19 @@ let addFilter = (
 ) => {
   const withS = interestPref + "s";
   const initialChar = interestPref.charAt(0);
-  baseSQL +=
-    "JOIN user_" +
-    withS +
-    " u" +
-    initialChar +
-    " ON u.user_id = u" +
-    initialChar +
-    ".users_user_id ";
-  baseSQL += "JOIN " + withS + " " + initialChar + " ON ";
-  baseSQL +=
-    "u" +
-    initialChar +
-    "." +
-    withS +
-    "_" +
-    interestPref +
-    "_id = " +
-    initialChar +
-    "." +
-    interestPref +
-    "_id";
+  baseSQL += `
+    JOIN
+      user_${withS} u${initialChar} 
+    ON
+      u.user_id = u${initialChar}.users_user_id
+    JOIN 
+      ${withS} ${initialChar} 
+    ON
+      u${initialChar}.${withS}_${interestPref}_id = ${initialChar}.${interestPref}_id
+  `;
+  // baseSQL += "JOIN user_" + withS + " u" + initialChar + " ON u.user_id = u" + initialChar + ".users_user_id ";
+  // baseSQL += "JOIN " + withS + " " + initialChar + " ON ";
+  // baseSQL += "u" + initialChar + "." + withS + "_" + interestPref + "_id = " + initialChar + "." + interestPref + "_id";
 
   // add user filters, note that you stack for both on statements in mysql queries which will NOT effect the results
   // therefore we can
@@ -269,15 +267,15 @@ let addFilter = (
   baseSQL += " AND " + interestPref + " IN (";
 
   // add the number of ? need and push to fields array return bSQL and fields
-  for (const item in interestProfObj) {
-    if (Array.isArray(interestProfObj[item])) {
-      for (let i = 0; i < interestProfObj[item].length; i++) {
+  for (const item in interestPrefObj) {
+    if (Array.isArray(interestPrefObj[item])) {
+      for (let i = 0; i < interestPrefObj[item].length; i++) {
         baseSQL += "?, ";
-        fields.push(interestProfObj[item][i]);
+        fields.push(interestPrefObj[item][i]);
       }
     } else {
       baseSQL += "?, ";
-      fields.push(interestProfObj[item]);
+      fields.push(interestPrefObj[item]);
     }
   }
   baseSQL = baseSQL.substring(0, baseSQL.length - 2);

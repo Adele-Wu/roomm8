@@ -274,9 +274,6 @@ router.get("/search", async (req, res, next) => {
 });
 
 router.get("/filter", async (req, res, next) => {
-  // remove any key value pair that have empty values
-  // console.log(req);
-  // console.log(req.query);
   let parseObject = Object.fromEntries(
     Object.entries(req.query).filter(([_, v]) => v != "")
   );
