@@ -25,23 +25,24 @@
                 </div>
             </div>
 
-            <div class="search_category">
-                <label for="price">Age Range:
-                    <div class="range">
+            <div class="search_category form-validation">
+                <label for="age">Age Range:
+                    <div class="range" id="ageRange">
                         <input id="minAgeRange" type="text" name="minAgeRange" placeholder="Min Age"
-                            class="w-5/12 mx-3">-
+                            class="rangeBox w-5/12 mx-2">-
                         <input id="maxAgeRange" type="text" name="maxAgeRange" placeholder="Max Age"
-                            class="w-5/12 mx-3">
+                            class="rangeBox w-5/12 mx-2">
                     </div>
                 </label>
+                <small>Error message</small>
             </div>
 
             <div class="search_category">
                 <label for="occupation">Occupation:</label>
                 <div class="filter_category">
                     <div class="item">
-                        <input type="checkbox" name="student" id="student" class="occupation" />Student
-                        <input type="checkbox" name="professional" id="professional" class="occupation" />Professional
+                        <input type="radio" name="student" id="student" class="occupation" />Student
+                        <input type="radio" name="professional" id="professional" class="occupation" />Professional
                     </div>
                 </div>
             </div>
@@ -126,8 +127,6 @@
                         <input type="checkbox" name="pets" id="fish" class="filter_option" />Fish
                         <input type="checkbox" name="pets" id="reptile" class="filter_option" />Reptile
                         <input type="checkbox" name="pets" id="bird" class="filter_option" />Bird
-                        <input type="checkbox" name="pets" id="other" class="filter_option" />Other
-                        <input type="checkbox" name="pets" id="none" class="filter_option" />None
                     </div>
                 </div>
             </div>
@@ -249,7 +248,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="filterButton">Filter</button>
+            <button type="submit" class="filterButton" id="filterButton">Filter</button>
         </form>
     </div>
 
@@ -261,3 +260,5 @@
     </div>
 
 </div>
+
+<script defer type="text/javascript" src="javascripts/search-validation.js"></script>

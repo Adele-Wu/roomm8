@@ -490,3 +490,9 @@ input.radio{
   margin: 0;
   margin-left: 2rem;
 }
+
+.rangeBox{
+  height: 10px;
+  padding-left: 1px;
+  padding-right: 1px;
+}
