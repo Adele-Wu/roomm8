@@ -81,6 +81,7 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       successPrint("Registration Success: User was created!");
       req.session.save((err) => {
         res.redirect("/login");
+        console.log(res);
       });
 
       // res.redirect("/login");

@@ -130,7 +130,7 @@ User.getTenMostRecent = async (numberOfPosts) => {
 
 User.search = async (searchTerm) => {
   let baseSQL =
-    "SELECT user_id, first_name, last_name, gender, dob, occupation, fields, school, email, username, photopath, description, CONCAT(' ', username) AS haystack FROM users HAVING haystack like ?;";
+    "SELECT user_id, first_name, last_name, gender, dob, occupation, fields, school, email, username, photopath, description, CONCAT(' ', username, first_name, last_name, occupation) AS haystack FROM users HAVING haystack like ?;";
   searchTerm = "%" + searchTerm + "%";
   return await db
     .execute(baseSQL, [searchTerm])
@@ -209,7 +209,6 @@ User.filter = async (parseObject, parseObjectKey) => {
     );
   }
   baseSQL += ";"; // add terminating operator
-  console.log(fields);
   return (
     db
       .execute(baseSQL, fields)
