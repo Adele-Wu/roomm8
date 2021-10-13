@@ -130,43 +130,33 @@ router.get("/:id(\\d+)", async (req, res, next) => {
     res.redirect("/browse-room");
   }
 });
-router.get("/filter", async function(request,response,next)
-{
+
+router.get("/filter", async function (req, res, next) {
   let parseObject = Object.fromEntries(
-    Object.entries(request.query).filter(([_, v]) => v != "")
-    );
-  if(Object.keys(parseObject).length===0)
-  {
-    response.redirect('/browse-room')
-  }
-  else
-  {
-    if(parseObject.privacy)
-    {
-      if(parseObject.privacy==="private")
-      {
-        parseObject.privacy=1
-      }
-      else if(parseObject.privacy==="shared")
-      {
-        parseObject.privacy=0
+    Object.entries(req.query).filter(([_, v]) => v != "")
+  );
+  if (Object.keys(parseObject).length === 0) {
+    res.redirect("/browse-room");
+  } else {
+    if (parseObject.privacy) {
+      if (parseObject.privacy === "private") {
+        parseObject.privacy = 1;
+      } else if (parseObject.privacy === "shared") {
+        parseObject.privacy = 0;
       }
     }
-    if(parseObject.minPriceRange || parseObject.maxPriceRange)
-    {
-      if(!parseObject.minPriceRange)
-      {
-        parseObject.minPriceRange = 0.00
-        parseObject.maxPriceRange = parseFloat(parseObject.maxPriceRange)
+    if (parseObject.minPriceRange || parseObject.maxPriceRange) {
+      if (!parseObject.minPriceRange) {
+        parseObject.minPriceRange = 0.0;
+        parseObject.maxPriceRange = parseFloat(parseObject.maxPriceRange);
       }
-      if(!parseObject.maxPriceRange)
-      {
-        parseObject.maxPriceRange = 900000.00;
-        parseObject.minPriceRange = parseFloat(parseObject.minPriceRange)
+      if (!parseObject.maxPriceRange) {
+        parseObject.maxPriceRange = 900000.0;
+        parseObject.minPriceRange = parseFloat(parseObject.minPriceRange);
       }
     }
     let resultsOfQuery = await Post.filter(parseObject);
-    response.render('browse-room',{results:resultsOfQuery})
+    res.render("browse-room", { results: resultsOfQuery });
   }
 });
 module.exports = router;

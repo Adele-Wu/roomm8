@@ -19,7 +19,6 @@ async function executeSearch() {
     let mainContent = document.getElementById("room_results");
     let searchURL = `post/search?search=${searchTerm.value}`;
     let response = await axios.get(searchURL);
-    console.log(response);
     if (!response) {
       location.replace("/browse-room");
       return;
