@@ -10,14 +10,14 @@
             </button>
         </div>
 
-        <form action="/filter" class="filter_form w-56">
+        <form action="post/filter" action="GET" class="filter_form w-56">
 
             {{!-- room preferences --}}
             <div class="search_category">
                 <label for="price">Price Range: </label>
                 <div class="range">
-                    <input id="minRange" type="text" name="priceRange" placeholder="Min Price" class="w-5/12 mx-3">-
-                    <input id="maxRange" type="text" name="priceRange" placeholder="Max Price" class="w-5/12 mx-3">
+                    <input  id="minRange" type="text" name="minPriceRange" placeholder="Min Price" class="w-5/12 mx-3">-
+                    <input  id="maxRange" type="text" name="maxPriceRange" placeholder="Max Price" class="w-5/12 mx-3">
                 </div>
             </div>
 
@@ -25,10 +25,10 @@
                 <label for="privacy">Privacy:</label>
                 <div class="filter_category">
                     <div class="item">
-                        <input type="checkbox" name="privacy" id="privateroom" class="filter_option" value="private" />Private Room
+                        <input type="radio" name="privacy" id="privateroom" class="filter_option" value="private" />Private Room
                     </div>
                     <div class="item">
-                        <input type="checkbox" name="privacy" id="sharedroom" class="filter_option" value="shared" />Shared Room
+                        <input type="radio" name="privacy" id="sharedroom" class="filter_option" value="shared" />Shared Room
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
             </div>
 
             {{!-- roommate preferances --}}
-            <div class="search_category">
+            {{!-- <div class="search_category">
                 <label for="privacy">Gender:</label>
                 <div class="filter_category">
                     <div class="item">
@@ -53,20 +53,18 @@
                         <input type="checkbox" name="gender" id="other" class="filter_option" />Other
                     </div>
                 </div>
-            </div>
-
-            <div class="search_category">
+            </div> --}}
+            
+            {{!-- <div class="search_category">
                 <label for="price">Age Range:
                     <div class="range">
-                        <input id="minAgeRange" type="text" name="minAgeRange" placeholder="Min Age"
-                            class="w-5/12 mx-3">-
-                        <input id="maxAgeRange" type="text" name="maxAgeRange" placeholder="Max Age"
-                            class="w-5/12 mx-3">
+                        <input id="minAgeRange" type="text" name="minAgeRange" placeholder="Min Age"class="w-5/12 mx-3">
+                        -
+                        <input id="maxAgeRange" type="text" name="maxAgeRange" placeholder="Max Age"class="w-5/12 mx-3">
                     </div>
                 </label>
-            </div>
-
-            <div class="search_category">
+            </div> --}}
+            {{!-- <div class="search_category">
                 <label for="occupationsc">Occupation:</label>
                 <div class="filter_category">
                     <div class="item">
@@ -78,6 +76,7 @@
             <div class="search_category">
                 <label for="fields">Fields:</label>
                 <select name="fields" id="fields" class="w-2/3">
+                    <option value="" selected disabled hidden >Select a Field</option>
                     <option value="Agriculture, Agriculture Operations, and Related Sciences"
                     >Agriculture, Agriculture Operations, and Related Sciences</option>
                     <option value="Architecture and Related Services">Architecture and Related
@@ -154,6 +153,7 @@
             <div class="search_category">
                 <label for="school">School:</label>
                 <select name="schools" id="schools" class="w-2/3">
+                    <option value="" selected disabled hidden >Select a School</option>
                     <option value="College of San Francisco">College of San Francisco</option>
                     <option value="San Francisco State University">San Francisco State University</option>
                     <option value="University of California, San Francisco">University of California, San Francisco</option>
@@ -306,7 +306,7 @@
                         <input type="checkbox" name="interests" value="music" id="music" class="filter_option" />Music
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <button type="submit" class="filterButton">Filter</button>
         </form>
