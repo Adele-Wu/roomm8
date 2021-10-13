@@ -12,16 +12,6 @@ async function executeSearch() {
     location.replace("/browse-room");
     return;
   }
-  let minPricerange = document.getElementById("minRange");
-  let languages = document.getElementById("language");
-  var selected = "";
-  for (var option of languages.options)
-    {
-        if (option.selected) {
-            selected= selected+","+option.value;
-        }
-    }
-
   // if the users is looking for a users than we know that the username starts with an alphabet
   // else will be an address
   let isUser = /[a-zA-Z]/.test(searchTerm.value.charAt(0));
@@ -29,6 +19,11 @@ async function executeSearch() {
     let mainContent = document.getElementById("room_results");
     let searchURL = `post/search?search=keyTerm=${searchTerm.value}?minRange=${minPricerange.value}?languages=${selected}`;
     let response = await axios.get(searchURL);
+    console.log(response);
+    if (!response) {
+      location.replace("/browse-room");
+      return;
+    }
     let newMainContentHTML = "";
     response.data.results.forEach((post) => {
       newMainContentHTML += createPost(post);
@@ -75,9 +70,11 @@ function createPost(post) {
     <p class="cardAddress">${post.address}</p>
     <p class="cardDescription">${post.description}</p>
     </div>
-    <button class="postButton" href="/post/${post.post_id}">Check Post</button>
+    <button class="postButton">
+    <a href="/post/${post.post_id}">
+    Check Post
+    </a>
+    </button>
     </div>
-    `
-
-
+    `;
 }

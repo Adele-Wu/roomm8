@@ -1,7 +1,7 @@
 var db = require("../conf/database");
-const PostModel = {};
+const Post = {};
 
-PostModel.create = async (
+Post.create = async (
   title,
   address,
   rent,
@@ -30,7 +30,7 @@ PostModel.create = async (
     .catch((err) => err);
 };
 
-PostModel.getTenMostRecent = async (numberOfPosts) => {
+Post.getTenMostRecent = async (numberOfPosts) => {
   let baseSQL =
     "SELECT post_id, title, address, rent, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT " +
     numberOfPosts +
@@ -43,7 +43,7 @@ PostModel.getTenMostRecent = async (numberOfPosts) => {
     .catch((err) => Promise.reject(err));
 };
 
-PostModel.search = async (searchTerm) => {
+Post.search = async (searchTerm) => {
   let baseSQL =
     "SELECT post_id, title, address, rent, description, thumbnail, concat_ws(' ', title, description) \
   AS haystack \
@@ -58,4 +58,79 @@ PostModel.search = async (searchTerm) => {
     .catch((err) => Promise.reject(err));
 };
 
-module.exports = PostModel;
+Post.filter = async function(parsedObject)
+{
+  console.log(parsedObject);
+  let fields=[];
+  let baseSQL = "SELECT DISTINCT post_id,title, address, rent, description, thumbnail FROM posts "
+  if(parsedObject.disability || parsedObject.parking)
+  {
+    baseSQL+=`
+    join 
+      posts_amenities pa
+    on 
+      p.post_id = pa.posts_post_id
+    join 
+      amenities a 
+    on 
+      a.amenities_id = pa.amenities_amenities_id 
+    and 
+      a.amenity in (`;
+    if(parsedObject.parking &&!parsedObject.disability)
+    {
+      baseSQL +=`?)`
+      fields.push(parsedObject.parking);
+    } 
+    if(parsedObject.disability &&!parsedObject.parking)
+    {
+      baseSQL +=`?)`
+      fields.push(parsedObject.disability);
+    }
+    if(parsedObject.disability && parsedObject.parking)
+    {
+      baseSQL +=`?,?)`
+      fields.push(parsedObject.disability);
+      fields.push(parsedObject.parking);
+    }
+    if(parsedObject.maxPriceRange ||Number.isInteger(parsedObject.privacy))
+    {
+      
+      baseSQL+=` AND `;
+      if(parsedObject.maxPriceRange)
+      {
+        baseSQL += `rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+      }
+      if(parsedObject.maxPriceRange && Number.isInteger(parsedObject.privacy))
+      {
+        baseSQL+=` AND `
+      }
+      if(Number.isInteger(parsedObject.privacy))
+      {
+        baseSQL +=` privacy = "${parsedObject.privacy}";`;
+      }
+    }
+  }
+  else
+  {
+    baseSQL+=` WHERE `;
+    if(parsedObject.maxPriceRange)
+    {
+      baseSQL += `rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+    }
+    if(parsedObject.maxPriceRange && Number.isInteger(parsedObject.privacy))
+    {
+      baseSQL+=` AND `
+    }
+    if(Number.isInteger(parsedObject.privacy))
+    {
+      baseSQL +=` privacy = "${parsedObject.privacy}";`;
+    }
+  }
+  return db
+    .execute(baseSQL, fields)
+    .then(([results, fields]) => {
+      return results;
+    })
+    .catch((err) => Promise.reject(err));
+};
+module.exports = Post;

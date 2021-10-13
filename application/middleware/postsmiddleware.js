@@ -1,9 +1,9 @@
-var PostModel = require("../models/Posts");
+var Post = require("../models/Posts");
 const postMiddleWare = {};
 
 postMiddleWare.getRecentPosts = async function (req, res, next) {
   try {
-    let results = await PostModel.getTenMostRecent(10);
+    let results = await Post.getTenMostRecent(10);
     res.locals.results = results;
     if (results.length == 0) {
       console.log("error");

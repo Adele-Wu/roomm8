@@ -24,7 +24,11 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
     const {
       first_name,
       last_name,
+      gender,
       date_of_birth,
+      occupation,
+      fields,
+      schools,
       email,
       username,
       password,
@@ -57,7 +61,11 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
         (await User.create(
           first_name,
           last_name,
+          gender,
           date_of_birth,
+          occupation,
+          fields,
+          schools,
           email,
           username,
           password
@@ -71,9 +79,9 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       }
       // else print you gucci and redirect to login
       successPrint("Registration Success: User was created!");
-
       req.session.save((err) => {
         res.redirect("/login");
+        console.log(res);
       });
 
       // res.redirect("/login");
@@ -143,8 +151,6 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
     // });
   }
 });
-
-// souza's promisified example // create a folder named utils and require this.
 
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
@@ -217,7 +223,6 @@ router.post("/login", async (req, res, next) => {
   // })
 });
 
-// TODO add logout // destroy session from db, cookie from browser.
 router.post("/logout", async (req, res, next) => {
   await req.session.destroy((err) => {
     if (err) {
@@ -230,6 +235,58 @@ router.post("/logout", async (req, res, next) => {
       res.json({ status: "OK", message: "User is logged out." });
     }
   });
+});
+
+router.get("/:id(\\d+)", async (req, res, next) => {
+  let baseSQL = "SELECT * FROM users where user_id = ?;";
+  let [results, fields] = await db.execute(baseSQL, [req.params.id]);
+  // console.log(results);
+  if (results && results.length) {
+    res.render("user-profile", {
+      title: results[0].first_name,
+      currentUser: results[0],
+    });
+  }
+});
+
+router.get("/search", async (req, res, next) => {
+  try {
+    let searchTerm = req.query.search;
+    if (!searchTerm) {
+      res.send({
+        results: [],
+      });
+    } else {
+      let results = await User.search(searchTerm);
+      if (results.length) {
+        res.send({
+          results: results,
+        });
+      } else {
+        let results = await User.getTenMostRecent(10);
+        res.send({
+          results: results,
+        });
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/filter", async (req, res, next) => {
+  let parseObject = Object.fromEntries(
+    Object.entries(req.query).filter(([_, v]) => v != "")
+  );
+  // uncomment this and make sure we get an empty object and shows nothing when the filter is given nothing.
+  if (Object.keys(parseObject).length === 0) {
+    res.render("browse-user");
+  } else {
+    let results = await User.filter(parseObject, Object.keys(parseObject));
+    res.render("browse-user", {
+      results: results,
+    });
+  }
 });
 
 // purely here to test if the db is connect

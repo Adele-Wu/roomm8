@@ -5,7 +5,7 @@ const { successPrint, errorPrint } = require("../helpers/debug/debugprinters");
 var sharp = require("sharp");
 var multer = require("multer");
 var crypto = require("crypto");
-var PostModel = require("../models/Posts");
+var Post = require("../models/Posts");
 var PostError = require("../helpers/error/PostError");
 
 var storage = multer.diskStorage({
@@ -38,7 +38,7 @@ router.post("/createPost", upload.single("fileUpload"), (req, res, next) => {
     .resize(200)
     .toFile(destinationOfThumbnail)
     .then(() => {
-      return PostModel.create(
+      return Post.create(
         title,
         address,
         rent,
@@ -83,13 +83,13 @@ router.get("/search", async (req, res, next) => {
         results: [],
       });
     } else {
-      let results = await PostModel.search(searchTerm);
+      let results = await Post.search(searchTerm);
       if (results.length) {
         res.send({
           results: results,
         });
       } else {
-        let results = await PostModel.getTenMostRecent(10);
+        let results = await Post.getTenMostRecent(10);
         res.send({
           results: results,
         });
@@ -101,25 +101,24 @@ router.get("/search", async (req, res, next) => {
   */
 });
 
-// TODO: need to add messaging system for individual posts by users (or email)
 router.get("/:id(\\d+)", async (req, res, next) => {
   try {
     let usernameTitle = "";
     let baseSQL =
       "SELECT u.username, p.title, p.description, p.photopath, p.created \
-    FROM users u \
-    JOIN posts p \
-    on u.user_id = p.users_user_id \
-    WHERE p.post_id = ?";
+  FROM users u \
+  JOIN posts p \
+  on u.user_id = p.users_user_id \
+  WHERE p.post_id = ?";
     let [results, fields] = await db.execute(baseSQL, [req.params.id]);
     if (results && results.length) {
       let baseSQL2 =
         "SELECT m.users_user_id, m.description, m.posts_post_id, m.created \
-      FROM posts p \
-      JOIN messages m \
-      on p.post_id = posts_post_id \
-      WHERE p.post_id = ? \
-      ORDER BY m.created DESC;";
+    FROM posts p \
+    JOIN messages m \
+    on p.post_id = posts_post_id \
+    WHERE p.post_id = ? \
+    ORDER BY m.created DESC;";
       let [results2, fields2] = await db.execute(baseSQL2, [req.params.id]);
       req.session.viewing = req.params.id;
       usernameTitle += results[0].username + "'s Room Profile";
@@ -134,21 +133,43 @@ router.get("/:id(\\d+)", async (req, res, next) => {
     res.redirect("/browse-room");
   }
 });
-router.get("/:keyTerm/:priceMin/:priceMax/:privacy\
-          /:amenities/:gender/:ageMin/:ageMax\
-          /:ocupation/:fields/:school/:pets/:somking\
-          /:lifestyle/:schedule/:languages/interrests"
-,function(request, response, next)
+router.get("/filter", async function(request,response,next)
 {
-
-  console.log(request.body);
-  /*
-  var dict = { key1 : value1 , 
-    key2 : value2 , 
-    .... 
-  };
-
-  const query = ""
-*/
+  let parseObject = Object.fromEntries(
+    Object.entries(request.query).filter(([_, v]) => v != "")
+    );
+  if(Object.keys(parseObject).length===0)
+  {
+    response.redirect('/browse-room')
+  }
+  else
+  {
+    if(parseObject.privacy)
+    {
+      if(parseObject.privacy==="private")
+      {
+        parseObject.privacy=1
+      }
+      else if(parseObject.privacy==="shared")
+      {
+        parseObject.privacy=0
+      }
+    }
+    if(parseObject.minPriceRange || parseObject.maxPriceRange)
+    {
+      if(!parseObject.minPriceRange)
+      {
+        parseObject.minPriceRange = 0.00
+        parseObject.maxPriceRange = parseFloat(parseObject.maxPriceRange)
+      }
+      if(!parseObject.maxPriceRange)
+      {
+        parseObject.maxPriceRange = 900000.00;
+        parseObject.minPriceRange = parseFloat(parseObject.minPriceRange)
+      }
+    }
+    let resultsOfQuery = await Post.filter(parseObject);
+    response.render('browse-room',{results:resultsOfQuery})
+  }
 });
 module.exports = router;

@@ -1,15 +1,17 @@
 const registration_form = document.getElementById("registration_form");
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");
-// const address = document.getElementById("address");
+const gender = document.getElementById("gender");
 const date_of_birth = document.getElementById("date_of_birth");
+const fields = document.getElementById("fields");
+const schools = document.getElementById("schools");
 const email = document.getElementById("email");
 const username = document.getElementById("username");
 const password = document.getElementById("password");
 const confirm_password = document.getElementById("confirm_password");
-const registration_submit = document.getElementById("registration_submit"); 
+const registration_submit = document.getElementById("registration_submit");
 
-var final_test_before_sql_query = new Array(7).fill(false);
+var final_test_before_sql_query = new Array(10).fill(false);
 
 first_name.addEventListener("input", (e) => {
   if (first_name.value === "") {
@@ -45,21 +47,32 @@ last_name.addEventListener("input", (e) => {
   final_test_before_sql_query[1] = false;
 });
 
-date_of_birth.addEventListener("input", (e) => {
-  setSuccessFor(date_of_birth);
-  final_test_before_sql_query[2] = true;
+gender.addEventListener("click", (e) => {
+  if (
+    document.getElementById("male").checked ||
+    document.getElementById("female").checked ||
+    document.getElementById("other").checked
+  ) {
+    setSuccessFor(gender);
+    final_test_before_sql_query[2] = true;
+  }
 });
 
-// address.addEventListener("input", (e) => {
-//   if (address.value === "") {
-//     setErrorFor(address, "Address can't be blank.");
-//   } else {
-//     setSuccessFor(address);
-//     final_test_before_sql_query[2] = true;
-//     return;
-//   }
-//   final_test_before_sql_query[2] = false;
-// });
+date_of_birth.addEventListener("input", (e) => {
+  setSuccessFor(date_of_birth);
+  final_test_before_sql_query[3] = true;
+});
+
+// Come back to for css - For Adele
+fields.addEventListener("click", (e) => {
+  setSuccessFor(fields);
+  final_test_before_sql_query[4] = true;
+});
+
+schools.addEventListener("click", (e) => {
+  setSuccessFor(schools);
+  final_test_before_sql_query[5] = true;
+});
 
 email.addEventListener("input", (e) => {
   if (email.value === "") {
@@ -68,10 +81,10 @@ email.addEventListener("input", (e) => {
     setErrorFor(email, "Not a valid email");
   } else {
     setSuccessFor(email);
-    final_test_before_sql_query[3] = true;
+    final_test_before_sql_query[6] = true;
     return;
   }
-  final_test_before_sql_query[3] = false;
+  final_test_before_sql_query[6] = false;
 });
 
 username.addEventListener("input", (e) => {
@@ -91,10 +104,10 @@ username.addEventListener("input", (e) => {
     setErrorFor(username, "Username can't have white spaces.");
   } else {
     setSuccessFor(username);
-    final_test_before_sql_query[4] = true;
+    final_test_before_sql_query[7] = true;
     return;
   }
-  final_test_before_sql_query[4] = false;
+  final_test_before_sql_query[7] = false;
 });
 
 password.addEventListener("input", (e) => {
@@ -110,10 +123,10 @@ password.addEventListener("input", (e) => {
     setErrorFor(password, "Password must have a special character.");
   } else {
     setSuccessFor(password);
-    final_test_before_sql_query[5] = true;
+    final_test_before_sql_query[8] = true;
     return;
   }
-  final_test_before_sql_query[5] = false;
+  final_test_before_sql_query[8] = false;
 });
 
 confirm_password.addEventListener("input", (e) => {
@@ -123,10 +136,10 @@ confirm_password.addEventListener("input", (e) => {
     setErrorFor(confirm_password, "Passwords don't match.");
   } else {
     setSuccessFor(confirm_password);
-    final_test_before_sql_query[6] = true;
+    final_test_before_sql_query[9] = true;
     return;
   }
-  final_test_before_sql_query[6] = false;
+  final_test_before_sql_query[9] = false;
 });
 
 registration_form.addEventListener("change", (e) => {
@@ -144,15 +157,16 @@ registration_submit.addEventListener("click", (e) => {
   // will prevent anything from happening if it reaches here.
   // if anything in the array is false then prevent anything from happening.
   // if every element in final_test_before_sql_query is true then else stop
+
   if (!final_test_before_sql_query.every((e) => e === true)) {
+    console.log("prevent");
     e.preventDefault();
   }
-  console.log("Eddy has nice hair");
   // e.preventDefault();
   // checkInputs();
 });
 
-// TODO come back with back-end lead to fix bug
+// TODO: come back with back-end lead to fix bug
 // Issue: doesn't redirect to homepage after success.
 // function checkInputs() {
 //   // .trim remove any white space from the left.

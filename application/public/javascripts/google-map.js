@@ -93,7 +93,7 @@ class GoogleMap {
     let api = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=`;
     // add api key | may need to add a different one so I don't get charged like a billion dollars
     // TODO WE NEED AN API KEY FOR THIS TO WORK!!!!!!!!!!!!
-    api += "AIzaSyDIE-MIgEos6ePPbsLh9gQ7nJqEX_TwfuU";
+    api += "AIzaSyAPXLO7hv5qBFm4sz0NSxnLOc41O4GFl60";
     let response = await axios.get(api);
     this.addMarker(
       response.data.results[0].geometry.location.lat,
