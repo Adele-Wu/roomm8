@@ -50,7 +50,7 @@ async function executeFilter() {
 function createFilteredPost(post) {
   // edited this output stream with the proper div location to wrap the button
   return `
-    <div id="${post.post_id}" class="item card" style="height:500px">
+    <div id="${post.post_id}" class="item card">
       <img class="cardImage  max-w-screen-lg mx-auto" src="images/uploads/posts/${post.thumbnail}" id="${post.post_id}" alt="room" />
       <div class="cardBody break-words">
         <p class="cardTitle font-bold text-lg">${post.title}</p>
