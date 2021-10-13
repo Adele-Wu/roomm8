@@ -29,7 +29,6 @@ async function executeSearch() {
       gmap.pinpointLocation(post.address);
     });
     mainContent.innerHTML = newMainContentHTML;
-    // cleaning house
   } else {
     gmap.pinpointLocation(searchTerm.value);
   }

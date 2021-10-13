@@ -117,6 +117,7 @@ router.get("/:id(\\d+)", async (req, res, next) => {
     WHERE p.post_id = ? \
     ORDER BY m.created DESC;";
       let [results2, fields2] = await db.execute(baseSQL2, [req.params.id]);
+      console.log(results2);
       req.session.viewing = req.params.id;
       usernameTitle += results[0].username + "'s Room Profile";
       res.render("room-profile", {
@@ -135,7 +136,6 @@ router.get("/filter", async function (req, res, next) {
   // let parseObject = Object.fromEntries(
   //   Object.entries(req.query.filterObject).filter(([_, v]) => v != "")
   // );
-
   try {
     let parseObject = req.query;
     if (Object.keys(parseObject).length === 0) {
@@ -165,11 +165,36 @@ router.get("/filter", async function (req, res, next) {
         results = await Post.getTenMostRecent(10);
         res.send({ results: results });
       }
-      // res.send({ results: results });
-      // res.render("browse-room", { results: results });
+      return;
     }
   } catch (err) {
     console.log(err);
+  }
+});
+
+router.post("/messages", async (req, res, next) => {
+  const message = req.body.message;
+  console.log(message);
+
+  try {
+    const fk_userId = req.session.userId;
+    const postId = req.session.viewing;
+    if (!fk_userId) {
+      // TODO: for later we can add flash messages and redirect to log in
+      res.redirect("/login");
+      // res.redirect("/post/" + postId);
+    }
+    const baseSQL =
+      "INSERT INTO messages (description, users_user_id, posts_post_id, created) VALUES (?, ?, ?, NOW())";
+    await db
+      .execute(baseSQL, [message, fk_userId, postId])
+      .then((results) => {
+        res.redirect("/post/" + postId);
+      })
+      .catch((err) => console.log("Comment " + err));
+  } catch (err) {
+    console.log(err);
+    res.redirect("/post/" + postId);
   }
 });
 

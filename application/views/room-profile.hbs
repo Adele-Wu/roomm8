@@ -4,8 +4,24 @@
 <div>{{currentPost.username}}</div>
 <div>{{currentPost.description}}</div>
 <div>{{currentPost.created}}</div>
-
-{{#each comments}}
-  {{this.description}}
-  {{this.created}}
-{{/each}}
+<br />
+<br />
+<br />
+<div>
+  {{#each comments}}
+    <p>Comment: {{this.description}}</p>
+    <p>Date: {{this.created}}</p>
+  {{/each}}
+</div>
+<div>
+  <form action="/post/messages" method="POST">
+    <textarea
+      name="message"
+      id="message"
+      class=""
+      cols="30"
+      rows="10"
+    ></textarea>
+    <button class="hover_card" type="submit">Send Message</button>
+  </form>
+</div>
