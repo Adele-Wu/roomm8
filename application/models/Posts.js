@@ -90,7 +90,7 @@ Post.filter = async (parsedObject) => {
     if (parsedObject.maxPriceRange || Number.isInteger(parsedObject.privacy)) {
       baseSQL += ` AND `;
       if (parsedObject.maxPriceRange) {
-        baseSQL += `rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+        baseSQL += `p.rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
       }
       if (
         parsedObject.maxPriceRange &&
@@ -99,13 +99,13 @@ Post.filter = async (parsedObject) => {
         baseSQL += ` AND `;
       }
       if (Number.isInteger(parsedObject.privacy)) {
-        baseSQL += ` privacy = "${parsedObject.privacy}";`;
+        baseSQL += ` p.privacy = "${parsedObject.privacy}";`;
       }
     }
   } else {
     baseSQL += ` WHERE `;
     if (parsedObject.maxPriceRange) {
-      baseSQL += `rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+      baseSQL += `p.rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
     }
     if (parsedObject.maxPriceRange && Number.isInteger(parsedObject.privacy)) {
       baseSQL += ` AND `;
