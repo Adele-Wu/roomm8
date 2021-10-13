@@ -10,11 +10,6 @@ var { body, validationResult } = require("express-validator");
 const session = require("express-session");
 const { sessionSave, delay } = require("../utils/promisification");
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-
 router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -97,58 +92,6 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
         next(err);
       }
     }
-
-    // then promises method.
-    // User.usernameExists(username)
-    // .then((usernameDoesExist) => {
-    //   if(usernameDoesExist) {
-    //     throw new UserError(
-    //       "Registration Failed: Username already exist",
-    //       "/registration",
-    //       200
-    //     );
-    //   } else {
-    //     return User.emailExists(email);
-    //   }
-    // })
-    // .then((emailDoesExist) => {
-    //   if(emailDoesExist) {
-    //     throw new UserError(
-    //       "Registration Failed: Email already exist",
-    //       "/registration",
-    //       200
-    //     )
-    //   } else {
-    //       return User.create(first_name, last_name, address, email, username, password);
-    //   }
-    // })
-    // .then((createdUserId) => {
-    //   if(createdUserId < 0) {
-    //     throw new UserError(
-    //       "Server Error, user could not be created",
-    //       "/registration",
-    //       500
-    //     );
-    //   } else {
-    //     successPrint("Registration Success: User was created!");
-    //     // req.flash will only work with sessions until such time leave these commented until sessions are done.
-    //     // req.flash('success', 'User account has been made!');
-    //     res.redirect("/login");
-    //   }
-    // })
-    // .catch((err) => {
-    //   errorPrint("User couldn't be made", err);
-    //   if (err instanceof UserError) {
-    //     // print to console
-    //     errorPrint(err.getMessage());
-    //     // flash on browser
-    //     // req.flash('error', err.getMessage());
-    //     res.status(err.getStatus());
-    //     res.redirect(err.getRedirectURL());
-    //   } else {
-    //     next(err);
-    //   }
-    // });
   }
 });
 
@@ -191,36 +134,6 @@ router.post("/login", async (req, res, next) => {
       next(err);
     }
   }
-
-  // then promise method
-  // User.authenticate(username, password)
-  // .then((loggedUserId) => {
-  //   if(loggedUserId > 0){
-  //     successPrint(`User ${username} was able to log in.`);
-  //     req.session.username = username;
-  //     req.session.userId = loggedUserId;
-  //     res.locals.logged = true;
-  //     req.flash('success', 'You are logged in.');
-  //     console.log("am i getting to this line");
-  //     res.redirect('/');
-  //   } else {
-  //     throw new UserError(
-  //       "Invalid username or password",
-  //       "/login",
-  //       200
-  //     )
-  //   }
-  // })
-  // .catch((err) => {
-  //   if(err instanceof UserError){
-  //     errorPrint(err.getMessage());
-  //     req.flash('error', err.getMessage());
-  //     res.status(err.getStatus());
-  //     res.redirect("/login");
-  //   } else {
-  //     next(err);
-  //   }
-  // })
 });
 
 router.post("/logout", async (req, res, next) => {
@@ -288,23 +201,5 @@ router.get("/filter", async (req, res, next) => {
     });
   }
 });
-
-// purely here to test if the db is connect
-// manually type or copypasta url below to test db
-// localhost:3000/users/getUsers
-// look in console to see if the data is being re
-// router.get('/getUsers', (req, res, next) => {
-//   let baseSQL = "SELECT * FROM users";
-//   db.execute(baseSQL).then(([results, fields]) => {
-//     if(results && results.length == 0){
-//       console.log('error');
-//       // res.render(results);
-//     }
-//     else{
-//       console.log(results);
-//       // res.render(results);
-//     }
-//   })
-// })
 
 module.exports = router;
