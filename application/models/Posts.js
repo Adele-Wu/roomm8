@@ -60,9 +60,8 @@ Post.search = async (searchTerm) => {
 
 Post.filter = async function(parsedObject)
 {
-  console.log(parsedObject);
   let fields=[];
-  let baseSQL = "SELECT DISTINCT post_id,title, address, rent, description, thumbnail FROM posts "
+  let baseSQL = "SELECT DISTINCT post_id,title, address, rent, description, thumbnail FROM posts p "
   if(parsedObject.disability || parsedObject.parking)
   {
     baseSQL+=`
@@ -98,7 +97,7 @@ Post.filter = async function(parsedObject)
       baseSQL+=` AND `;
       if(parsedObject.maxPriceRange)
       {
-        baseSQL += `rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+        baseSQL += `p.rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
       }
       if(parsedObject.maxPriceRange && Number.isInteger(parsedObject.privacy))
       {
@@ -106,7 +105,7 @@ Post.filter = async function(parsedObject)
       }
       if(Number.isInteger(parsedObject.privacy))
       {
-        baseSQL +=` privacy = "${parsedObject.privacy}";`;
+        baseSQL +=` p.privacy = "${parsedObject.privacy}";`;
       }
     }
   }
@@ -115,7 +114,7 @@ Post.filter = async function(parsedObject)
     baseSQL+=` WHERE `;
     if(parsedObject.maxPriceRange)
     {
-      baseSQL += `rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+      baseSQL += `p.rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
     }
     if(parsedObject.maxPriceRange && Number.isInteger(parsedObject.privacy))
     {
@@ -123,7 +122,7 @@ Post.filter = async function(parsedObject)
     }
     if(Number.isInteger(parsedObject.privacy))
     {
-      baseSQL +=` privacy = "${parsedObject.privacy}";`;
+      baseSQL +=` p.privacy = "${parsedObject.privacy}";`;
     }
   }
   return db

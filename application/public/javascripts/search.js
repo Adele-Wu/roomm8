@@ -19,7 +19,7 @@ async function executeSearch() {
     let mainContent = document.getElementById("room_results");
     let searchURL = `post/search?search=keyTerm=${searchTerm.value}?minRange=${minPricerange.value}?languages=${selected}`;
     let response = await axios.get(searchURL);
-    console.log(response);
+    //console.log(response);
     if (!response) {
       location.replace("/browse-room");
       return;
