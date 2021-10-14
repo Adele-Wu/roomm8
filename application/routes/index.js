@@ -53,4 +53,12 @@ router.get("/browse-user", getRecentUsers, function (req, res, next) {
   });
 });
 
+router.get("/edit", function (req, res, next) {
+  res.render("edit-profile", {
+    title: "Edit Profile",
+    searchPost: false,
+    searchUser: false,
+  });
+});
+
 module.exports = router;
