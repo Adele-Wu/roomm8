@@ -5,12 +5,21 @@ if (searchButton) {
   searchButton.onclick = executeSearch;
 }
 
-async function executeSearch() {
+async function executeSearch() {  
   let searchTerm = document.getElementById("search-text");
-  // if the users doesn't search for anything redirect back to the same room
-  if (!searchTerm) {
-    location.replace("/browse-room");
-    return;
+// if the users doesn't search for anything redirect back to the same room
+if (!searchTerm) {
+  location.replace("/browse-room");
+  return;
+}
+let minPricerange = document.getElementById("minRange");
+let languages = document.getElementById("language");
+var selected = "";
+for (var option of languages.options)
+  {
+      if (option.selected) {
+          selected= selected+","+option.value;
+      }
   }
   // if the users is looking for a users than we know that the username starts with an alphabet
   // else will be an address
@@ -62,8 +71,8 @@ function createPost(post) {
     `;
     */
   return `
-    <div id="${post.post_id}" class="item card" style="height:500px">
-    <img class="cardImage  max-w-screen-lg mx-auto" src="images/uploads/posts/${post.thumbnail}" id="${post.post_id}" alt="room" />
+    <div id="${post.post_id}" class="item card" style="height: 300px">
+    <img class="cardImage roomImage max-w-screen-lg mx-auto" src="images/uploads/posts/${post.thumbnail}" id="${post.post_id}" alt="room" />
     <div class="cardBody break-words">
     <p class="cardTitle font-bold text-lg">${post.title}</p>
     <p class="cardAddress">${post.address}</p>

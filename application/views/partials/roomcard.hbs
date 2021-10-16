@@ -1,6 +1,6 @@
 <div id="{{post_id}}" class="item card">
   <img
-    class="cardImage max-w-screen-lg mx-auto"
+    class="cardImage roomImage max-w-screen-lg mx-auto"
     src="images/uploads/posts/{{thumbnail}}"
     id="{{post_id}}"
     alt="room"
@@ -11,8 +11,7 @@
     <p class="cardDescription">{{description}}</p>
   </div>
   {{! do not change this or at least keep a similar format. buttons do NOT have href properties. You can't fire a route with only a button if there's no form tag }}
-  <button class="postButton"><a href="/post/{{post_id}}">Check Post</a>
-  </button>
+  <button class="postButton"><a href="/post/{{post_id}}">Check Post</a></button>
 
   {{!-- <button class="postButton" href="/post/{{post_id}}">Check Post</button> --}}
 </div>
