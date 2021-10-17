@@ -101,7 +101,7 @@ router.get("/search", async (req, res, next) => {
 router.get("/:id(\\d+)", async (req, res, next) => {
   try {
     let usernameTitle = "";
-    let baseSQL = `SELECT u.username, p.title, p.description, p.photopath, p.created \
+    let baseSQL = `SELECT u.username, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.photopath, u.description, p.title, p.description, p.photopath, p.created  \
           FROM users u \
           JOIN posts p \
           on u.user_id = p.users_user_id \
@@ -117,6 +117,8 @@ router.get("/:id(\\d+)", async (req, res, next) => {
       let [results2, fields2] = await db.execute(baseSQL2, [req.params.id]);
       req.session.viewing = req.params.id;
       usernameTitle += results[0].username + "'s Room Profile";
+      // console.log("asdklfjalksdfjklasdjflkajsdlkfajsdlkfsjal");
+      console.log(results[0]);
       res.render("room-profile", {
         title: usernameTitle,
         currentPost: results[0],
