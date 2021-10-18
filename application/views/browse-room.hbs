@@ -3,7 +3,6 @@
     {{!-- filters panel --}}
     <div class="filter_panel" class="w-4/6">
         <div class="search ">
-            {{!-- placeholder for search --}}
             <input type="text" id="search-text" placeholder="search" class="w-11/12"></input>
             <button id="search-button">
                 <img src="/images/search_icon.png" width="20px">
@@ -16,19 +15,23 @@
             <div class="search_category">
                 <label for="price">Price Range: </label>
                 <div class="range">
-                    <input  id="minRange" type="text" name="minPriceRange" placeholder="Min Price" class="w-5/12 mx-3">-
-                    <input  id="maxRange" type="text" name="maxPriceRange" placeholder="Max Price" class="w-5/12 mx-3">
+                    <input id="minRange" type="text" name="minPriceRange" placeholder="Min Price" class="w-5/12 mx-3">-
+                    <input id="maxRange" type="text" name="maxPriceRange" placeholder="Max Price" class="w-5/12 mx-3">
                 </div>
             </div>
 
             <div class="search_category">
                 <label for="privacy">Privacy:</label>
                 <div class="filter_category">
-                    <div class="item">
-                        <input type="radio" name="privacy" id="privateroom" class="filter_option" value="private" />Private Room
-                    </div>
-                    <div class="item">
-                        <input type="radio" name="privacy" id="sharedroom" class="filter_option" value="shared" />Shared Room
+                    <div class="filter_option">
+                        <div class="item">
+                            <input type="radio" name="privacy" id="privateroom" class="filter_option"
+                                value="private" />Private Room
+                        </div>
+                        <div class="item">
+                            <input type="radio" name="privacy" id="sharedroom" class="filter_option"
+                                value="shared" />Shared Room
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,9 +39,15 @@
             <div class="search_category">
                 <label for="amenities"> Amenities </label>
                 <div class="filter_category">
-                    <div class="item">
-                        <input id="parking" type="checkbox" name="parking" value="parking">Parking
-                        <input id="disability" type="checkbox" name="disability" value="disability">Disability
+                    <div class="item grid grid-cols-2">
+                        <div class="filter_option">
+                            <input id="parking" type="checkbox" name="parking" value="parking">
+                            <label>Parking</label>
+                        </div>
+                        <div class="filter_option">
+                            <input id="disability" type="checkbox" name="disability" value="disability">
+                            <label>Disability</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,5 +67,3 @@
     <div id="map"> </div>
 
 </div>
-
-
