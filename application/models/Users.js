@@ -160,6 +160,7 @@ const partitionObj = (parseObject, column) => {
 };
 
 User.filter = async (parseObject, parseObjectKey) => {
+  console.log("askldfjaklsdjflkasjdfklasjdfklasdfjlksajkld");
   let age = false;
   let baseSQL =
     "SELECT DISTINCT u.user_id, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.description, u.photopath FROM users u ";

@@ -162,35 +162,6 @@ router.post("/logout", async (req, res, next) => {
 //   }
 // });
 
-router.get("/:username", async (req, res, next) => {
-  try {
-    // check if username exist within database. if it's not then redirect back
-    if (!(await User.usernameExists(req.params.username))) {
-      throw new UserError(
-        "Username: The username you're looking for doesn't exist.",
-        "/browse-user",
-        200
-      );
-    }
-    let baseSQL = "SELECT * FROM users where username = ?;";
-    let [results, fields] = await db.execute(baseSQL, [req.params.username]);
-    if (results && results.length) {
-      res.render("user-profile", {
-        title: results[0].first_name,
-        currentUser: results[0],
-      });
-    }
-  } catch (err) {
-    if (err instanceof UserError) {
-      errorPrint(err.getMessage());
-      res.status(err.getStatus());
-      res.redirect("/browse-user");
-    } else {
-      next(err);
-    }
-  }
-});
-
 router.get("/search", async (req, res, next) => {
   try {
     let searchTerm = req.query.search;
@@ -228,6 +199,37 @@ router.get("/filter", async (req, res, next) => {
     res.render("browse-user", {
       results: results,
     });
+  }
+});
+
+// Interesting bug. Looks like /:params has priority over /filter, therefore it's necessary to have this
+// route after
+router.get("/:username", async (req, res, next) => {
+  try {
+    // check if username exist within database. if it's not then redirect back
+    if (!(await User.usernameExists(req.params.username))) {
+      throw new UserError(
+        "Username: The username you're looking for doesn't exist.",
+        "/browse-user",
+        200
+      );
+    }
+    let baseSQL = "SELECT * FROM users where username = ?;";
+    let [results, fields] = await db.execute(baseSQL, [req.params.username]);
+    if (results && results.length) {
+      res.render("user-profile", {
+        title: results[0].first_name,
+        currentUser: results[0],
+      });
+    }
+  } catch (err) {
+    if (err instanceof UserError) {
+      errorPrint(err.getMessage());
+      res.status(err.getStatus());
+      res.redirect("/browse-user");
+    } else {
+      next(err);
+    }
   }
 });
 
