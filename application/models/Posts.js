@@ -1,3 +1,14 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: Posts.js
+ *
+ * Description: Post model that handles all of database queries to return
+ * their corresponding data for their respected pages.
+ **************************************************************/
 var db = require("../conf/database");
 const Post = {};
 

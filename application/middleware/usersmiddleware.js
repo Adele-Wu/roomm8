@@ -1,3 +1,15 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: usersmiddleware.js
+ *
+ * Description: This small middleware is used to be called whenever the
+ * browse-user.hbs is render the top recent users that were registered
+ * to our application.
+ **************************************************************/
 var User = require("../models/Users");
 const usersMiddleWare = {};
 

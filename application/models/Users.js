@@ -1,3 +1,14 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: Users.js
+ *
+ * Description: Users model that handle all of the validation and
+ * database queries to mysql.
+ **************************************************************/
 var db = require("../conf/database");
 var bcrypt = require("bcrypt");
 const User = {};
@@ -160,7 +171,7 @@ const partitionObj = (parseObject, column) => {
 };
 
 User.filter = async (parseObject, parseObjectKey) => {
-  console.log("askldfjaklsdjflkasjdfklasjdfklasdfjlksajkld");
+  console.log("print this in filter");
   let age = false;
   let baseSQL =
     "SELECT DISTINCT u.user_id, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.description, u.photopath FROM users u ";

@@ -1,3 +1,13 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: about.js
+ *
+ * Description: About us page that serves a static object.
+ **************************************************************/
 const express = require("express");
 const router = express.Router();
 const options = {

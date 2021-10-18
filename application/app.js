@@ -1,3 +1,15 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: app.js
+ *
+ * Description: This file stores all the necessary libraries, routers and
+ * unmounted middleware (needs next() to be called or it'll hang) for our
+ * application.
+ **************************************************************/
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");

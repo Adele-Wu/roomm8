@@ -1,3 +1,15 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: users.js
+ *
+ * Description: users router that will handle all user routes that will
+ * check and validate all incoming user inputs and then send to the
+ * Users Model.
+ **************************************************************/
 var express = require("express");
 var router = express.Router();
 var db = require("../conf/database");

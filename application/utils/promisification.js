@@ -1,3 +1,36 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: users.js
+ *
+ * Description: users router that will handle all user routes that will
+ * check and validate all incoming user inputs and then send to the
+ * Users Model.
+ **************************************************************/
+const delay = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 5000);
+  });
+};
+
+const sessionSave = (session) => {
+  return new Promise((resolve, reject) => {
+    session.save((err) => {
+      if (err) {
+        // console.log("ERR " + err);
+        reject(err);
+      }
+      // console.log("success " + err);
+      resolve();
+    });
+  });
+};
+
 // const promiseSave = (req) => {
 //   return new Promise((resolve, reject) => {
 //     req.session.save((err) => {
@@ -21,26 +54,5 @@
 //     });
 //   });
 // };
-
-const delay = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve();
-    }, 5000);
-  });
-};
-
-const sessionSave = (session) => {
-  return new Promise((resolve, reject) => {
-    session.save((err) => {
-      if (err) {
-        // console.log("ERR " + err);
-        reject(err);
-      }
-      // console.log("success " + err);
-      resolve();
-    });
-  });
-};
 
 module.exports = { sessionSave, delay };

@@ -1,3 +1,16 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: post.js
+ *
+ * Description: post router that will handle all post routes that will
+ * handle all the logic for storing images, create posts, search, filter,
+ * create messages, and link to individual posts.
+ * As well as call methods within Post Models for any db queries.
+ **************************************************************/
 var express = require("express");
 var router = express.Router();
 var db = require("../conf/database");

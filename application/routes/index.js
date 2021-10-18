@@ -1,3 +1,15 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: index.js
+ *
+ * Description: index.js is created to the purpose of handle all the static
+ * pages for our web application. These routes lay the foundation for the rest
+ * of the other pages necessary for our project.
+ **************************************************************/
 var express = require("express");
 var router = express.Router();
 var getRecentPosts = require("../middleware/postsmiddleware").getRecentPosts;
