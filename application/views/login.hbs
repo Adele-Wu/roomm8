@@ -1,7 +1,9 @@
 <form
+  id="login_form"
   action="/users/login"
   method="POST"
   enctype="application/x-www-form-urlencoded"
+  class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5"
 >
   <div class="form-validation">
     <label for="username">Username</label>
@@ -14,6 +16,7 @@
       required
     />
   </div>
+
   <div class="form-validation">
     <label for="password">Password</label>
     <input
@@ -25,5 +28,7 @@
       required
     />
   </div>
-  <input type="submit" class="hover_card" id="login_submit" value="Submit" />
+  <button>
+    <input type="submit" class="hover_card" id="login_submit" value="Submit" /></input>
+    </button>
 </form>

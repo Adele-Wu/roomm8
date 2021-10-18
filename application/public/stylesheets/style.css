@@ -32,6 +32,10 @@ body {
   background-size: cover;
 }
 
+.pageBodyCont {
+  min-height: 63vh;
+}
+
 .about_us {
   padding: 1rem;
 }
@@ -137,8 +141,24 @@ form {
 }
 
 #registration_form {
-    max-width: 50rem;
-  }
+  max-width: 50rem;
+}
+
+#login_form {
+  max-width: 50rem;
+}
+
+#registration_submit {
+  width: 50%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+#login_submit {
+  width: 50%;
+  margin: auto;
+  border-radius: 20px;
+}
 
 .hover_card {
   background-color: rgba(255, 255, 255, 0.3);
