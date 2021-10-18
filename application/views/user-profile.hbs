@@ -1,19 +1,60 @@
-<img
-  class="cardImage max-w-screen-lg mx-auto"
-  {{!-- src="images/uploads/posts/{{photopath}}" --}}
-  src="../images/Smiley_Face.JPG"
-  id="{{user_id}}"
-  alt="face"
-/>
-<h3>{{currentUser.first_name}}</h3>
-<div>{{currentUser.last_name}}</div>
-<div>{{currentUser.gender}}</div>
-<div>{{currentUser.fields}}</div>
-<div>{{currentUser.school}}</div>
-<div>{{currentUser.email}}</div>
-<div>{{currentUser.username}}</div>
+<div class="lg:container m-auto lg:flex object-cover">
+  <div class="card postcard lg:flex lg:w-2/3 p-4">
+    <img class="postUserImage m-auto lg:m-0 object-cover" {{!-- src="images/uploads/posts/{{photopath}}" --}}
+      src="../images/Smiley_Face.JPG" id="{{user_id}}" alt="face" />
 
-{{!-- {{#each comments}}
-  {{this.description}}
-  {{this.created}}
-{{/each}} --}}
+    <div id="post_info_container" class="p-4">
+      {{!-- <label class="post_label">Name: </label> --}}
+      <h3 class="name_container">
+        <span class="name">{{currentUser.first_name}}</span>
+        <span class="name">{{currentUser.last_name}}</span>
+      </h3>
+
+      <div class="post_info_category">
+        <label class="post_label">Gender: </label>
+        <span>{{currentUser.gender}}</span>
+      </div>
+
+      <div class="post_info_category">
+        <label class="post_label">Field: </label>
+        <span>{{currentUser.fields}}</span>
+      </div>
+
+      <div class="post_info_category">
+        <label class="post_label">School: </label>
+        <span>{{currentUser.school}}</span>
+      </div>
+
+      <div class="post_info_category">
+        <label class="post_label">Email: </label>
+        <span>{{currentUser.email}}</span>
+      </div>
+
+      <div class="post_info_category">
+        <label class="post_label">Username: </label>
+        <span>{{currentUser.username}}</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card commentSection w-full lg:w-1/3 p-4">
+    <div class="myComment">
+      <form method="POST" name="postComment" class="noFormCSS">
+        <label class="">Leave a Comment:</label>
+        <textarea rows="5" id="comment" name="comment" cols="30" class="px-2"
+          placeholder="Ask a question or write a review"></textarea>
+        <button><input class="commentButton" type="submit" value="Comment"></button>
+      </form>
+    </div>
+
+    <div class="othersComments">
+      {{#each comments}}
+      <div class="comment_container">
+        <div>{{this.description}}</div>
+        <div class="post_label text-sm">{{this.created}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
