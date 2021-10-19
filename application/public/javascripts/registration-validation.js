@@ -8,6 +8,14 @@
  *
  * Description: Frontend validation for the registration page.
  **************************************************************/
+/**
+ * @author Eddy
+ */
+/**
+ * Each variable below has an event listener to detect for any changes
+ * and update the css such that it outputs whether a user has made an error
+ * or correctly made their inputs.
+ */
 const registration_form = document.getElementById("registration_form");
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");

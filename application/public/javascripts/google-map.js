@@ -10,8 +10,16 @@
  * create all the necessary markers for any and all searches and filter
  * for posts.
  **************************************************************/
+/**
+ * @author Eddy
+ */
 const ROADMAP = "roadmap";
 
+/**
+ * Initialize map with San Francisco as the default location.
+ *
+ * @function initMap
+ */
 function initMap() {
   let map = new google.maps.Map(document.getElementById("map"), {
     zoom: 12,
@@ -24,12 +32,20 @@ function initMap() {
   // });
 }
 
+/** @class GoogleMap representing our map object */
 class GoogleMap {
+  /**
+   * @constructor
+   * @param {number} id
+   * @param {object} locations {lat, lng}
+   */
   constructor(id, locations = []) {
     this.id = id;
     this.locations = locations;
   }
-
+  /**
+   * @function draw placement of each marker
+   */
   draw() {
     map = new google.maps.Map(document.getElementById(this.id), {
       zoom: 12,
@@ -48,11 +64,20 @@ class GoogleMap {
     }
   }
 
+  /**
+   * @function addMarker insert into locations array
+   */
   addMarker(lat, lng) {
     this.locations.push({ lat, lng });
     this.draw();
   }
 
+  /**
+   * pinpointLocation is used to find their geolocation base on their address using GeoCode API
+   *
+   * @function pinpointLocation creates connection and returns googlemap object
+   * @param address literal address
+   */
   async pinpointLocation(address) {
     let api = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=`;
     // add api key | may need to add a different one so I don't get charged like a billion dollars

@@ -15,7 +15,14 @@ const filterButton = document.getElementById("filter-button");
 if (filterButton) {
   filterButton.onclick = executeFilter;
 }
-
+/**
+ * Generates all the necessary innerHTML from the results of a query
+ * and googlemap object to generate the markers based on their lat lng.
+ * Main difference is the complexity of various different options. Therefore,
+ * we need to elegantly handle each case.
+ *
+ * @function executeFilter
+ */
 async function executeFilter() {
   let minPriceRangeId = document.getElementById("minPriceRange").value;
   let maxPriceRangeId = document.getElementById("maxPriceRange").value;
@@ -58,6 +65,13 @@ async function executeFilter() {
   mainContent.innerHTML = newMainContentHTML;
 }
 
+/**
+ * As the function name suggest, this is the blueprint for each individual card
+ * based on the n number of results.
+ *
+ * @function createFilteredPost
+ * @param post
+ */
 function createFilteredPost(post) {
   // edited this output stream with the proper div location to wrap the button
   return `

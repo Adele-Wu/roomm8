@@ -9,13 +9,24 @@
  * Description: Frontend search that will use client-side rendering
  * such that we have a more dynamic feel as a user searches for a post.
  **************************************************************/
+/**
+ * @author Eddy
+ */
 const searchButton = document.getElementById("search-button");
+/**
+ * GoogleMap Object to generate all the markers
+ */
 const gmap = new GoogleMap("map");
 
 if (searchButton) {
   searchButton.onclick = executeSearch;
 }
-
+/**
+ * Generates all the necessary innerHTML from the results of a query
+ * and googlemap object to generate the markers based on their lat lng.
+ *
+ * @function executeSearch
+ */
 async function executeSearch() {
   let searchTerm = document.getElementById("search-text");
   // if the users doesn't search for anything redirect back to the same room
@@ -45,6 +56,13 @@ async function executeSearch() {
   }
 }
 
+/**
+ * As the function name suggest, this is the blueprint for each individual card
+ * based on the n number of results.
+ *
+ * @function createPost
+ * @param post
+ */
 function createPost(post) {
   // edited this output stream with the proper div location to wrap the button
   return `

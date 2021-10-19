@@ -9,12 +9,20 @@
  * Description: Frontend search that will use client-side rendering
  * such that we have a more dynamic feel as a user searches for user(s).
  **************************************************************/
+/**
+ * @author Eddy
+ */
 const searchButton = document.getElementById("search-button");
 
+/** @var searchButton Checks to see if button was clicked to executeSearch */
 if (searchButton) {
   searchButton.onclick = executeSearch;
 }
-
+/**
+ * Generates all the necessary innerHTML from the results of a query.
+ *
+ * @function executeSearch
+ */
 async function executeSearch() {
   let searchTerm = document.getElementById("search-text");
   // if the users doesn't search for anything redirect back to the same room
@@ -40,6 +48,12 @@ async function executeSearch() {
   }
 }
 
+/**
+ * Generates all the necessary innerHTML from the results of a query.
+ *
+ * @function createUserCard
+ * @param user
+ */
 // TODO: src="images/uploads/users/${user.photopath}"
 // path above is needed for anyone who's going to EDIT their profile.
 // come back to this when you implement the next steps of registration. (create user preferences)
