@@ -1,3 +1,14 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: search-post.js
+ *
+ * Description: Frontend search that will use client-side rendering
+ * such that we have a more dynamic feel as a user searches for a post.
+ **************************************************************/
 const searchButton = document.getElementById("search-button");
 const gmap = new GoogleMap("map");
 

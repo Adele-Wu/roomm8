@@ -1,3 +1,14 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: filter-post.js
+ *
+ * Description: Frontend JS that parses the necessary parameters and
+ * sent to the backend and retrieves and renders the filtered posts.
+ **************************************************************/
 const filterButton = document.getElementById("filter-button");
 // const gmap = new GoogleMap("map");
 

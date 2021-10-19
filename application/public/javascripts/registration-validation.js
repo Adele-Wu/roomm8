@@ -1,3 +1,13 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: registration-validation.js
+ *
+ * Description: Frontend validation for the registration page.
+ **************************************************************/
 const registration_form = document.getElementById("registration_form");
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");

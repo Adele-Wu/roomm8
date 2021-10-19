@@ -22,10 +22,8 @@ const sessionSave = (session) => {
   return new Promise((resolve, reject) => {
     session.save((err) => {
       if (err) {
-        // console.log("ERR " + err);
         reject(err);
       }
-      // console.log("success " + err);
       resolve();
     });
   });
