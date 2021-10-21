@@ -530,9 +530,8 @@ footer {
   padding: 2rem;
 }
 
-.item .card {
-  /* max-height: 300px; */
-  height: 50rem;
+.item.card {
+  height: 38rem;
 }
 
 .cardGrid {
