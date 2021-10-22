@@ -1,5 +1,25 @@
+{{!============================================================================================
+
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: registration.hbs
+* Description: this is our registration page where you can find the 
+* registration form where a guest can register and have access to special features  
+
+=================================================================================================}}
+
 <form id="registration_form" action="/users/register" method="POST" enctype="application/x-www-form-urlencoded"
   class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
+
   <div class="form-validation">
     <label for="first_name">First Name:</label>
     <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2" required />
