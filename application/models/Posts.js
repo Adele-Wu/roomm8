@@ -12,6 +12,20 @@
 var db = require("../conf/database");
 const Post = {};
 
+/**
+ * The create method is used to create each post tied to a specific
+ * user.
+ *
+ * @param {*} title
+ * @param {*} address
+ * @param {*} rent
+ * @param {*} privacyInt
+ * @param {*} description
+ * @param {*} photopath
+ * @param {*} thumbnail
+ * @param {*} users_user_id
+ * @returns a promise resolve
+ */
 Post.create = async (
   title,
   address,
@@ -41,6 +55,13 @@ Post.create = async (
     .catch((err) => err);
 };
 
+/**
+ * A general query to return 10 most recent post. We can pass in any integer
+ * to return n number of row results back to the frontend.
+ *
+ * @param {*} numberOfPosts
+ * @returns
+ */
 Post.getTenMostRecent = async (numberOfPosts) => {
   let baseSQL =
     "SELECT post_id, title, address, rent, description, thumbnail, created FROM posts ORDER BY created DESC LIMIT " +
@@ -54,6 +75,13 @@ Post.getTenMostRecent = async (numberOfPosts) => {
     .catch((err) => Promise.reject(err));
 };
 
+/**
+ * search will concatonate the title and description together and use a wildcard to find
+ * any word in either the title or description as a row result.
+ *
+ * @param {*} searchTerm
+ * @returns row results
+ */
 Post.search = async (searchTerm) => {
   let baseSQL =
     "SELECT post_id, title, address, rent, description, thumbnail, concat_ws(' ', title, description) \
@@ -69,6 +97,12 @@ Post.search = async (searchTerm) => {
     .catch((err) => Promise.reject(err));
 };
 
+/**
+ * filter will filter the client's selected options
+ *
+ * @param {*} parsedObject
+ * @returns row results
+ */
 Post.filter = async function (parsedObject) {
   let fields = [];
   let baseSQL =

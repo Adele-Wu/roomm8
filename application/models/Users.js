@@ -139,6 +139,14 @@ User.getTenMostRecent = async (numberOfPosts) => {
     .catch((err) => Promise.reject(err));
 };
 
+/**
+ * search function that will use a wild card of the searchTerm that will concat the
+ * username, first name, last name and occupation to find either any of these that
+ * exist within the database.
+ *
+ * @param {*} searchTerm
+ * @returns results of the row results of the search term
+ */
 User.search = async (searchTerm) => {
   let baseSQL =
     "SELECT user_id, first_name, last_name, gender, dob, occupation, fields, school, email, username, photopath, description, CONCAT(' ', username, first_name, last_name, occupation) AS haystack FROM users HAVING haystack like ?;";
@@ -170,6 +178,19 @@ const partitionObj = (parseObject, column) => {
     }, {});
 };
 
+/**
+ * filter method has two conditions that need to be accounted for.
+ * a) when a client selects only within the user table
+ * b) or user and either preferences, interest or both are selected.
+ * since the user table on its own has a specific query, we can use this
+ * our base case. If either preference or interest is selected then
+ * we can concat the baseSQL with their respective sql joins using the
+ * generalized addFilter() method
+ *
+ * @param {*} parseObject
+ * @param {*} parseObjectKey
+ * @returns row results of the selected filter options
+ */
 User.filter = async (parseObject, parseObjectKey) => {
   console.log("print this in filter");
   let age = false;
@@ -231,11 +252,6 @@ User.filter = async (parseObject, parseObjectKey) => {
       .catch((err) => Promise.reject(err))
   );
 };
-
-// let sqlbases = {
-//   userSelect: `
-//   `,
-// };
 
 let addFilter = (
   userObj,

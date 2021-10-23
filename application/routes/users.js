@@ -22,6 +22,16 @@ var { body, validationResult } = require("express-validator");
 const session = require("express-session");
 const { sessionSave, delay } = require("../utils/promisification");
 
+/**
+ * /register calls body("email").isEmail() from the express-validator library to
+ * validate/sanitize the client's email. express-validator also has many different
+ * methods such as .trim(), .normalizeEamil(), .bail(), .exists() that can be chained
+ * within the array, however, for simplicity, I only went with isEmail().
+ * With the User Model, we have simple checks to see if a username and email exist
+ * within the database such that there are no duplicates. If any of these were to trigger
+ * then we would reroute them back to the registration page and inform them that
+ * the username and email is taken.
+ */
 router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -107,6 +117,25 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   }
 });
 
+/**
+ * /login would only need to authenticate the username and password, in order,
+ * to validate the client's username and password.
+ *
+ * req.session is persistent throughout the application with a cookie that has a
+ * specific time (once it exceeds it's duration then it will be destroyed.)
+ *
+ * Within, the promisification.js file, we pass in the session object to return a
+ * promise. This is to ensure that the session actually stores the value of
+ * req.session.username = username
+ * req.session.userId = loggedUserId
+ * res.locals.logged = true
+ * before redirecting to the next page. This must happen such that the logged boolean
+ * is set for handlebars to render the correct navbars. We can use the delay method,
+ * however, there is a major flaw to this method. As we begin to abuse this method, the
+ * time that it takes to render new pages would increase causing more delays which would
+ * most likely lose many clients due to impatiences. (i.e. don't use it cause it'll cause
+ * lag throughout the application)
+ */
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   let loggedUserId = await User.authenticate(username, password);
@@ -148,6 +177,10 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+/**
+ * /logout work in tandem with a frontend javascript script that fetchs this
+ * route in order to destroy our session of our current client.
+ */
 router.post("/logout", async (req, res, next) => {
   await req.session.destroy((err) => {
     if (err) {
@@ -174,6 +207,13 @@ router.post("/logout", async (req, res, next) => {
 //   }
 // });
 
+/**
+ * /search will search by a user text input with a few conditions
+ * a) if no input is given and trigger then return nothing
+ * b) else return results of the search term
+ * b.1) if it finds n results return results
+ * b.2) else call the top ten most recent results in the database.
+ */
 router.get("/search", async (req, res, next) => {
   try {
     let searchTerm = req.query.search;
@@ -199,6 +239,9 @@ router.get("/search", async (req, res, next) => {
   }
 });
 
+/**
+ * /filter will filter the user preferences, interests, and user table
+ */
 router.get("/filter", async (req, res, next) => {
   let parseObject = Object.fromEntries(
     Object.entries(req.query).filter(([_, v]) => v != "")

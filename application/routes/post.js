@@ -21,6 +21,11 @@ var crypto = require("crypto");
 var Post = require("../models/Posts");
 var PostError = require("../helpers/error/PostError");
 
+/**
+ * As the name suggests, we are storing the uploaded images to a destination
+ * to a specific path with a file name that's encrypted with a random hexadecimal
+ * name to ensure that other clients are not privy to other images.
+ */
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // path to where we're storing each posts from user.
@@ -35,6 +40,12 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
+/**
+ * When /createPost is invoked, upload.single will grab the image from the input tag that
+ * has name="fileUpload" and store that into req.file and req.body will contain the other
+ * input or text fields as usual. From here, fileUploaded had a bug where the path was given
+ * as path\to\destination, but we needed path/to/destination.
+ */
 router.post("/createPost", upload.single("fileUpload"), (req, res, next) => {
   let fileUploaded = req.file.path;
   let fileAsThumbnail = `thumbnail-${req.file.filename}`;
@@ -47,6 +58,7 @@ router.post("/createPost", upload.single("fileUpload"), (req, res, next) => {
   fileUploaded = fileUploaded.replace(/\\/g, "/");
   let realPath = fileUploaded.slice(6);
 
+  // sharp is used to resize our image // single params in resize is the width // two = width, height
   sharp(fileUploaded)
     .resize(200)
     .toFile(destinationOfThumbnail)
@@ -111,6 +123,10 @@ router.get("/search", async (req, res, next) => {
   }
 });
 
+/**
+ * When a user selects a specific post, it will render the room's profile
+ * with the user, post and messages tied to that specific post id.
+ */
 router.get("/:id(\\d+)", async (req, res, next) => {
   try {
     let usernameTitle = "";
@@ -144,6 +160,12 @@ router.get("/:id(\\d+)", async (req, res, next) => {
   }
 });
 
+/**
+ * /filter will filter posts by parsing the user's selection within a form tag
+ * and format the data and catch of any client errors.
+ * i.e. if a user were to input only a minimum value, then the maximum value would
+ * default $900,000 and vis-versa.
+ */
 router.get("/filter", async function (req, res, next) {
   // let parseObject = Object.fromEntries(
   //   Object.entries(req.query.filterObject).filter(([_, v]) => v != "")
@@ -184,9 +206,12 @@ router.get("/filter", async function (req, res, next) {
   }
 });
 
+/**
+ * /messages is simple query to the message table that is tied to the user and post
+ * table in a many to many relationship (mysql indexing techinique).
+ */
 router.post("/messages", async (req, res, next) => {
   const message = req.body.message;
-
   try {
     const fk_userId = req.session.userId;
     const postId = req.session.viewing;

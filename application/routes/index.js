@@ -16,6 +16,12 @@ var getRecentPosts = require("../middleware/postsmiddleware").getRecentPosts;
 var getRecentUsers = require("../middleware/usersmiddleware").getRecentUsers;
 var db = require("../conf/database");
 
+/**
+ * searchPost and searchUser (boolean) is hardcoded such that we make sure that
+ * the search bar is only render in browse room or user. Technically, we can
+ * use a unmounted middleware to check for which page we're on.
+ */
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", {
@@ -25,6 +31,9 @@ router.get("/", function (req, res, next) {
   });
 });
 
+/**
+ * Renders registration page
+ */
 router.get("/registration", function (req, res, next) {
   res.render("registration", {
     title: "Registration Page",
@@ -33,6 +42,9 @@ router.get("/registration", function (req, res, next) {
   });
 });
 
+/**
+ * Renders login page
+ */
 router.get("/login", function (req, res, next) {
   res.render("login", {
     title: "Login Page",
@@ -41,6 +53,9 @@ router.get("/login", function (req, res, next) {
   });
 });
 
+/**
+ * Renders post page (only when a user is logged in)
+ */
 router.get("/post", function (req, res, next) {
   res.render("postroom", {
     title: "Post Room Page",
@@ -49,6 +64,9 @@ router.get("/post", function (req, res, next) {
   });
 });
 
+/**
+ * Renders browse room page
+ */
 router.get("/browse-room", getRecentPosts, function (req, res, next) {
   res.render("browse-room", {
     title: "Browse Room Page",
@@ -57,6 +75,9 @@ router.get("/browse-room", getRecentPosts, function (req, res, next) {
   });
 });
 
+/**
+ * Renders browse user page
+ */
 router.get("/browse-user", getRecentUsers, function (req, res, next) {
   res.render("browse-user", {
     title: "Browse User Page",
@@ -65,6 +86,9 @@ router.get("/browse-user", getRecentUsers, function (req, res, next) {
   });
 });
 
+/**
+ * Renders edit page (only when a user is logged in)
+ */
 router.get("/edit", function (req, res, next) {
   res.render("edit-profile", {
     title: "Edit Profile",

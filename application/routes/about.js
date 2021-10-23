@@ -10,6 +10,8 @@
  **************************************************************/
 const express = require("express");
 const router = express.Router();
+
+// Creating a look up table to find the index of our team member via name
 const options = {
   Adele: 0,
   Jeff: 1,

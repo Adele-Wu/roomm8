@@ -18,6 +18,12 @@ const delay = () => {
   });
 };
 
+/**
+ * essentially a promise maker. You pass in the session object such that
+ * it returns a promise.
+ * @param {*} session
+ * @returns resolve or reject.
+ */
 const sessionSave = (session) => {
   return new Promise((resolve, reject) => {
     session.save((err) => {
