@@ -159,7 +159,7 @@ Post.filter = async function (parsedObject) {
       baseSQL += ` privacy = "${parsedObject.privacy}";`;
     }
   }
-  console.log(baseSQL);
+  // console.log(baseSQL);
   return db
     .execute(baseSQL, fields)
     .then(([results, fields]) => {

@@ -208,7 +208,6 @@ User.filter = async (parseObject, parseObjectKey) => {
   const interestObj = partitionObj(parseObject, interestCol);
 
   // special case due to having different query syntax this one must be tailored made
-  // this is done!!!!!!!!
   if (detectUserCol && !detectPrefCol && !detectInterestCol) {
     [baseSQL, fields] = filterUserModularized(
       parseObject,
@@ -219,6 +218,14 @@ User.filter = async (parseObject, parseObjectKey) => {
     );
   }
 
+  /**
+   * I am using a fizzbuzz approach. Since the join queries are almost identical
+   * for preference and interest then either can be included or excluded without
+   * affecting the overall baseSQL.
+   *
+   **/
+
+  // if a pref is detected then concat their join queries
   if (detectPrefCol) {
     [baseSQL, fields] = addFilter(
       userObj,
@@ -253,6 +260,21 @@ User.filter = async (parseObject, parseObjectKey) => {
   );
 };
 
+/**
+ * Since the filter for the interest and preference are idenitical except
+ * their substitution names (i.e. interest as i or preference as p) we can
+ * generalize the query for either and concatenate these to the baseSQL
+ * if it's necessary.
+ *
+ * @param {*} userObj
+ * @param {*} interestPrefObj
+ * @param {*} baseSQL
+ * @param {*} age
+ * @param {*} fields
+ * @param {*} interestPref
+ * @param {*} detectUserCol
+ * @returns
+ */
 let addFilter = (
   userObj,
   interestPrefObj,
