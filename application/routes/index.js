@@ -29,4 +29,8 @@ router.get("/browse-user", getRecentUsers, function (req, res, next) {
   res.render("browse-user", { title: "Browse User Page" });
 });
 
+router.get("/edit-user", function (req, res, next) {
+  res.render("edit-user", { title: "Edit User Profile" , searchPost: false});
+});
+
 module.exports = router;

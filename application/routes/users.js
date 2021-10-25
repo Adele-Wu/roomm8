@@ -149,6 +149,12 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   }
 });
 
+router.post("/edit-user", async (req, res, next) => {
+  console.log(req.body);
+
+});
+
+
 // souza's promisified example // create a folder named utils and require this.
 
 router.post("/login", async (req, res, next) => {
