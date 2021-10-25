@@ -88,14 +88,16 @@ User.create = async (
 // create auth method for login below
 User.authenticate = async (username, password) => {
   let baseSQL =
-    "SELECT user_id, username, password FROM users WHERE username=?;";
+    "SELECT user_id, username, password , usertype FROM users WHERE username=? ;";
   let userId; // <-- don't change to id or it'll mess up with mysql
+  let usertype;
   return db
     .execute(baseSQL, [username])
     .then(([results, field]) => {
       // here we want a result from our query then have the id persist through once logged in.
       if (results && results.length == 1) {
         userId = results[0].user_id;
+        usertype = results[0].usertype;
         // To learn more about bcrypt, you can go to this link https://github.com/kelektiv/node.bcrypt.js
         // ctrl + f compare
         // we pass in the password and hashed password returning a bool
@@ -107,7 +109,7 @@ User.authenticate = async (username, password) => {
     .then((passwordsMatched) => {
       if (passwordsMatched) {
         // TODO note that promise resolve and reject is outdated. find new.
-        return userId;
+        return {userId,usertype};
       } else {
         return -1;
       }

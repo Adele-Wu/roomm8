@@ -90,6 +90,14 @@ app.use((req, res, next) => {
     // console.log(req.session);
     res.locals.logged = true;
   }
+  if(req.session.usertype==0)
+  {
+    res.locals.usertype = true;
+  }
+  else{
+    res.locals.usertype = false;
+  }
+  
   next();
 });
 

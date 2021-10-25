@@ -154,7 +154,10 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
-  let loggedUserId = await User.authenticate(username, password);
+  
+  userInfo= await User.authenticate(username, password);
+  let loggedUserId =userInfo[0];
+  let usertype = userInfo[1];
   try {
     if (loggedUserId <= 0) {
       throw new UserError(
@@ -163,11 +166,13 @@ router.post("/login", async (req, res, next) => {
         200
       );
     }
-
     req.session.username = username;
     req.session.userId = loggedUserId;
     res.locals.logged = true; // hide things in navbar
-
+    console.log("user type "+usertype);
+    req.session.usertype = usertype;
+    
+    
     successPrint(`${username} is logged in.`);
 
     // whenever you're storing sessions
@@ -302,9 +307,101 @@ router.get("/filter", async (req, res, next) => {
 //     }
 //     else{
 //       console.log(results);
-//       // res.render(results);
+//       // res.render(results);  
 //     }
 //   })
 // })
+
+router.get("/admin-panel", function (req, res, next) {
+  res.render("admin-panel", {
+    title: "Admin Panel",
+    searchPost: false,
+    searchUser: true,
+  });
+});
+router.post("/AdminAction",async function(request,response,next)
+{
+  const { admin_username, admin_password } = request.body;
+  let loggedUserId = await User.authenticate(admin_username, admin_password);
+  try 
+  {
+    if (loggedUserId <= 0) 
+    {
+      throw new UserError(
+        "Login failed: User doesn't exist or password doesn't match.","/login",200);
+      }
+    }
+  catch (err) 
+  {
+    if (err instanceof UserError) 
+    {
+        errorPrint(err.getMessage());
+        // flash on browser | will not work without session
+        req.flash("error", err.getMessage());
+        res.status(err.getStatus());
+        res.redirect("/login");
+    } 
+    else 
+    {
+        next(err);
+    }
+  }
+
+  let userName= request.body.username;
+  switch(request.body.operation_selector)
+  {
+    case "change-email":
+    {
+      let new_email= request.body.new_email;
+      console.log(new_email);
+      let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
+      db.query(baseSQL,[new_email,userName]);
+      response.redirect("/users/admin-panel")
+      break;
+    }
+    case "delete-user":
+    {
+      let baseSQL=`DELETE FROM users WHERE username = '${userName}'`;
+      db.execute(baseSQL);
+      response.redirect("/");
+      break;
+    }
+    case "change-password":
+    {
+      let new_password= request.body.password;
+      let hashed_password = bcrypt.hash(password, 10);
+      let baseSQL = `UPDATE users SET password = ${hashed_password} WHERE username = ${userName}`
+      db.execute(baseSQL);
+      next;
+      break;
+    }
+    case "match-user":
+      {
+
+      }
+  }
+});
+router.get("/getUserName/:email",async function(request,response,next)
+{
+  let baseSQL = `SELECT U.username FROM users U WHERE U.email = ?`;
+  console.log(request.params.email)
+  db.execute(baseSQL,[request.params.email]).then(function([results,fields])
+  {
+        console.log(results)
+        response.json(results);
+    });
+  });
+router.get("/getEmail/:username",async function(request,response,next)
+{
+  let baseSQL = `SELECT U.email FROM users U WHERE U.username = ?`
+  db.execute(baseSQL,[request.params.username]).then(function([results,fields])
+  {
+        console.log(results)
+        response.json(results);
+    });
+
+
+});
+
 
 module.exports = router;
