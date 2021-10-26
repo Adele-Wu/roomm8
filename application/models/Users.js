@@ -109,7 +109,7 @@ User.authenticate = async (username, password) => {
     .then((passwordsMatched) => {
       if (passwordsMatched) {
         // TODO note that promise resolve and reject is outdated. find new.
-        return {userId,usertype};
+        return [userId,usertype];
       } else {
         return -1;
       }

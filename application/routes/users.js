@@ -156,8 +156,9 @@ router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   
   userInfo= await User.authenticate(username, password);
-  let loggedUserId =userInfo[0];
+  const loggedUserId =userInfo[0];
   let usertype = userInfo[1];
+
   try {
     if (loggedUserId <= 0) {
       throw new UserError(
@@ -169,10 +170,7 @@ router.post("/login", async (req, res, next) => {
     req.session.username = username;
     req.session.userId = loggedUserId;
     res.locals.logged = true; // hide things in navbar
-    console.log("user type "+usertype);
     req.session.usertype = usertype;
-    
-    
     successPrint(`${username} is logged in.`);
 
     // whenever you're storing sessions
@@ -354,7 +352,6 @@ router.post("/AdminAction",async function(request,response,next)
     case "change-email":
     {
       let new_email= request.body.new_email;
-      console.log(new_email);
       let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
       db.query(baseSQL,[new_email,userName]);
       response.redirect("/users/admin-panel")
