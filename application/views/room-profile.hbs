@@ -1,11 +1,65 @@
-{{! do whatever you need to here to make it pretty :) }}
-<img src="{{currentPost.photopath}}" alt="Sum Thin Wong" />
-<h3>{{currentPost.title}}</h3>
-<div>{{currentPost.username}}</div>
-<div>{{currentPost.description}}</div>
-<div>{{currentPost.created}}</div>
+{{!============================================================================================
 
-{{#each comments}}
-  {{this.description}}
-  {{this.created}}
-{{/each}}
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: room-profile.hbs
+* Description: this page will display the room and all it's amenities 
+
+=================================================================================================}}
+
+<div class="lg:container m-auto lg:flex">
+  <div class="card postcard lg:w-2/3 p-4">
+
+    <img class="postRoomImage m-auto lg:m-0 object-cover w-full h-auto" src="{{currentPost.photopath}}"
+      alt="Sum Thin Wong" />
+    <div id="post_info_container" class="p-4">
+
+      <h3 class="name">{{currentPost.title}}</h3>
+
+      <div class="post_info_category">
+        <label class="post_label">Host Username: </label>
+        <span>{{currentPost.username}}</span>
+      </div>
+
+      <div class="post_info_category">
+        <label class="post_label">Listing Created: </label>
+        <span>{{currentPost.created}}</span>
+      </div>
+
+      <div class="post_info_category flex">
+        <label class="post_label">Description: </label>
+        {{!-- <div class="px-4">{{currentPost.description}}</div> --}}
+        <span class="px-2">{{currentPost.description}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card commentSection w-full lg:w-1/3 p-4">
+    <div class="myComment">
+      <form method="POST" name="postComment" class="noFormCSS">
+        <label class="">Leave a Comment:</label>
+        <textarea rows="5" id="comment" name="comment" cols="30" class="px-2"
+          placeholder="Ask a question or write a review"></textarea>
+        <button class="commentButton" type="submit" value="Comment">Comment</button>
+      </form>
+    </div>
+
+    <div class="othersComments">
+      {{#each comments}}
+      <div class="comment_container">
+        <div>{{this.description}}</div>
+        <div class="post_label text-sm">{{this.created}}</div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

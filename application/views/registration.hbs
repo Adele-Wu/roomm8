@@ -1,8 +1,28 @@
-<form id="registration_form" action="/users/register" method="POST" enctype="application/x-www-form-urlencoded" class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
+{{!============================================================================================
+
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: registration.hbs
+* Description: this is our registration page where you can find the 
+* registration form where a guest can register and have access to special features  
+
+=================================================================================================}}
+
+<form id="registration_form" action="/users/register" method="POST" enctype="application/x-www-form-urlencoded"
+  class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
+
   <div class="form-validation">
     <label for="first_name">First Name:</label>
-    <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2"
-      required />
+    <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2" required />
 
     <small>Error message</small>
   </div>
@@ -16,14 +36,13 @@
   <div class="form-validation">
     <label for="gender">Gender:</label>
     <div id="gender">
-      
-      <input type="radio" value="male" id="male" name="gender" class="radio"/>
+      <input type="radio" value="male" id="male" name="gender" class="radio" />
       <label for="male">Male</label>
 
-      <input type="radio" value="female" id="female" name="gender" value="female" class="radio"/>
+      <input type="radio" value="female" id="female" name="gender" value="female" class="radio" />
       <label for="female">Female</label>
-      
-      <input type="radio" value="other" id="other" name="gender" value="other" class="radio"/>
+
+      <input type="radio" value="other" id="other" name="gender" value="other" class="radio" />
       <label for="other">Other</label>
     </div>
 
@@ -33,6 +52,19 @@
   <div class="form-validation">
     <label for="date_of_birth">Birth Date:</label>
     <input type="date" class="hover_card" id="date_of_birth" name="date_of_birth" value="2018-07-22" required />
+
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="occupation">Occupation</label>
+    <div id="occupation">
+      <input type="radio" id="student" name="occupation" value="Student" class="radio"/>
+      <label for="student">Student</label>
+
+      <input type="radio" id="professional" name="occupation" value="Professional" class="radio"/>
+      <label for="professional">Professional</label>
+    </div>
 
     <small>Error message</small>
   </div>
@@ -173,6 +205,8 @@
 
     <small>Error message</small>
   </div>
-  <button type="submit" class="hover_card" id="registration_submit" value="Submit" disabled="">Submit</button>
+  <button>
+    <input type="submit" class="hover_card" id="registration_submit" value="Submit" disabled=""></input>
+    </button>
 </form>
 <script defer type="text/javascript" src="javascripts/registration-validation.js"></script>

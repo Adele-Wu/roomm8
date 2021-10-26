@@ -1,3 +1,22 @@
+{{!============================================================================================
+
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: layout.hbs
+* Description: This is our layout file or Document Object Model (DOM) It defines the logical structure 
+* of documents and the way a document is accessed and manipulated.
+
+=================================================================================================}}
+
 <!DOCTYPE html>
 <html>
 
@@ -12,9 +31,7 @@
   {{!-- Put all JS scripts --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
     integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer">
-    </script>
-
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   {{#if searchPost}}
   {{!--
   <script
@@ -23,6 +40,10 @@
   <script defer src="javascripts/google-map.js"></script>
   <script defer src="javascripts/search.js"></script>
   {{/if}}
+  {{#if searchUser}}
+  <script defer src="javascripts/search-user.js"></script>
+  {{/if}}
+
 </head>
 
 <div id="demonstration-only-tag" class="flex flex-col justify-center items-center bg-white">SFSU Software Engineering
@@ -32,7 +53,9 @@
 
   {{> header}}
 
-  {{{body}}}
+  <div class="pageBodyCont">
+    {{{body}}}
+  </div>
 
   {{#if logged}}
   <script defer src="/javascripts/logout.js"></script>

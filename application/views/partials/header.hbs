@@ -1,3 +1,22 @@
+{{!============================================================================================
+
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: header.hbs
+* Description: displays the header of our website
+
+=================================================================================================}}
+
+
 <header>
 
   <div class="logo ">
@@ -25,9 +44,13 @@
         <ul
           class="noHover flex flex-col duration-300 ease-out sm:transition-none md:flex-row md:items-center md:ml-auto">
           {{!-- home button --}}
+          {{#if usertype}}
+          <li><a href="/users/admin-panel" style="text-decoration:none" class="block nav_item">Admin Panel</a></li>
+          {{/if}}
           <li><a href="/browse-room" style="text-decoration:none" class="block nav_item">Browse Rooms</a></li>
           <li><a href="/browse-user" style="text-decoration:none" class="block nav_item">Browse Users</a></li>
 
+          <div class="md:ml-auto noHover" id="header-right"></div>
           {{#if logged}}
           <div class="md:ml-auto" id="header-right">
             <li><a href="/post" style="text-decoration: none;" class="block nav_item">Post Room</a></li>
@@ -38,8 +61,10 @@
             <li><a href="/login" style="text-decoration:none" class="block nav_item">Log In</a></li>
             {{/if}}
           </div>
+
         </ul>
       </div>
+    </div>
     </div>
   </nav>
 

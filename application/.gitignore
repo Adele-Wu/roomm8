@@ -62,3 +62,6 @@ typings/
 
 # nodist version manager
 .node-version
+
+# vscode
+.vscode

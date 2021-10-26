@@ -21,36 +21,39 @@ for (var option of languages.options)
           selected= selected+","+option.value;
       }
   }
-
-// if the users is looking for a users than we know that the username starts with an alphabet
-// else will be an address
-let isUser = /[a-zA-Z]/.test(searchTerm.value.charAt(0));
-if (isUser) {
-  let mainContent = document.getElementById("room_results");
-  let searchURL = `post/search?search=keyTerm=${searchTerm.value}?minRange=${minPricerange.value}?languages=${selected}`;
-  let response = await axios.get(searchURL);
-  let newMainContentHTML = "";
-  response.data.results.forEach((post) => {
-    newMainContentHTML += createPost(post);
-    gmap.pinpointLocation(post.address);
-  });
-  mainContent.innerHTML = newMainContentHTML;
-  // fetch(searchURL)
-  //   .then((data) => {
-  //     return data.json();
-  //   })
-  //   .then((data_json) => {
-  //     let newMainContentHMTL = "";
-  //     data_json.results.forEach((results) => {
-  //       newMainContentHMTL += createPost(results);
-  //       gmap.pinpointLocation(results.address);
-  //     });
-  //     mainContent.innerHTML = newMainContentHMTL;
-  //   });
-} else {
-
-  gmap.pinpointLocation(searchTerm.value);
-}
+  // if the users is looking for a users than we know that the username starts with an alphabet
+  // else will be an address
+  let isUser = /[a-zA-Z]/.test(searchTerm.value.charAt(0));
+  if (isUser) {
+    let mainContent = document.getElementById("room_results");
+    let searchURL = `post/search?search=${searchTerm.value}`;
+    let response = await axios.get(searchURL);
+    //console.log(response);
+    if (!response) {
+      location.replace("/browse-room");
+      return;
+    }
+    let newMainContentHTML = "";
+    response.data.results.forEach((post) => {
+      newMainContentHTML += createPost(post);
+      gmap.pinpointLocation(post.address);
+    });
+    mainContent.innerHTML = newMainContentHTML;
+    // fetch(searchURL)
+    //   .then((data) => {
+    //     return data.json();
+    //   })
+    //   .then((data_json) => {
+    //     let newMainContentHMTL = "";
+    //     data_json.results.forEach((results) => {
+    //       newMainContentHMTL += createPost(results);
+    //       gmap.pinpointLocation(results.address);
+    //     });
+    //     mainContent.innerHTML = newMainContentHMTL;
+    //   });
+  } else {
+    gmap.pinpointLocation(searchTerm.value);
+  }
 }
 
 function createPost(post) {

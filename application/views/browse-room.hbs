@@ -1,35 +1,56 @@
+{{!============================================================================================
+
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: browse-room.hbs
+* Description: displays all the rooms available in the browse page for guests. 
+
+=================================================================================================}}
+
+
 <div class="relative min-h-screen md:flex">
 
     {{!-- filters panel --}}
     <div class="filter_panel" class="w-4/6">
         <div class="search ">
-
-            {{!-- placeholder for search --}}
             <input type="text" id="search-text" placeholder="search" class="w-11/12"></input>
             <button id="search-button">
                 <img src="/images/search_icon.png" width="20px">
             </button>
         </div>
 
-        <form action="/filter" class="filter_form w-64">
+        <form action="post/filter" action="GET" class="filter_form w-56">
 
             {{!-- room preferences --}}
             <div class="search_category">
                 <label for="price">Price Range: </label>
                 <div class="range">
-                    <input id="minRange" type="text" name="priceRange" placeholder="Min Price" class="w-5/12 mx-3">-
-                    <input id="maxRange" type="text" name="priceRange" placeholder="Max Price" class="w-5/12 mx-3">
+                    <input id="minRange" type="text" name="minPriceRange" placeholder="Min Price" class="w-5/12 mx-3">-
+                    <input id="maxRange" type="text" name="maxPriceRange" placeholder="Max Price" class="w-5/12 mx-3">
                 </div>
             </div>
 
             <div class="search_category">
                 <label for="privacy">Privacy:</label>
                 <div class="filter_category">
-                    <div class="item">
-                        <input type="checkbox" name="privacy" id="privateroom" class="filter_option" />Private Room
-                    </div>
-                    <div class="item">
-                        <input type="checkbox" name="privacy" id="sharedroom" class="filter_option" />Shared Room
+                    <div class="filter_option">
+                        <div class="item">
+                            <input type="radio" name="privacy" id="privateroom" class="filter_option"
+                                value="private" />Private Room
+                        </div>
+                        <div class="item">
+                            <input type="radio" name="privacy" id="sharedroom" class="filter_option"
+                                value="shared" />Shared Room
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,247 +58,18 @@
             <div class="search_category">
                 <label for="amenities"> Amenities </label>
                 <div class="filter_category">
-                    <div class="item">
-                        <input id="parking" type="checkbox" name="parking">Parking
-                        <input id="disability" type="checkbox" name="disability">Disability
+                    <div class="item grid grid-cols-2">
+                        <div class="filter_option">
+                            <input id="parking" type="checkbox" name="parking" value="parking">
+                            <label>Parking</label>
+                        </div>
+                        <div class="filter_option">
+                            <input id="disability" type="checkbox" name="disability" value="disability">
+                            <label>Disability</label>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {{!-- roommate preferances --}}
-            <div class="search_category">
-                <label for="privacy">Gender:</label>
-                <div class="filter_category">
-                    <div class="item">
-                        <input type="radio" name="gender" id="female" class="filter_option" />Female
-                        <input type="radio" name="gender" id="male" class="filter_option" />Male
-                        <input type="radio" name="gender" id="other" class="filter_option" />Other
-                    </div>
-                </div>
-            </div>
-
-            <div class="search_category">
-                <label for="price">Age Range:
-                    <div class="range">
-                        <input id="minAgeRange" type="text" name="minAgeRange" placeholder="Min Age"
-                            class="w-5/12 mx-3">-
-                        <input id="maxAgeRange" type="text" name="maxAgeRange" placeholder="Max Age"
-                            class="w-5/12 mx-3">
-                    </div>
-                </label>
-            </div>
-
-            <div class="search_category">
-                <label for="occupationsc">Occupation:</label>
-                <div class="filter_category">
-                    <div class="item">
-                        <input type="radio" name="student" id="student" class="occupation" />Student
-                        <input type="radio" name="professional" id="professional" class="occupation" />Professional
-                    </div>
-                </div>
-            </div>
-            <div class="search_category">
-                <label for="fields">Fields:</label>
-                <select name="fields" id="fields" class="w-2/3">
-                    <option value="1">Agriculture, Agriculture Operations, and Related Sciences</option>
-                    <option value="2">Architecture and Related Services</option>
-                    <option value="3">Area, Ethnic, Cultural, Gender, and Group Studies</option>
-                    <option value="4">Aviation</option>
-                    <option value="5">Biological and Biomedical Sciences</option>
-                    <option value="6">Business, Management, Marketing, and Related Support Services</option>
-                    <option value="7">Communication, Journalism, and Related Programs</option>
-                    <option value="8">Communications Technologies/technicians and Support Services</option>
-                    <option value="9">Computer and Information Sciences and Support Services</option>
-                    <option value="10">Construction Trades</option>
-                    <option value="11">Education</option>
-                    <option value="12">Engineering Technologies and Engineering-Related Fields</option>
-                    <option value="13">Engineering</option>
-                    <option value="14">English Language and Literature/letters</option>
-                    <option value="15">Family and Consumer Sciences/human Sciences</option>
-                    <option value="16">Foreign Languages, Literatures, and Linguistics</option>
-                    <option value="17">Health Professions and Related Programs</option>
-                    <option value="18">History</option>
-                    <option value="19">Homeland Security, Law Enforcement, Firefighting</option>
-                    <option value="20">Human Services</option>
-                    <option value="21">Legal Professions and Studies</option>
-                    <option value="22">Liberal Arts and Sciences Studies and Humanities</option>
-                    <option value="23">Library Science</option>
-                    <option value="24">Mathematics and Statistics</option>
-                    <option value="25">Mechanic and Repair Technologies/technicians</option>
-                    <option value="26">Military Technologies and Applied Sciences</option>
-                    <option value="27">Multi/interdisciplinary Studies</option>
-                    <option value="28">Natural Resources and Conservation</option>
-                    <option value="29">Parks, Recreation, Leisure, and Fitness Studies</option>
-                    <option value="30">Personal and Culinary Services</option>
-                    <option value="31">Philosophy and Religious Studies</option>
-                    <option value="32">Physical Sciences</option>
-                    <option value="33">Precision Production</option>
-                    <option value="34">Psychology</option>
-                    <option value="35">Science Technologies/technicians</option>
-                    <option value="36">Social Sciences</option>
-                    <option value="37">Theology and Religious Vocations</option>
-                    <option value="38">Transportation and Materials Moving</option>
-                    <option value="39">Visual and Performing Arts</option>
-                </select>
-            </div>
-
-            <div class="search_category">
-                <label for="school">School:</label>
-                <select name="schools" id="schools" class="w-2/3">
-                    <option value="1">College of San Francisco</option>
-                    <option value="2">San Francisco State University</option>
-                    <option value="3">University of California, San Francisco</option>
-                    <option value="4">Academy of Art University</option>
-                    <option value="5">Alliant International University</option>
-                    <option value="6">Art Institute of California</option>
-                    <option value="7">California Institute of Integral Studies</option>
-                    <option value="8">DeVry University</option>
-                    <option value="9">The Fashion Institute of Design and Merchandising (FIDM)</option>
-                    <option value="10">Golden Gate University</option>
-                    <option value="11">Heald College</option>
-                    <option value="12">Hult International Business School</option>
-                    <option value="13">Minerva Schools at KGI</option>
-                    <option value="14">Presidio Graduate School</option>
-                    <option value="15">San Francisco Art Institute</option>
-                    <option value="16">San Francisco Conservatory of Music</option>
-                    <option value="17">San Francisco Law School</option>
-                    <option value="18">San Francisco School of Digital Filmmaking</option>
-                    <option value="19">Saybrook University</option>
-                    <option value="20">University of San Francisco</option>
-                    <option value="21">Wharton School of the University of Pennsylvania</option>
-                </select>
-            </div>
-
-            <div class="search_category">
-                <label for="pets">Pets:</label>
-                <div class="filter_category">
-                    <div class="item">
-                        <input type="checkbox" name="pets" id="dog" class="filter_option" />Dog
-                        <input type="checkbox" name="pets" id="cat" class="filter_option" />Cat
-                        <input type="checkbox" name="pets" id="fish" class="filter_option" />Fish
-                        <input type="checkbox" name="pets" id="reptile" class="filter_option" />Reptile
-                        <input type="checkbox" name="pets" id="bird" class="filter_option" />Bird
-                    </div>
-                </div>
-            </div>
-
-            <div class="search_category">
-                <label for="smoking">Smoking:
-                    <input type="radio" name="smoke" id="yessmoke" class="filter_option" />Yes
-                    <input type="radio" name="smoke" id="nosmoke" class="filter_option" />No
-                </label>
-            </div>
-
-            <div class="search_category">
-                <label for="lifestyle">Lifestyle:
-                    <input type="radio" name="lifestyle" id="clean" class="filter_option" />Clean
-                    <input type="radio" name="lifestyle" id="messy" class="filter_option" />Messy
-                </label>
-            </div>
-
-            <div class="search_category">
-                <label for="schedule">Schedule:
-                    <div class="item">
-                        <input type="radio" name="schedule" id="earlybird" class="filter_option" />Early Bird
-                        <input type="radio" name="schedule" id="nightowl" class="filter_option" />Night Owl
-                    </div>
-                </label>
-            </div>
-
-            <div class="search_category">
-                <label for="language">Language(s):</label>
-                <div class="filter_category">
-                    <select name="language" id="language" class="w-2/3" multiple>
-                        <option>Afrikaans</option>
-                        <option>Albanian</option>
-                        <option>Arabic</option>
-                        <option>Armenian</option>
-                        <option>Basque </option>
-                        <option>Bengali </option>
-                        <option>Bulgarian </option>
-                        <option>Catalan </option>
-                        <option>Cambodian </option>
-                        <option>Chinese (Cantonese) </option>
-                        <option>Chinese (Mandarin) </option>
-                        <option>Croatian </option>
-                        <option>Czech </option>
-                        <option>Danish </option>
-                        <option>Dutch </option>
-                        <option>English </option>
-                        <option>Estonian </option>
-                        <option>Fiji </option>
-                        <option>Finnish </option>
-                        <option>French </option>
-                        <option>Georgian </option>
-                        <option>German </option>
-                        <option>Greek </option>
-                        <option>Gujarati </option>
-                        <option>Hebrew </option>
-                        <option>Hindi </option>
-                        <option>Hungarian </option>
-                        <option>Icelandic </option>
-                        <option>Indonesian</option>
-                        <option>Irish</option>
-                        <option>Italian</option>
-                        <option>Japanese</option>
-                        <option>Javanese</option>
-                        <option>Korean</option>
-                        <option>Latin</option>
-                        <option>Latvian</option>
-                        <option>Lithuanian</option>
-                        <option>Macedonian</option>
-                        <option>Malay</option>
-                        <option>Malayalam</option>
-                        <option>Maltese</option>
-                        <option>Maori</option>
-                        <option>Marathi</option>
-                        <option>Mongolian</option>
-                        <option>Nepali </option>
-                        <option>Norwegian</option>
-                        <option>Persian </option>
-                        <option>Polish </option>
-                        <option>Portugues</option>
-                        <option>Punjabi </option>
-                        <option>Quechua </option>
-                        <option>Romanian </option>
-                        <option>Russian</option>
-                        <option>Samoan</option>
-                        <option>Serbian</option>
-                        <option>Slovak</option>
-                        <option>Slovenian</option>
-                        <option>Spanish</option>
-                        <option>Swahili</option>
-                        <option>Swedish</option>
-                        <option>Tamil</option>
-                        <option>Tatar</option>
-                        <option>Telugu</option>
-                        <option>Thai</option>
-                        <option>Tibetan</option>
-                        <option>Tonga</option>
-                        <option>Turkish</option>
-                        <option>Ukrainian</option>
-                        <option>Urdu</option>
-                        <option>Uzbek</option>
-                        <option>Vietnamese</option>
-                        <option>Welsh </option>
-                    </select>
-                </div>
-                <div class="text-xs mx-2">(scroll for more, hold cmd to select multiple)</div>
-            </div>
-
-            <div class="search_category">
-                <label for="interests">Interests:</label>
-                <div class="filter_category">
-                    <div class="item">
-                        <input type="checkbox" name="interests" id="art" class="filter_option" />Art
-                        <input type="checkbox" name="interests" id="cooking" class="filter_option" />Cooking
-                        <input type="checkbox" name="interests" id="exercising" class="filter_option" />Exercising
-                        <input type="checkbox" name="interests" id="gaming" class="filter_option" />Gaming
-                        <input type="checkbox" name="interests" id="music" class="filter_option" />Music
-                    </div>
-                </div>
-            </div>
-
             <button type="submit" class="filterButton">Filter</button>
         </form>
     </div>
