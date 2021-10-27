@@ -93,6 +93,17 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.use(function (request, response, next)
+{
+  response.locals.usertype = (request.session.usertype==0);
+  next();
+});
+
+
+
+
+
 // renders index.hbs
 app.use("/", indexRouter);
 // renders users.hbs

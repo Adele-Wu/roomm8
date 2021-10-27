@@ -23,7 +23,7 @@ const { successPrint, errorPrint } = require("../helpers/debug/debugprinters");
 var sharp = require("sharp");
 var multer = require("multer");
 var crypto = require("crypto");
-var PostModel = require("../models/Posts");
+var Post = require("../models/Posts");
 var PostError = require("../helpers/error/PostError");
 
 var storage = multer.diskStorage({
@@ -56,7 +56,7 @@ router.post("/createPost", upload.single("fileUpload"), (req, res, next) => {
     .resize(200)
     .toFile(destinationOfThumbnail)
     .then(() => {
-      return PostModel.create(
+      return Post.create(
         title,
         address,
         rent,
@@ -101,13 +101,13 @@ router.get("/search", async (req, res, next) => {
         results: [],
       });
     } else {
-      let results = await PostModel.search(searchTerm);
+      let results = await Post.search(searchTerm);
       if (results.length) {
         res.send({
           results: results,
         });
       } else {
-        let results = await PostModel.getTenMostRecent(10);
+        let results = await Post.getTenMostRecent(10);
         res.send({
           results: results,
         });
@@ -152,4 +152,32 @@ router.get("/:id(\\d+)", async (req, res, next) => {
   }
 });
 
+router.get("/filter", async function (req, res, next) {
+  let parseObject = Object.fromEntries(
+    Object.entries(req.query).filter(([_, v]) => v != "")
+  );
+  if (Object.keys(parseObject).length === 0) {
+    res.redirect("/browse-room");
+  } else {
+    if (parseObject.privacy) {
+      if (parseObject.privacy === "private") {
+        parseObject.privacy = 1;
+      } else if (parseObject.privacy === "shared") {
+        parseObject.privacy = 0;
+      }
+    }
+    if (parseObject.minPriceRange || parseObject.maxPriceRange) {
+      if (!parseObject.minPriceRange) {
+        parseObject.minPriceRange = 0.0;
+        parseObject.maxPriceRange = parseFloat(parseObject.maxPriceRange);
+      }
+      if (!parseObject.maxPriceRange) {
+        parseObject.maxPriceRange = 900000.0;
+        parseObject.minPriceRange = parseFloat(parseObject.minPriceRange);
+      }
+    }
+    let resultsOfQuery = await Post.filter(parseObject);
+    res.render("browse-room", { results: resultsOfQuery });
+  }
+});
 module.exports = router;

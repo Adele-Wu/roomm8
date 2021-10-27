@@ -18,7 +18,6 @@
 
 const express = require("express");
 const router = express.Router();
-console.log();
 const options = {
   Adele: 0,
   Jeff: 1,

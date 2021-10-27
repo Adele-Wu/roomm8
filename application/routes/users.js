@@ -44,6 +44,7 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       last_name,
       gender,
       date_of_birth,
+      occupation,
       fields,
       schools,
       email,
@@ -80,6 +81,7 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
           last_name,
           gender,
           date_of_birth,
+          occupation,
           fields,
           schools,
           email,
@@ -97,6 +99,7 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       successPrint("Registration Success: User was created!");
       req.session.save((err) => {
         res.redirect("/login");
+        console.log(res);
       });
 
       // res.redirect("/login");
@@ -167,11 +170,13 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   }
 });
 
-// souza's promisified example // create a folder named utils and require this.
-
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
-  let loggedUserId = await User.authenticate(username, password);
+  
+  userInfo= await User.authenticate(username, password);
+  const loggedUserId =userInfo[0];
+  let usertype = userInfo[1];
+
   try {
     if (loggedUserId <= 0) {
       throw new UserError(
@@ -180,11 +185,10 @@ router.post("/login", async (req, res, next) => {
         200
       );
     }
-
     req.session.username = username;
     req.session.userId = loggedUserId;
     res.locals.logged = true; // hide things in navbar
-
+    req.session.usertype = usertype;
     successPrint(`${username} is logged in.`);
 
     // whenever you're storing sessions
@@ -240,7 +244,6 @@ router.post("/login", async (req, res, next) => {
   // })
 });
 
-// TODO add logout // destroy session from db, cookie from browser.
 router.post("/logout", async (req, res, next) => {
   await req.session.destroy((err) => {
     if (err) {
@@ -267,6 +270,46 @@ router.get("/:id(\\d+)", async (req, res, next) => {
   }
 });
 
+router.get("/search", async (req, res, next) => {
+  try {
+    let searchTerm = req.query.search;
+    if (!searchTerm) {
+      res.send({
+        results: [],
+      });
+    } else {
+      let results = await User.search(searchTerm);
+      if (results.length) {
+        res.send({
+          results: results,
+        });
+      } else {
+        let results = await User.getTenMostRecent(10);
+        res.send({
+          results: results,
+        });
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get("/filter", async (req, res, next) => {
+  let parseObject = Object.fromEntries(
+    Object.entries(req.query).filter(([_, v]) => v != "")
+  );
+  // uncomment this and make sure we get an empty object and shows nothing when the filter is given nothing.
+  if (Object.keys(parseObject).length === 0) {
+    res.render("browse-user");
+  } else {
+    let results = await User.filter(parseObject, Object.keys(parseObject));
+    res.render("browse-user", {
+      results: results,
+    });
+  }
+});
+
 // purely here to test if the db is connect
 // manually type or copypasta url below to test db
 // localhost:3000/users/getUsers
@@ -280,9 +323,106 @@ router.get("/:id(\\d+)", async (req, res, next) => {
 //     }
 //     else{
 //       console.log(results);
-//       // res.render(results);
+//       // res.render(results);  
 //     }
 //   })
 // })
+
+router.get("/admin-panel", function (req, res, next) {
+  res.render("admin-panel", {
+    title: "Admin Panel",
+    searchPost: false,
+    searchUser: true,
+  });
+});
+
+router.post("/AdminAction",async function(request,response,next)
+{
+  const { admin_username, admin_password } = request.body;
+  let loggedUserId = await User.authenticate(admin_username, admin_password);
+  try 
+  {
+    if (loggedUserId <= 0) 
+    {
+      throw new UserError(
+        "Login failed: User doesn't exist or password doesn't match.","/login",200);
+      }
+    }
+  catch (err) 
+  {
+    if (err instanceof UserError) 
+    {
+        errorPrint(err.getMessage());
+        // flash on browser | will not work without session
+        req.flash("error", err.getMessage());
+        res.status(err.getStatus());
+        res.redirect("/login");
+    } 
+    else 
+    {
+        next(err);
+    }
+  }
+
+  let userName= request.body.username;
+  switch(request.body.operation_selector)
+  {
+    case "change-email":
+    {
+      let new_email= request.body.new_email;
+      let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
+      db.query(baseSQL,[new_email,userName]);
+      response.redirect("/users/admin-panel")
+      break;
+    }
+    case "delete-user":
+    {
+      let baseSQL=`DELETE FROM users WHERE username = '${userName}'`;
+      db.execute(baseSQL);
+      response.redirect("/");
+      break;
+    }
+    case "change-password":
+    {
+      let new_password= request.body.password;
+      let hashed_password = bcrypt.hash(password, 10);
+      let baseSQL = `UPDATE users SET password = ${hashed_password} WHERE username = ${userName}`
+      db.execute(baseSQL);
+      next;
+      break;
+    }
+    case "match-user":
+      {
+
+      }
+  }
+});
+
+router.get("/getUserName/:email",async function(request,response,next)
+{
+  let baseSQL = `SELECT U.username FROM users U WHERE U.email = ?`;
+  console.log(request.params.email)
+  db.execute(baseSQL,[request.params.email]).then(function([results,fields])
+  {
+        console.log(results)
+        response.json(results);
+    });
+  });
+
+router.get("/getEmail/:username",async function(request,response,next)
+{
+  let baseSQL = `SELECT U.email FROM users U WHERE U.username = ?`
+  db.execute(baseSQL,[request.params.username]).then(function([results,fields])
+  {
+        console.log(results)
+        response.json(results);
+    });
+});
+
+router.post("/edit-user", async (req, res, next) => {
+  res.redirect("/");
+  //dummy redirect, needs DB logic per case from Delete_this
+});
+
 
 module.exports = router;

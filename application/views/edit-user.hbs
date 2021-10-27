@@ -1,48 +1,46 @@
-{{!============================================================================================
+<form id="edit_user_form" action="/users/edit-user" method="POST" enctype="application/x-www-form-urlencoded" class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
 
-* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
-* Class: CSC-648-02 Software Engineering Final Project 
-* Fall 2021
-* TEAM 5 MEMBERS
-  > Edward Yun, 
-  > Jeffrey Fullmer Gradner, 
-  > Adele Wu, 
-  > Jeff Friedrich,
-  > Kris Byington, 
-  > Jose Quinteros
+<div class="form-validation">{{!-- for radio buttons  --}}
+<div class="form-validation">
+    <label for="delete_box">Delete Profile</label>
+    <div id="delete_box">
+      
+      <input type="radio" value="delete" id="delete_profile" name="update_this" class="radio"/>
+      <label for="delete_profile">Delete Profile</label>
 
-* File: registration.hbs
-* Description: this is our registration page where you can find the 
-* registration form where a guest can register and have access to special features  
-
-=================================================================================================}}
-
-<form id="registration_form" action="/users/register" method="POST" enctype="application/x-www-form-urlencoded"
-  class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
+    </div>
+  </div>
 
   <div class="form-validation">
     <label for="first_name">First Name:</label>
-    <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2" required />
-
+    <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2"/>
+      <input type="radio" value="first_name" id="update_first_name" name="update_this" class="radio"/>
+      <label for="update_first_name">update</label>
     <small>Error message</small>
   </div>
+
   <div class="form-validation">
     <label for="last_name">Last Name:</label>
-    <input type="text" class="hover_card" id="last_name" name="last_name" placeholder="Enter last name" minlength="2"
-      required />
+      <input type="text" class="hover_card" id="last_name" name="last_name" placeholder="Enter last name" minlength="2"/>
+      <input type="radio" value="last_name" id="update_last_name" name="update_this" class="radio"/>
+      <label for="update_last_name">update</label>
     <small>Error message</small>
   </div>
 
   <div class="form-validation">
     <label for="gender">Gender:</label>
     <div id="gender">
-      <input type="radio" value="male" id="male" name="gender" class="radio" />
+      
+      <input type="radio" value="gender" id="update_gender" name="update_this" class="radio"/>
+      <label for="update_gender">update</label>
+
+      <input type="radio" value="male" id="male" name="gender" class="radio"/>
       <label for="male">Male</label>
 
-      <input type="radio" value="female" id="female" name="gender" value="female" class="radio" />
+      <input type="radio" value="female" id="female" name="gender" value="female" class="radio"/>
       <label for="female">Female</label>
-
-      <input type="radio" value="other" id="other" name="gender" value="other" class="radio" />
+      
+      <input type="radio" value="other" id="other" name="gender" value="other" class="radio"/>
       <label for="other">Other</label>
     </div>
 
@@ -51,21 +49,9 @@
 
   <div class="form-validation">
     <label for="date_of_birth">Birth Date:</label>
-    <input type="date" class="hover_card" id="date_of_birth" name="date_of_birth" value="2018-07-22" required />
-
-    <small>Error message</small>
-  </div>
-
-  <div class="form-validation">
-    <label for="occupation">Occupation</label>
-    <div id="occupation">
-      <input type="radio" id="student" name="occupation" value="Student" class="radio"/>
-      <label for="student">Student</label>
-
-      <input type="radio" id="professional" name="occupation" value="Professional" class="radio"/>
-      <label for="professional">Professional</label>
-    </div>
-
+    <input type="date" class="hover_card" id="date_of_birth" name="date_of_birth" value="2018-07-22"/>
+      <input type="radio" value="birth_date" id="update_birth_date" name="update_this" class="radio"/>
+      <label for="update_birth_date">update</label>
     <small>Error message</small>
   </div>
 
@@ -138,6 +124,9 @@
         Materials Moving</option>
       <option value="Visual and Performing Arts">Visual and Performing Arts</option>
     </select>
+      <label for="update_field">update</label>
+      <input type="radio" value="field" id="update_field" name="update_this" class="radio"/>
+      
     <small>Error message</small>
   </div>
 
@@ -175,38 +164,41 @@
       <option value="Wharton School of the University of Pennsylvania">Wharton
         School of the University of Pennsylvania</option>
     </select>
-
+      <label for="update_school">update</label>
+      <input type="radio" value="school" id="update_school" name="update_this" class="radio"/>
     <small>Error message</small>
   </div>
 
   <div class="form-validation">
     <label for="email">Email:</label>
-    <input type="email" class="hover_card" id="email" name="email" placeholder="Enter valid e-mail address" required />
-
+    <input type="email" class="hover_card" id="email" name="email" placeholder="Enter valid e-mail address"/>
+      <input type="radio" value="email" id="update_email" name="update_this" class="radio"/>
+      <label for="update_email">update</label>
     <small>Error message</small>
   </div>
 
   <div class="form-validation">
     <label for="username">Username:</label>
-    <input type="text" class="hover_card" id="username" name="username" placeholder="Enter username" required />
-
+    <input type="text" class="hover_card" id="username" name="username" placeholder="Enter username"/>
+      <input type="radio" value="username" id="update_username" name="update_this" class="radio"/>
+      <label for="update_username">update</label>
     <small>Error message</small>
   </div>
   <div class="form-validation">
     <label for="password">Password:</label>
-    <input type="password" class="hover_card" id="password" name="password" placeholder="Enter password" required />
-
+    <input type="password" class="hover_card" id="password" name="password" placeholder="Enter password"/>
+    <input type="radio" value="school" id="update_password" name="update_this" class="radio"/>
+    <label for="update_password">update</label>
     <small>Error message</small>
   </div>
   <div class="form-validation">
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" class="hover_card" id="confirm_password" name="confirm_password"
-      placeholder="Enter confirm password" required />
+      placeholder="Enter confirm password"/>
 
     <small>Error message</small>
-  </div>
-  <button>
-    <input type="submit" class="hover_card" id="registration_submit" value="Submit" disabled=""></input>
-    </button>
+  </div> 
+</div> {{!--top div for radio buttons   --}}
+  <button type="submit" class="hover_card" id="edit_user_submit" value="Submit" disabled="">Submit</button>
 </form>
-<script defer type="text/javascript" src="javascripts/registration-validation.js"></script>
+<script defer type="text/javascript" src="javascripts/edit-user-validation.js"></script>

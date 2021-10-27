@@ -1,26 +1,4 @@
-<<<<<<< HEAD
-/* ============================================================================================
-
-  * Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
-  * Class: CSC-648-02 Software Engineering Final Project 
-  * Fall 2021
-  * TEAM 5 MEMBERS
-    > Edward Yun, 
-    > Jeffrey Fullmer Gradner, 
-    > Adele Wu, 
-    > Jeff Friedrich,
-    > Kris Byington, 
-    > Jose Quinteros
-  
-  * File: about_me.hbs
-  * Description: contains...
-  
-  ================================================================================================= */
-
-const registration_form = document.getElementById("registration_form");
-=======
 const edit_user_form = document.getElementById("edit_user_form");
->>>>>>> 13f0c7fe2965b7a250124310731e7311e0334782
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");
 const gender = document.getElementById("gender");
@@ -44,7 +22,9 @@ const update_email= document.getElementById("update_email");
 const update_username = document.getElementById("update_username");
 const update_password = document.getElementById("update_password");
 
+
 var final_test_before_sql_query = new Array(11).fill(false);
+
 delete_profile.addEventListener("click", (e) => {
     if (delete_profile.checked == true) {
       setSuccessFor(delete_profile);
@@ -53,6 +33,7 @@ delete_profile.addEventListener("click", (e) => {
     }
     final_test_before_sql_query[0] = false;
   });
+
 first_name.addEventListener("input", (e) => {
   if (first_name.value === "") {
     setErrorFor(first_name, "First name can't be blank.");
@@ -69,6 +50,7 @@ first_name.addEventListener("input", (e) => {
   }
   final_test_before_sql_query[1] = false;
 });
+
 last_name.addEventListener("input", (e) => {
   if (last_name.value === "") {
     setErrorFor(last_name, "Last name can't be blank.");
@@ -85,6 +67,7 @@ last_name.addEventListener("input", (e) => {
   }
   final_test_before_sql_query[2] = false;
 });
+
 gender.addEventListener("click", (e) => {
   if (
     document.getElementById("male").checked ||
@@ -95,19 +78,23 @@ gender.addEventListener("click", (e) => {
     final_test_before_sql_query[3] = true;
   }
 });
+
 date_of_birth.addEventListener("input", (e) => {
   setSuccessFor(date_of_birth);
   final_test_before_sql_query[4] = true;
 });
+
 // Come back to for css - For Adele
 fields.addEventListener("click", (e) => {
   setSuccessFor(fields);
   final_test_before_sql_query[5] = true;
 });
+
 schools.addEventListener("click", (e) => {
   setSuccessFor(schools);
   final_test_before_sql_query[6] = true;
 });
+
 email.addEventListener("input", (e) => {
   if (email.value === "") {
     setErrorFor(email, "Email can't be blank.");
@@ -120,6 +107,7 @@ email.addEventListener("input", (e) => {
   }
   final_test_before_sql_query[7] = false;
 });
+
 username.addEventListener("input", (e) => {
   if (username.value === "") {
     setErrorFor(username, "Username can't be blank.");
@@ -142,6 +130,7 @@ username.addEventListener("input", (e) => {
   }
   final_test_before_sql_query[8] = false;
 });
+
 password.addEventListener("input", (e) => {
   if (password.value === "") {
     setErrorFor(password, "Password can't be blank.");
@@ -160,6 +149,7 @@ password.addEventListener("input", (e) => {
   }
   final_test_before_sql_query[9] = false;
 });
+
 confirm_password.addEventListener("input", (e) => {
   if (confirm_password === "") {
     setErrorFor(confirm_password, "Confirm password can't be blank.");
@@ -172,6 +162,7 @@ confirm_password.addEventListener("input", (e) => {
   }
   final_test_before_sql_query[10] = false;
 });
+
 edit_user_form.addEventListener("change", (e) => {
   if (readyToSubmit()) {
     // enable button
@@ -179,6 +170,7 @@ edit_user_form.addEventListener("change", (e) => {
     // edit_user__submit.disabled = false;
   }
 });
+
 // click handles both enter and click
 // TODO ITS BUGGY WE NEED TO CHECK WHY BEFORE DEPLOYMENT IF YOU DONT WANT THIS TO RUN
 // COMMENT OUT SCRIPT IN THE edit_user_.hbs at the bottom to disable!!!
@@ -186,6 +178,7 @@ edit_user_form.addEventListener("change", (e) => {
   // will prevent anything from happening if it reaches here.
   // if anything in the array is false then prevent anything from happening.
   // if every element in final_test_before_sql_query is true then else stop
+
 //   if (!final_test_before_sql_query.every((e) => e === true)) {
 //     console.log("prevent");
 //     e.preventDefault();
@@ -193,6 +186,7 @@ edit_user_form.addEventListener("change", (e) => {
   // e.preventDefault();
   // checkInputs();
 // });
+
 // TODO: come back with back-end lead to fix bug
 // Issue: doesn't redirect to homepage after success.
 // function checkInputs() {
@@ -204,6 +198,7 @@ edit_user_form.addEventListener("change", (e) => {
 //   const username_value = username.value.trim();
 //   const password_value = password.value.trim();
 //   const confirm_password_value = confirm_password.value.trim();
+
 //   if (first_name.value === "") {
 //     setErrorFor(first_name, "First name can't be blank.");
 //   } else if (!isCapital(first_name.value)) {
@@ -216,6 +211,7 @@ edit_user_form.addEventListener("change", (e) => {
 //     setSuccessFor(first_name);
 //     final_test_before_sql_query[0] = true;
 //   }
+
 //   if (last_name.value === "") {
 //     setErrorFor(last_name, "Last name can't be blank.");
 //   } else if (!isCapital(last_name.value)) {
@@ -228,12 +224,14 @@ edit_user_form.addEventListener("change", (e) => {
 //     setSuccessFor(last_name);
 //     final_test_before_sql_query[1] = true;
 //   }
+
 //   if (address.value === "") {
 //     setErrorFor(address, "Address can't be blank.");
 //   } else {
 //     setSuccessFor(address);
 //     final_test_before_sql_query[2] = true;
 //   }
+
 //   // TODO figure out address validation...
 //   // if(address_value === ''){
 //   //     setErrorFor(address, "Address can't be blank.");
@@ -242,6 +240,7 @@ edit_user_form.addEventListener("change", (e) => {
 //   // } else {
 //   //     setSuccessFor(address);
 //   // }
+
 //   if (email.value === "") {
 //     setErrorFor(email, "Email can't be blank.");
 //   } else if (!isEmail(email.value)) {
@@ -250,6 +249,7 @@ edit_user_form.addEventListener("change", (e) => {
 //     setSuccessFor(email);
 //     final_test_before_sql_query[3] = true;
 //   }
+
 //   if (username.value === "") {
 //     setErrorFor(username, "Username can't be blank.");
 //   } else if (username.value.length < 3 || username.value.length > 12) {
@@ -263,6 +263,7 @@ edit_user_form.addEventListener("change", (e) => {
 //     setSuccessFor(username);
 //     final_test_before_sql_query[4] = true;
 //   }
+
 //   if (password.value === "") {
 //     setErrorFor(password, "Password can't be blank.");
 //   } else if (password.value.length < 8 || password.value.length > 16) {
@@ -277,6 +278,7 @@ edit_user_form.addEventListener("change", (e) => {
 //     setSuccessFor(password);
 //     final_test_before_sql_query[5] = true;
 //   }
+
 //   if (confirm_password === "") {
 //     setErrorFor(confirm_password, "Confirm password can't be blank.");
 //   } else if (password.value !== confirm_password.value) {
@@ -286,6 +288,7 @@ edit_user_form.addEventListener("change", (e) => {
 //     final_test_before_sql_query[6] = true;
 //   }
 // }
+
 // display error
 function setErrorFor(input, message) {
   const form_control = input.parentElement;
@@ -293,22 +296,27 @@ function setErrorFor(input, message) {
   form_control.className = "form-validation error";
   small.innerText = message;
 }
+
 // display success
 function setSuccessFor(input) {
   const form_control = input.parentElement;
   form_control.className = "form-validation success";
 }
+
 function isEmail(email) {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
 }
+
 function isCapital(name) {
   return name.charAt(0) === name.charAt(0).toUpperCase();
 }
+
 function hasWhiteSpace(str) {
   return str.indexOf(" ") >= 0;
 }
+
 function readyToSubmit()
 {
     if( delete_profile.checked && 

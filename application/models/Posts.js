@@ -76,4 +76,68 @@ Post.search = async (searchTerm) => {
     .catch((err) => Promise.reject(err));
 };
 
+Post.filter = async (parsedObject) => {
+  let fields = [];
+  let baseSQL =
+    "SELECT DISTINCT post_id,title, address, rent, description, thumbnail FROM posts p ";
+  if (parsedObject.disability || parsedObject.parking) {
+    baseSQL += `
+    join 
+    posts_amenities pa
+    on 
+    p.post_id = pa.posts_post_id
+    join 
+    amenities a 
+    on 
+    a.amenities_id = pa.amenities_amenities_id 
+    and 
+    a.amenity in (`;
+    if (parsedObject.parking && !parsedObject.disability) {
+      baseSQL += `?)`;
+      fields.push(parsedObject.parking);
+    }
+    if (parsedObject.disability && !parsedObject.parking) {
+      baseSQL += `?)`;
+      fields.push(parsedObject.disability);
+    }
+    if (parsedObject.disability && parsedObject.parking) {
+      baseSQL += `?,?)`;
+      fields.push(parsedObject.disability);
+      fields.push(parsedObject.parking);
+    }
+    if (parsedObject.maxPriceRange || Number.isInteger(parsedObject.privacy)) {
+      baseSQL += ` AND `;
+      if (parsedObject.maxPriceRange) {
+        baseSQL += `p.rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+      }
+      if (
+        parsedObject.maxPriceRange &&
+        Number.isInteger(parsedObject.privacy)
+      ) {
+        baseSQL += ` AND `;
+      }
+      if (Number.isInteger(parsedObject.privacy)) {
+        baseSQL += ` p.privacy = "${parsedObject.privacy}";`;
+      }
+    }
+  } else {
+    baseSQL += ` WHERE `;
+    if (parsedObject.maxPriceRange) {
+      baseSQL += `p.rent BETWEEN ${parsedObject.minPriceRange} AND ${parsedObject.maxPriceRange} `;
+    }
+    if (parsedObject.maxPriceRange && Number.isInteger(parsedObject.privacy)) {
+      baseSQL += ` AND `;
+    }
+    if (Number.isInteger(parsedObject.privacy)) {
+      baseSQL += ` privacy = "${parsedObject.privacy}";`;
+    }
+  }
+  console.log(baseSQL);
+  return db
+    .execute(baseSQL, fields)
+    .then(([results, fields]) => {
+      return results;
+    })
+    .catch((err) => Promise.reject(err));
+};
 module.exports = Post;
