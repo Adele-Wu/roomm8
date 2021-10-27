@@ -27,20 +27,24 @@ if (searchButton) {
  *
  * @function executeSearch
  */
-async function executeSearch() {
+async function executeSearch() 
+{
   let searchTerm = document.getElementById("search-text");
   // if the users doesn't search for anything redirect back to the same room
   if (!searchTerm) {
     location.replace("/browse-room");
     return;
   }
+  
   // if the users is looking for a users than we know that the username starts with an alphabet
   // else will be an address
   let isUser = /[a-zA-Z]/.test(searchTerm.value.charAt(0));
   if (isUser) {
     let mainContent = document.getElementById("room_results");
     let searchURL = `post/search?search=${searchTerm.value}`;
+    
     let response = await axios.get(searchURL);
+    console.log(response);
     if (!response) {
       location.replace("/browse-room");
       return;
