@@ -36,7 +36,11 @@
     <p class="">{{description}}</p>
   </div>
   {{! do not change this or at least keep a similar format. buttons do NOT have href properties. You can't fire a route with only a button if there's no form tag }}
-  <button class="postButton">
+  {{!-- <button class="postButton">
     <a href="/users/{{user_id}}">Display
+      {{username}}</a></button> --}}
+  <button class="postButton">
+    <a href="/users/{{username}}">Display
       {{username}}</a></button>
+
 </div>

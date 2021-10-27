@@ -28,14 +28,15 @@
             </button>
         </div>
 
-        <form action="post/filter" action="GET" class="filter_form w-56">
+        {{!-- <form action="post/filter" action="GET" class="filter_form w-56"> --}}
+        <div id="post-form" class="filter_form w-56">
 
             {{!-- room preferences --}}
             <div class="search_category">
                 <label for="price">Price Range: </label>
                 <div class="range">
-                    <input id="minRange" type="text" name="minPriceRange" placeholder="Min Price" class="w-5/12 mx-3">-
-                    <input id="maxRange" type="text" name="maxPriceRange" placeholder="Max Price" class="w-5/12 mx-3">
+                    <input id="minPriceRange" type="text" name="minPriceRange" placeholder="Min Price" class="w-5/12 mx-3">-
+                    <input id="maxPriceRange" type="text" name="maxPriceRange" placeholder="Max Price" class="w-5/12 mx-3">
                 </div>
             </div>
 
@@ -56,7 +57,7 @@
             </div>
 
             <div class="search_category">
-                <label for="amenities"> Amenities </label>
+                <label for="amenities">Amenities</label>
                 <div class="filter_category">
                     <div class="item grid grid-cols-2">
                         <div class="filter_option">
@@ -70,8 +71,9 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="filterButton">Filter</button>
-        </form>
+
+            <button id="filter-button" class="filterButton">Filter</button>
+        </div>
     </div>
 
     {{!-- generate all the necessary cards --}}

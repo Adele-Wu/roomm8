@@ -1,3 +1,14 @@
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: Users.js
+ *
+ * Description: Users model that handle all of the validation and
+ * database queries to mysql.
+ **************************************************************/
 var db = require("../conf/database");
 var bcrypt = require("bcrypt");
 const User = {};
@@ -130,6 +141,14 @@ User.getTenMostRecent = async (numberOfPosts) => {
     .catch((err) => Promise.reject(err));
 };
 
+/**
+ * search function that will use a wild card of the searchTerm that will concat the
+ * username, first name, last name and occupation to find either any of these that
+ * exist within the database.
+ *
+ * @param {*} searchTerm
+ * @returns results of the row results of the search term
+ */
 User.search = async (searchTerm) => {
   let baseSQL =
     "SELECT user_id, first_name, last_name, gender, dob, occupation, fields, school, email, username, photopath, description, CONCAT(' ', username, first_name, last_name, occupation) AS haystack FROM users HAVING haystack like ?;";
@@ -161,7 +180,21 @@ const partitionObj = (parseObject, column) => {
     }, {});
 };
 
+/**
+ * filter method has two conditions that need to be accounted for.
+ * a) when a client selects only within the user table
+ * b) or user and either preferences, interest or both are selected.
+ * since the user table on its own has a specific query, we can use this
+ * our base case. If either preference or interest is selected then
+ * we can concat the baseSQL with their respective sql joins using the
+ * generalized addFilter() method
+ *
+ * @param {*} parseObject
+ * @param {*} parseObjectKey
+ * @returns row results of the selected filter options
+ */
 User.filter = async (parseObject, parseObjectKey) => {
+  console.log("print this in filter");
   let age = false;
   let baseSQL =
     "SELECT DISTINCT u.user_id, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.description, u.photopath FROM users u ";
@@ -177,7 +210,6 @@ User.filter = async (parseObject, parseObjectKey) => {
   const interestObj = partitionObj(parseObject, interestCol);
 
   // special case due to having different query syntax this one must be tailored made
-  // this is done!!!!!!!!
   if (detectUserCol && !detectPrefCol && !detectInterestCol) {
     [baseSQL, fields] = filterUserModularized(
       parseObject,
@@ -188,6 +220,14 @@ User.filter = async (parseObject, parseObjectKey) => {
     );
   }
 
+  /**
+   * I am using a fizzbuzz approach. Since the join queries are almost identical
+   * for preference and interest then either can be included or excluded without
+   * affecting the overall baseSQL.
+   *
+   **/
+
+  // if a pref is detected then concat their join queries
   if (detectPrefCol) {
     [baseSQL, fields] = addFilter(
       userObj,
@@ -222,11 +262,21 @@ User.filter = async (parseObject, parseObjectKey) => {
   );
 };
 
-// let sqlbases = {
-//   userSelect: `
-//   `,
-// };
-
+/**
+ * Since the filter for the interest and preference are idenitical except
+ * their substitution names (i.e. interest as i or preference as p) we can
+ * generalize the query for either and concatenate these to the baseSQL
+ * if it's necessary.
+ *
+ * @param {*} userObj
+ * @param {*} interestPrefObj
+ * @param {*} baseSQL
+ * @param {*} age
+ * @param {*} fields
+ * @param {*} interestPref
+ * @param {*} detectUserCol
+ * @returns
+ */
 let addFilter = (
   userObj,
   interestPrefObj,

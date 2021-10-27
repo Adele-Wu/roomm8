@@ -1,0 +1,204 @@
+<form id="edit_user_form" action="/users/edit-user" method="POST" enctype="application/x-www-form-urlencoded" class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
+
+<div class="form-validation">{{!-- for radio buttons  --}}
+<div class="form-validation">
+    <label for="delete_box">Delete Profile</label>
+    <div id="delete_box">
+      
+      <input type="radio" value="delete" id="delete_profile" name="update_this" class="radio"/>
+      <label for="delete_profile">Delete Profile</label>
+
+    </div>
+  </div>
+
+  <div class="form-validation">
+    <label for="first_name">First Name:</label>
+    <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2"/>
+      <input type="radio" value="first_name" id="update_first_name" name="update_this" class="radio"/>
+      <label for="update_first_name">update</label>
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="last_name">Last Name:</label>
+      <input type="text" class="hover_card" id="last_name" name="last_name" placeholder="Enter last name" minlength="2"/>
+      <input type="radio" value="last_name" id="update_last_name" name="update_this" class="radio"/>
+      <label for="update_last_name">update</label>
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="gender">Gender:</label>
+    <div id="gender">
+      
+      <input type="radio" value="gender" id="update_gender" name="update_this" class="radio"/>
+      <label for="update_gender">update</label>
+
+      <input type="radio" value="male" id="male" name="gender" class="radio"/>
+      <label for="male">Male</label>
+
+      <input type="radio" value="female" id="female" name="gender" value="female" class="radio"/>
+      <label for="female">Female</label>
+      
+      <input type="radio" value="other" id="other" name="gender" value="other" class="radio"/>
+      <label for="other">Other</label>
+    </div>
+
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="date_of_birth">Birth Date:</label>
+    <input type="date" class="hover_card" id="date_of_birth" name="date_of_birth" value="2018-07-22"/>
+      <input type="radio" value="birth_date" id="update_birth_date" name="update_this" class="radio"/>
+      <label for="update_birth_date">update</label>
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="fields">Fields:</label>
+    <select name="fields" id="fields" class="hover_card ml-4" value="fields">
+      <option value="Agriculture, Agriculture Operations, and Related Sciences">Agriculture, Agriculture Operations, and
+        Related Sciences</option>
+      <option value="Architecture and Related Services">Architecture and Related
+        Services</option>
+      <option value="Area, Ethnic, Cultural, Gender, and Group Studies">Area,
+        Ethnic, Cultural, Gender, and Group Studies</option>
+      <option value="Aviation">Aviation</option>
+      <option value="Biological and Biomedical Sciences">Biological and
+        Biomedical Sciences</option>
+      <option value="Business, Management, Marketing, and Related Support Services">Business, Management, Marketing, and
+        Related Support Services</option>
+      <option value="Communication, Journalism, and Related Programs">Communication, Journalism, and Related Programs
+      </option>
+      <option value="Communications Technologies/technicians and Support Services">Communications
+        Technologies/technicians and Support Services</option>
+      <option value="Computer and Information Sciences and Support Services">Computer and Information Sciences and
+        Support Services</option>
+      <option value="Construction Trades">Construction Trades</option>
+      <option value="Education">Education</option>
+      <option value="Engineering Technologies and Engineering-Related Fields">Engineering Technologies and
+        Engineering-Related Fields</option>
+      <option value="Engineering">Engineering</option>
+      <option value="English Language and Literature/letters">English Language
+        and Literature/letters</option>
+      <option value="Family and Consumer Sciences/human Sciences">Family and
+        Consumer Sciences/human Sciences</option>
+      <option value="Foreign Languages, Literatures, and Linguistics">Foreign
+        Languages, Literatures, and Linguistics</option>
+      <option value="Health Professions and Related Programs">Health Professions
+        and Related Programs</option>
+      <option value="History">History</option>
+      <option value="Homeland Security, Law Enforcement, Firefighting">Homeland
+        Security, Law Enforcement, Firefighting</option>
+      <option value="Human Services">Human Services</option>
+      <option value="Legal Professions and Studies">Legal Professions and
+        Studies</option>
+      <option value="Liberal Arts and Sciences Studies and Humanities">Liberal
+        Arts and Sciences Studies and Humanities</option>
+      <option value="Library Science">Library Science</option>
+      <option value="Mathematics and Statistics">Mathematics and Statistics</option>
+      <option value="Mechanic and Repair Technologies/technicians">Mechanic and
+        Repair Technologies/technicians</option>
+      <option value="Military Technologies and Applied Sciences">Military
+        Technologies and Applied Sciences</option>
+      <option value="Multi/interdisciplinary Studies">Multi/interdisciplinary
+        Studies</option>
+      <option value="Natural Resources and Conservation">Natural Resources and
+        Conservation</option>
+      <option value="Parks, Recreation, Leisure, and Fitness Studies">Parks,
+        Recreation, Leisure, and Fitness Studies</option>
+      <option value="Personal and Culinary Services">Personal and Culinary
+        Services</option>
+      <option value="Philosophy and Religious Studies">Philosophy and Religious
+        Studies</option>
+      <option value="Physical Sciences">Physical Sciences</option>
+      <option value="Precision Production">Precision Production</option>
+      <option value="Psychology">Psychology</option>
+      <option value="Science Technologies/technicians">Science
+        Technologies/technicians</option>
+      <option value="Social Sciences">Social Sciences</option>
+      <option value="Theology and Religious Vocations">Theology and Religious
+        Vocations</option>
+      <option value="Transportation and Materials Moving">Transportation and
+        Materials Moving</option>
+      <option value="Visual and Performing Arts">Visual and Performing Arts</option>
+    </select>
+      <label for="update_field">update</label>
+      <input type="radio" value="field" id="update_field" name="update_this" class="radio"/>
+      
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="schools">School:</label>
+    <select name="schools" id="schools" class="hover_card ml-3" value="schools">
+      <option value="College of San Francisco">College of San Francisco</option>
+      <option value="San Francisco State University">San Francisco State
+        University</option>
+      <option value="University of California, San Francisco">University of
+        California, San Francisco</option>
+      <option value="Academy of Art University">Academy of Art University</option>
+      <option value="Alliant International University">Alliant International
+        University</option>
+      <option value="Art Institute of California">Art Institute of California</option>
+      <option value="California Institute of Integral Studies">California
+        Institute of Integral Studies</option>
+      <option value="DeVry University">DeVry University</option>
+      <option value="The Fashion Institute of Design and Merchandising (FIDM)">The Fashion Institute of Design and
+        Merchandising (FIDM)</option>
+      <option value="Golden Gate University">Golden Gate University</option>
+      <option value="Heald College">Heald College</option>
+      <option value="Hult International Business School">Hult International
+        Business School</option>
+      <option value="Minerva Schools at KGI">Minerva Schools at KGI</option>
+      <option value="Presidio Graduate School">Presidio Graduate School</option>
+      <option value="San Francisco Art Institute">San Francisco Art Institute</option>
+      <option value="San Francisco Conservatory of Music">San Francisco
+        Conservatory of Music</option>
+      <option value="San Francisco Law School">San Francisco Law School</option>
+      <option value="San Francisco School of Digital Filmmaking">San Francisco
+        School of Digital Filmmaking</option>
+      <option value="Saybrook University">Saybrook University</option>
+      <option value="University of San Francisco">University of San Francisco</option>
+      <option value="Wharton School of the University of Pennsylvania">Wharton
+        School of the University of Pennsylvania</option>
+    </select>
+      <label for="update_school">update</label>
+      <input type="radio" value="school" id="update_school" name="update_this" class="radio"/>
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="email">Email:</label>
+    <input type="email" class="hover_card" id="email" name="email" placeholder="Enter valid e-mail address"/>
+      <input type="radio" value="email" id="update_email" name="update_this" class="radio"/>
+      <label for="update_email">update</label>
+    <small>Error message</small>
+  </div>
+
+  <div class="form-validation">
+    <label for="username">Username:</label>
+    <input type="text" class="hover_card" id="username" name="username" placeholder="Enter username"/>
+      <input type="radio" value="username" id="update_username" name="update_this" class="radio"/>
+      <label for="update_username">update</label>
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
+    <label for="password">Password:</label>
+    <input type="password" class="hover_card" id="password" name="password" placeholder="Enter password"/>
+    <input type="radio" value="school" id="update_password" name="update_this" class="radio"/>
+    <label for="update_password">update</label>
+    <small>Error message</small>
+  </div>
+  <div class="form-validation">
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" class="hover_card" id="confirm_password" name="confirm_password"
+      placeholder="Enter confirm password"/>
+
+    <small>Error message</small>
+  </div> 
+</div> {{!--top div for radio buttons   --}}
+  <button type="submit" class="hover_card" id="edit_user_submit" value="Submit" disabled="">Submit</button>
+</form>
+<script defer type="text/javascript" src="javascripts/edit-user-validation.js"></script>

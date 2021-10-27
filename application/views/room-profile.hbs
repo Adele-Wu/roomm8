@@ -63,3 +63,37 @@
     </div>
   </div>
 </div>
+{{! do whatever you need to here to make it pretty :) }}
+<img src="{{currentPost.photopath}}" alt="Sum Thin Wong" />
+<h3>{{currentPost.title}}</h3>
+<div class="">{{currentPost.username}}</div>
+<div class="">{{currentPost.first_name}}</div>
+<div class="">{{currentPost.last_name}}</div>
+<div class="">{{currentPost.gender}}</div>
+<div class="">{{currentPost.dob}}</div>
+<div class="">{{currentPost.occupation}}</div>
+<div class="">{{currentPost.fields}}</div>
+<div class="">{{currentPost.school}}</div>
+<div class="">{{currentPost.email}}</div>
+<div class="">{{currentPost.photopath}}</div>
+<div class="">{{currentPost.description}}</div>
+<div class="">{{currentPost.description}}</div>
+<div class="">{{currentPost.created}}</div>
+<div>
+  {{#each comments}}
+    <p>Comment: {{this.description}}</p>
+    <p>Date: {{this.created}}</p>
+  {{/each}}
+</div>
+<div>
+  <form action="/post/messages" method="POST">
+    <textarea
+      name="message"
+      id="message"
+      class=""
+      cols="30"
+      rows="10"
+    ></textarea>
+    <button class="hover_card" type="submit">Send Message</button>
+  </form>
+</div>
