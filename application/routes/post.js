@@ -146,8 +146,6 @@ router.get("/:id(\\d+)", async (req, res, next) => {
       let [results2, fields2] = await db.execute(baseSQL2, [req.params.id]);
       req.session.viewing = req.params.id;
       usernameTitle += results[0].username + "'s Room Profile";
-      // console.log("asdklfjalksdfjklasdjflkajsdlkfajsdlkfsjal");
-      console.log(results[0]);
       res.render("room-profile", {
         title: usernameTitle,
         currentPost: results[0],
