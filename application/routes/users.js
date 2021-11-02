@@ -1,21 +1,15 @@
-/* ============================================================================================
-
-  * Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
-  * Class: CSC-648-02 Software Engineering Final Project 
-  * Fall 2021
-  * TEAM 5 MEMBERS
-    > Edward Yun, 
-    > Jeffrey Fullmer Gradner, 
-    > Adele Wu, 
-    > Jeff Friedrich,
-    > Kris Byington, 
-    > Jose Quinteros
-  
-  * File: about_me.hbs
-  * Description: contains...
-  
-  ================================================================================================= */
-
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: users.js
+ *
+ * Description: users router that will handle all user routes that will
+ * check and validate all incoming user inputs and then send to the
+ * Users Model.
+ **************************************************************/
 var express = require("express");
 var router = express.Router();
 var db = require("../conf/database");
@@ -28,11 +22,16 @@ var { body, validationResult } = require("express-validator");
 const session = require("express-session");
 const { sessionSave, delay } = require("../utils/promisification");
 
-/* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.send('respond with a resource');
-// });
-
+/**
+ * /register calls body("email").isEmail() from the express-validator library to
+ * validate/sanitize the client's email. express-validator also has many different
+ * methods such as .trim(), .normalizeEamil(), .bail(), .exists() that can be chained
+ * within the array, however, for simplicity, I only went with isEmail().
+ * With the User Model, we have simple checks to see if a username and email exist
+ * within the database such that there are no duplicates. If any of these were to trigger
+ * then we would reroute them back to the registration page and inform them that
+ * the username and email is taken.
+ */
 router.post("/register", [body("email").isEmail()], async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -115,61 +114,28 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
         next(err);
       }
     }
-
-    // then promises method.
-    // User.usernameExists(username)
-    // .then((usernameDoesExist) => {
-    //   if(usernameDoesExist) {
-    //     throw new UserError(
-    //       "Registration Failed: Username already exist",
-    //       "/registration",
-    //       200
-    //     );
-    //   } else {
-    //     return User.emailExists(email);
-    //   }
-    // })
-    // .then((emailDoesExist) => {
-    //   if(emailDoesExist) {
-    //     throw new UserError(
-    //       "Registration Failed: Email already exist",
-    //       "/registration",
-    //       200
-    //     )
-    //   } else {
-    //       return User.create(first_name, last_name, address, email, username, password);
-    //   }
-    // })
-    // .then((createdUserId) => {
-    //   if(createdUserId < 0) {
-    //     throw new UserError(
-    //       "Server Error, user could not be created",
-    //       "/registration",
-    //       500
-    //     );
-    //   } else {
-    //     successPrint("Registration Success: User was created!");
-    //     // req.flash will only work with sessions until such time leave these commented until sessions are done.
-    //     // req.flash('success', 'User account has been made!');
-    //     res.redirect("/login");
-    //   }
-    // })
-    // .catch((err) => {
-    //   errorPrint("User couldn't be made", err);
-    //   if (err instanceof UserError) {
-    //     // print to console
-    //     errorPrint(err.getMessage());
-    //     // flash on browser
-    //     // req.flash('error', err.getMessage());
-    //     res.status(err.getStatus());
-    //     res.redirect(err.getRedirectURL());
-    //   } else {
-    //     next(err);
-    //   }
-    // });
   }
 });
 
+/**
+ * /login would only need to authenticate the username and password, in order,
+ * to validate the client's username and password.
+ *
+ * req.session is persistent throughout the application with a cookie that has a
+ * specific time (once it exceeds it's duration then it will be destroyed.)
+ *
+ * Within, the promisification.js file, we pass in the session object to return a
+ * promise. This is to ensure that the session actually stores the value of
+ * req.session.username = username
+ * req.session.userId = loggedUserId
+ * res.locals.logged = true
+ * before redirecting to the next page. This must happen such that the logged boolean
+ * is set for handlebars to render the correct navbars. We can use the delay method,
+ * however, there is a major flaw to this method. As we begin to abuse this method, the
+ * time that it takes to render new pages would increase causing more delays which would
+ * most likely lose many clients due to impatiences. (i.e. don't use it cause it'll cause
+ * lag throughout the application)
+ */
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   
@@ -212,38 +178,12 @@ router.post("/login", async (req, res, next) => {
       next(err);
     }
   }
-
-  // then promise method
-  // User.authenticate(username, password)
-  // .then((loggedUserId) => {
-  //   if(loggedUserId > 0){
-  //     successPrint(`User ${username} was able to log in.`);
-  //     req.session.username = username;
-  //     req.session.userId = loggedUserId;
-  //     res.locals.logged = true;
-  //     req.flash('success', 'You are logged in.');
-  //     console.log("am i getting to this line");
-  //     res.redirect('/');
-  //   } else {
-  //     throw new UserError(
-  //       "Invalid username or password",
-  //       "/login",
-  //       200
-  //     )
-  //   }
-  // })
-  // .catch((err) => {
-  //   if(err instanceof UserError){
-  //     errorPrint(err.getMessage());
-  //     req.flash('error', err.getMessage());
-  //     res.status(err.getStatus());
-  //     res.redirect("/login");
-  //   } else {
-  //     next(err);
-  //   }
-  // })
 });
 
+/**
+ * /logout work in tandem with a frontend javascript script that fetchs this
+ * route in order to destroy our session of our current client.
+ */
 router.post("/logout", async (req, res, next) => {
   await req.session.destroy((err) => {
     if (err) {
@@ -258,18 +198,25 @@ router.post("/logout", async (req, res, next) => {
   });
 });
 
-router.get("/:id(\\d+)", async (req, res, next) => {
-  let baseSQL = "SELECT * FROM users where user_id = ?;";
-  let [results, fields] = await db.execute(baseSQL, [req.params.id]);
-  // console.log(results);
-  if (results && results.length) {
-    res.render("user-profile", {
-      title: results[0].first_name,
-      currentUser: results[0],
-    });
-  }
-});
+// router.get("/:id(\\d+)", async (req, res, next) => {
+//   let baseSQL = "SELECT * FROM users where user_id = ?;";
+//   let [results, fields] = await db.execute(baseSQL, [req.params.id]);
+//   // console.log(results);
+//   if (results && results.length) {
+//     res.render("user-profile", {
+//       title: results[0].first_name,
+//       currentUser: results[0],
+//     });
+//   }
+// });
 
+/**
+ * /search will search by a user text input with a few conditions
+ * a) if no input is given and trigger then return nothing
+ * b) else return results of the search term
+ * b.1) if it finds n results return results
+ * b.2) else call the top ten most recent results in the database.
+ */
 router.get("/search", async (req, res, next) => {
   try {
     let searchTerm = req.query.search;
@@ -295,6 +242,9 @@ router.get("/search", async (req, res, next) => {
   }
 });
 
+/**
+ * /filter will filter the user preferences, interests, and user table
+ */
 router.get("/filter", async (req, res, next) => {
   let parseObject = Object.fromEntries(
     Object.entries(req.query).filter(([_, v]) => v != "")
@@ -310,25 +260,9 @@ router.get("/filter", async (req, res, next) => {
   }
 });
 
-// purely here to test if the db is connect
-// manually type or copypasta url below to test db
-// localhost:3000/users/getUsers
-// look in console to see if the data is being re
-// router.get('/getUsers', (req, res, next) => {
-//   let baseSQL = "SELECT * FROM users";
-//   db.execute(baseSQL).then(([results, fields]) => {
-//     if(results && results.length == 0){
-//       console.log('error');
-//       // res.render(results);
-//     }
-//     else{
-//       console.log(results);
-//       // res.render(results);  
-//     }
-//   })
-// })
 
 router.get("/admin-panel", function (req, res, next) {
+  console.log("lolololol");
   res.render("admin-panel", {
     title: "Admin Panel",
     searchPost: false,
@@ -422,6 +356,36 @@ router.get("/getEmail/:username",async function(request,response,next)
 router.post("/edit-user", async (req, res, next) => {
   res.redirect("/");
   //dummy redirect, needs DB logic per case from Delete_this
+});
+// Interesting bug. Looks like /:params has priority over /filter, therefore it's necessary to have this
+// route after
+router.get("/:username", async (req, res, next) => {
+  try {
+    // check if username exist within database. if it's not then redirect back
+    if (!(await User.usernameExists(req.params.username))) {
+      throw new UserError(
+        "Username: The username you're looking for doesn't exist.",
+        "/browse-user",
+        200
+      );
+    }
+    let baseSQL = "SELECT * FROM users where username = ?;";
+    let [results, fields] = await db.execute(baseSQL, [req.params.username]);
+    if (results && results.length) {
+      res.render("user-profile", {
+        title: results[0].first_name,
+        currentUser: results[0],
+      });
+    }
+  } catch (err) {
+    if (err instanceof UserError) {
+      errorPrint(err.getMessage());
+      res.status(err.getStatus());
+      res.redirect("/browse-user");
+    } else {
+      next(err);
+    }
+  }
 });
 
 

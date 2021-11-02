@@ -19,28 +19,41 @@
 
 <header>
 
-  <div class="logo ">
-    <img src="/images/roomM8_white.png" width="100rem">
+  <div class="logo">
+    <img src="/images/roomM8_white.png" width="100rem" />
   </div>
 
-  {{!-- nav bar --}}
+  {{! nav bar }}
   <nav class="m-2 md:mx-auto md:w-11/12 center">
     <div class="noHover flex flex-wrap items-center md:flex-no-wrap">
-      {{!-- home button always visible --}}
-      <li><a href="/" style="text-decoration:none" class="block nav_item">Home</a></li>
+      {{! home button always visible }}
+      <li><a
+          href="/"
+          style="text-decoration:none"
+          class="block nav_item"
+        >Home</a></li>
 
-      {{!-- hamburger menu --}}
+      {{! hamburger menu }}
       <div class="ml-auto md:hidden noHover">
-        <button onclick="menuToggle()" class="flex items-center px-3 py-2 border-0 rounded m-4" type="button">
+        <button
+          onclick="menuToggle()"
+          class="flex items-center px-3 py-2 border-0 rounded m-4"
+          type="button"
+        >
           <svg class="h-3 w-3 noHover" viewBox="0 0 20 20">
-            <path fill="currentColor" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            <path
+              fill="currentColor"
+              d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"
+            ></path>
           </svg>
         </button>
       </div>
 
-      {{!-- other nav menu itmes --}}
-      <div id="menu"
-        class="noHover w-full h-0 transition-all ease-out duration-500 md:transition-none md:flex md:items-center">
+      {{! other nav menu itmes }}
+      <div
+        id="menu"
+        class="noHover w-full h-0 transition-all ease-out duration-500 md:transition-none md:flex md:items-center"
+      >
         <ul
           class="noHover flex flex-col duration-300 ease-out sm:transition-none md:flex-row md:items-center md:ml-auto">
           {{!-- home button --}}
@@ -57,8 +70,16 @@
             <li><a href="/edit-user" style="text-decoration: none;" class="block nav_item">Edit Profile</a></li>
             <li><a id="logout" style="text-decoration: none;" class="block nav_item">Log Out</a></li>
             {{else}}
-            <li><a href="/registration" style="text-decoration:none" class="block nav_item">Sign Up</a></li>
-            <li><a href="/login" style="text-decoration:none" class="block nav_item">Log In</a></li>
+              <li><a
+                  href="/registration"
+                  style="text-decoration:none"
+                  class="block nav_item"
+                >Sign Up</a></li>
+              <li><a
+                  href="/login"
+                  style="text-decoration:none"
+                  class="block nav_item"
+                >Log In</a></li>
             {{/if}}
           </div>
 
@@ -70,22 +91,5 @@
 
 </header>
 
-{{!-- hamburger menu for small screens --}}
-<script>
-  const menu = document.getElementById("menu");
-
-  function menuToggle() {
-    menu.classList.toggle('h-full')
-  }
-
-  // browser resize listener
-  window.addEventListener("resize", menuResize);
-
-  // responsive resize menu
-  function menuResize() {
-    const window_size = window.innerWidth || document.body.clientWidth;
-    if (window_size > 640) {
-      menu.classList.remove('h-32');
-    }
-  }
-</script>
+{{! hamburger menu for small screens }}
+<script src="javascripts/hamburger-menu.js"></script>

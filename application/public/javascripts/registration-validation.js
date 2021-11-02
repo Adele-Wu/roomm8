@@ -1,26 +1,23 @@
-<<<<<<< HEAD
-/* ============================================================================================
-
-  * Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
-  * Class: CSC-648-02 Software Engineering Final Project 
-  * Fall 2021
-  * TEAM 5 MEMBERS
-    > Edward Yun, 
-    > Jeffrey Fullmer Gradner, 
-    > Adele Wu, 
-    > Jeff Friedrich,
-    > Kris Byington, 
-    > Jose Quinteros
-  
-  * File: about_me.hbs
-  * Description: contains...
-  
-  ================================================================================================= */
-
-const registration_form = document.getElementById("registration_form");
-=======
+/**************************************************************
+ * Class: CSC-648-02 Fall 2021
+ * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
+ *  Kris Byington, Jose Quinteros
+ * Project: 648 Final Project
+ *
+ * File: registration-validation.js
+ *
+ * Description: Frontend validation for the registration page.
+ **************************************************************/
+/**
+ * @author Eddy
+ */
+/**
+ * Each variable below has an event listener to detect for any changes
+ * and update the css such that it outputs whether a user has made an error
+ * or correctly made their inputs.
+ */
 const edit_user_form = document.getElementById("edit_user_form");
->>>>>>> 13f0c7fe2965b7a250124310731e7311e0334782
+const registration_form = document.getElementById("registration_form");
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");
 const gender = document.getElementById("gender");
