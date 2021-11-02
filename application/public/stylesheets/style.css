@@ -354,7 +354,9 @@ input.card {
   border-radius: 20px;
   /* height: 60rem; */
   height: 90vh;
-  width: 100%;
+  /* width: 100%; */
+  min-width: 30%;
+  max-width: 100%;
   background-color: darkslateblue;
 }
 
