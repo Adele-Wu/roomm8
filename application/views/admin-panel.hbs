@@ -7,12 +7,12 @@
 
       <div class="center">
         {{!-----------------------USER1 input------------------------}}
-        <div class="form_section flex justify-between">
+        <div class="form_section sm:flex justify-between">
           <label for="username1_input" class="align-text-bottom">Edit this user </label>
           <input type="text" id="username1_input" name="username" placeholder="Enter username" required />
         </div>
         {{!-----------------------Match user input------------------------}}
-        <div class="form_section flex justify-between">
+        <div class="form_section sm:flex justify-between">
           <span>
             <input type="radio" id="match_radio" name="operation_selector" value="match-user" />
             <label for="match_radio">Match user </label>
@@ -21,7 +21,7 @@
             disabled="true" />
         </div>
         {{!-----------------------change password input------------------------}}
-        <div class="form_section flex justify-between">
+        <div class="form_section sm:flex justify-between">
           <span>
             <input type="radio" id="change_password_radio" name="operation_selector" value="change-password" />
             <label for="change_password_radio">Change password</label>
@@ -29,7 +29,7 @@
           <input type="text" id="new_password" name="new_password" placeholder="Enter password" disabled="true" />
         </div>
         {{!-----------------------change email input------------------------}}
-        <div class="form_section flex justify-between">
+        <div class="form_section sm:flex justify-between">
           <span>
             <input type="radio" id="change_email_radio" name="operation_selector" value="change-email" />
             <label for="change_email_radio">Change email</label>
@@ -47,7 +47,7 @@
           <input type="text" id="admin_username" name="admin_username" placeholder="Enter admin username" required />
         </div>
         {{!-----------------------Admin password input------------------------}}
-        <div class="form_section flex justify-between">
+        <div class="form_section sm:flex justify-between">
           <label for="admin_password">Enter admin password</label>
           <input type="password" id="admin_password" name="admin_password" placeholder="Enter password" required />
         </div>
@@ -56,20 +56,24 @@
       <input type="submit" value="Submit" class="registration_submit" />
     </form>
 
-    <div class="likeForm admin-form container w-screen md:w-5/6	lg:w-1/2 xl:w-2/5">
+    <div class="lookUpUserSection admin-form container w-screen md:w-5/6	lg:w-1/2 xl:w-2/5">
       <div class="center">
-        <div class="center text-center mb-4 bold ">Look Up a User</div>
-        <div class="float-right mb-4">
-          Username lookup
-          <input type="text" name="user_name" id="user_name_input_lookup" placeholder="enter email of user">
-          <input type="button" id="user_name_lookup_button" value="lookup" class="my-1">
+        <p class="center text-center mb-4 bold">Look Up a User</p>
+        <div class="ms:float-right lg:float-none xl:float-right mb-4 lg:flex flex-wrap mx-auto lg:ml-3 mr-12 md:mr-24 lg:mr-0 xl:mr-10">
+          <label class="lookUpUserLabel">Username lookup</label>
+          <div class="sm:inline lg:ml-20 xl:ml-4">
+            <input type="text" name="user_name" id="user_name_input_lookup" placeholder="enter email of user"
+              class="lookUpUserInput">
+            <input type="button" id="user_name_lookup_button" value="lookup" class="lookUpUserButton my-1">
+          </div>
         </div>
-        <br>
-        <br>
-        <div class="float-right">
-          Email lookup
-          <input type="text" name="email" id="email_input_lookup" placeholder="enter username of user">
-          <input type="button" id="email_lookup_button" value="lookup" class="my-1">
+        <div class="md:float-right lg:float-none xl:float-right lg:flex flex-wrap mx-auto lg:ml-3 mr-12 md:mr-24 lg:mr-0 xl:mr-10">
+          <label class="lookUpUserLabel">Email lookup</label>
+          <div class="sm:inline lg:ml-20 xl:ml-4">
+            <input type="text" name="email" id="email_input_lookup" placeholder="enter username of user"
+              class="lookUpUserInput">
+            <input type="button" id="email_lookup_button" value="lookup" class="lookUpUserButton my-1">
+          </div>
         </div>
       </div>
     </div>
