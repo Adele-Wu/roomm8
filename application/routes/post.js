@@ -131,7 +131,7 @@ router.get("/search", async (req, res, next) => {
 router.get("/:id(\\d+)", async (req, res, next) => {
   try {
     let usernameTitle = "";
-    let baseSQL = `SELECT u.username, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.photopath, u.description, p.title, p.description, p.photopath, p.created  \
+    let baseSQL = `SELECT u.username, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.photopath, u.description, p.title, p.description, p.photopath, p.created, p.address, p.rent  \
           FROM users u \
           JOIN posts p \
           on u.user_id = p.users_user_id \
@@ -211,20 +211,25 @@ router.get("/filter", async function (req, res, next) {
  * /messages is simple query to the message table that is tied to the user and post
  * table in a many to many relationship (mysql indexing techinique).
  */
+
+//there's a bug here. route not found
+
 router.post("/messages", async (req, res, next) => {
-  const message = req.body.message;
+  const comment = req.body.comment;
   try {
     const fk_userId = req.session.userId;
     const postId = req.session.viewing;
     if (!fk_userId) {
-      // TODO: for later we can add flash messages and redirect to log in
+      // TODO: for later we can add flash comments and redirect to log in
       res.redirect("/login");
       // res.redirect("/post/" + postId);
     }
+    console.log(comment, fk_userId, postId);
+
     const baseSQL =
       "INSERT INTO messages (description, users_user_id, posts_post_id, created) VALUES (?, ?, ?, NOW())";
     await db
-      .execute(baseSQL, [message, fk_userId, postId])
+      .execute(baseSQL, [comment, fk_userId, postId])
       .then((results) => {
         res.redirect("/post/" + postId);
       })
