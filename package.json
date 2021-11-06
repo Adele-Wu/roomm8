@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "dotenv": "^10.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.12"
-  }
-}

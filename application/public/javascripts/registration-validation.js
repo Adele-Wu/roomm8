@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-const edit_user_form = document.getElementById("edit_user_form");
-=======
 /**************************************************************
  * Class: CSC-648-02 Fall 2021
  * Name: Edward Yun, Jeffrey Fullmer Gradner, Adele Wu, Jeff Friedrich,
@@ -19,8 +16,8 @@ const edit_user_form = document.getElementById("edit_user_form");
  * and update the css such that it outputs whether a user has made an error
  * or correctly made their inputs.
  */
+const edit_user_form = document.getElementById("edit_user_form");
 const registration_form = document.getElementById("registration_form");
->>>>>>> BackEnd
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");
 const gender = document.getElementById("gender");

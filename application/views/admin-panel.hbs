@@ -1,169 +1,136 @@
-<div class="home_body">
-  <div class="home_sect2">
-    <p class="home_sect2_text m-2">Admin Portal</p>
-    <div class="md:flex my-auto container center">
-      <div class="home_sect2_container card flex-auto text-center">
-        <form id="admin_form" action="/users/AdminAction" method="POST" enctype="application/x-www-form-urlencoded" class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
-         {{!-----------------------USER1 input------------------------}}
-        <label for="username1_input">Username</label>
-        <input
-                type="text"
-                id="username1_input"
-                name="username"
-                placeholder="Enter username"
-                required
-                />
-            {{!-----------------------Match user input------------------------}}
-            <label for="match_radio">Match a User</label>
-            <input type="radio"id="match_radio" name="operation_selector" value="match-user"/>
-            <input
-                type="text"
-                id="match_username_input"
-                name="username2"
-                placeholder="Enter username 2"
-                disabled = "true"
-                />
-            
-            {{!-----------------------delete user input------------------------}}
-            <label for="delete_user_radio">Delete a User</label>
-            <input type="radio"id="delete_user_radio" name="operation_selector" value="delete-user" />
-            {{!-----------------------change password input------------------------}}
-            <label for="change_password_radio">Change a password</label>
-            <input type="radio"id="change_password_radio" name="operation_selector" value="change-password"/>
-            <input
-                type="text"
-                id="new_password"
-                name="new_password"
-                placeholder="Enter Password"
-                disabled = "true"
-                />
-            {{!-----------------------change email input------------------------}}
-            <label for="change_email_radio">Change a email</label>
-            <input type="radio"id="change_email_radio" name="operation_selector" value="change-email"/>
-            <input
-                type="text"
-                id="new_email"
-                name="new_email"
-                placeholder="Enter new Email"
-                disabled = "true"
-                />
-            {{!-----------------------Admin username input------------------------}}
-            <label for="admin_username">Enter Admin User name</label>
-            <input
-                type="text"
-                id="admin_username"
-                name="admin_username"
-                placeholder="Enter Admin Username"
-                required
-                />
-            {{!-----------------------Admin password input------------------------}}
-            <label for="admin_password">Enter Admin password</label>
-            <input
-                type="password"
-                id="admin_password"
-                name="admin_password"
-                placeholder="Enter Password"
-                required
-                />
-            {{!-----------------------UserName lookup------------------------}}
-            <input type= "submit" value="Submit"/>
+<div>
+  <p class="home_sect2_text m-2 mt-6 mb-0 bold ">Admin Portal</p>
+  <div class="lg:flex my-auto center container">
+    <form id="admin_form" action="/users/AdminAction" method="POST" enctype="application/x-www-form-urlencoded"
+      class="admin-form container w-screen md:w-5/6	lg:w-1/2 xl:w-2/5">
+      <p class="center text-center mb-4 bold">Edit a User</p>
 
-        </form> 
-        User name look up
-         <input type="text" name = "user_name" id = "user_name_input_lookup" placeholder="email of user" >
-        <input type="button" id="user_name_lookup_button" value="lookup">
-        <br>
-        <br>
-        Email look up
-        <input type="text" name = "email" id = "email_input_lookup" placeholder="user name of user">
-        <input type="button" id="email_lookup_button" value="lookup">
+      <div class="center">
+        {{!-----------------------USER1 input------------------------}}
+        <div class="form_section sm:flex justify-between">
+          <label for="username1_input" class="align-text-bottom">Edit this user </label>
+          <input type="text" id="username1_input" name="username" placeholder="Enter username" required />
+        </div>
+        {{!-----------------------Match user input------------------------}}
+        <div class="form_section sm:flex justify-between">
+          <span>
+            <input type="radio" id="match_radio" name="operation_selector" value="match-user" />
+            <label for="match_radio">Match user </label>
+          </span>
+          <input type="text" id="match_username_input" name="username2" placeholder="Enter username 2"
+            disabled="true" />
+        </div>
+        {{!-----------------------change password input------------------------}}
+        <div class="form_section sm:flex justify-between">
+          <span>
+            <input type="radio" id="change_password_radio" name="operation_selector" value="change-password" />
+            <label for="change_password_radio">Change password</label>
+          </span>
+          <input type="text" id="new_password" name="new_password" placeholder="Enter password" disabled="true" />
+        </div>
+        {{!-----------------------change email input------------------------}}
+        <div class="form_section sm:flex justify-between">
+          <span>
+            <input type="radio" id="change_email_radio" name="operation_selector" value="change-email" />
+            <label for="change_email_radio">Change email</label>
+          </span>
+          <input type="text" id="new_email" name="new_email" placeholder="Enter new email" disabled="true" />
+        </div>
+        {{!-----------------------delete user input------------------------}}
+        <div class="form_section">
+          <input type="radio" id="delete_user_radio" name="operation_selector" value="delete-user" />
+          <label for="delete_user_radio">Delete user</label>
+        </div>
+        {{!-----------------------Admin username input------------------------}}
+        <div class="form_section ">
+          <label for="admin_username">Enter admin username</label>
+          <input type="text" id="admin_username" name="admin_username" placeholder="Enter admin username" required />
+        </div>
+        {{!-----------------------Admin password input------------------------}}
+        <div class="form_section sm:flex justify-between">
+          <label for="admin_password">Enter admin password</label>
+          <input type="password" id="admin_password" name="admin_password" placeholder="Enter password" required />
+        </div>
       </div>
-     
+      {{!-----------------------UserName lookup------------------------}}
+      <input type="submit" value="Submit" class="registration_submit" />
+    </form>
+
+    <div class="lookUpUserSection admin-form container w-screen md:w-5/6	lg:w-1/2 xl:w-2/5">
+      <div class="center">
+        <p class="center text-center mb-4 bold">Look Up a User</p>
+        <div class="ms:float-right lg:float-none xl:float-right mb-4 lg:flex flex-wrap mx-auto lg:ml-3 mr-12 md:mr-24 lg:mr-0 xl:mr-10">
+          <label class="lookUpUserLabel">Username lookup</label>
+          <div class="sm:inline lg:ml-20 xl:ml-4">
+            <input type="text" name="user_name" id="user_name_input_lookup" placeholder="enter email of user"
+              class="lookUpUserInput">
+            <input type="button" id="user_name_lookup_button" value="lookup" class="lookUpUserButton my-1">
+          </div>
+        </div>
+        <div class="md:float-right lg:float-none xl:float-right lg:flex flex-wrap mx-auto lg:ml-3 mr-12 md:mr-24 lg:mr-0 xl:mr-10">
+          <label class="lookUpUserLabel">Email lookup</label>
+          <div class="sm:inline lg:ml-20 xl:ml-4">
+            <input type="text" name="email" id="email_input_lookup" placeholder="enter username of user"
+              class="lookUpUserInput">
+            <input type="button" id="email_lookup_button" value="lookup" class="lookUpUserButton my-1">
+          </div>
+        </div>
+      </div>
     </div>
-        
-
-    {{! attributon for using icons }}
-    <details class="text-xs text-right">
-      <summary></summary>
-      Icons made by
-      <a
-        href="https://www.flaticon.com/authors/icongeek26"
-        title="Icongeek26"
-        class="text-xs"
-      >Icongeek26</a>
-      from
-      <a
-        href="https://www.flaticon.com/"
-        title="Flaticon"
-        class="text-xs"
-      >www.flaticon.com</a>
-    </details>
-
   </div>
-
-
 </div>
+
 <script>
-    document.getElementById("match_radio").addEventListener("click",function()
-    {
-        document.getElementById("match_username_input").disabled = false;
-        document.getElementById("new_password").disabled = true;
-        document.getElementById("new_password").disabled.value = "";
-        document.getElementById("new_email").disabled = true;
-        document.getElementById("new_email").value ="";        
-    })
+  document.getElementById("match_radio").addEventListener("click", function () {
+    document.getElementById("match_username_input").disabled = false;
+    document.getElementById("new_password").disabled = true;
+    document.getElementById("new_password").disabled.value = "";
+    document.getElementById("new_email").disabled = true;
+    document.getElementById("new_email").value = "";
+  })
 
-    document.getElementById("delete_user_radio").addEventListener("click",function()
-    {
-        document.getElementById("match_username_input").disabled = true;
-        document.getElementById("match_username_input").value = "";
-        document.getElementById("new_password").disabled = true;
-        document.getElementById("new_password").disabled.value = "";
-        document.getElementById("new_email").disabled = true;
-        document.getElementById("new_email").value ="";
-        
-    })
-    document.getElementById("change_password_radio").addEventListener("click",function()
-    {
-        document.getElementById("match_username_input").disabled = true;
-        document.getElementById("match_username_input").value = "";
-        document.getElementById("new_password").disabled = false;
-        document.getElementById("new_email").disabled = true;
-        document.getElementById("new_email").value ="";
-        
-    })
-    document.getElementById("change_email_radio").addEventListener("click",function()
-    {
-        document.getElementById("match_username_input").disabled = true;
-        document.getElementById("match_username_input").value = ""
-        document.getElementById("new_password").disabled = true;
-        document.getElementById("new_password").disabled.value = "";
-        document.getElementById("new_email").disabled = false;
-        
-    })
+  document.getElementById("delete_user_radio").addEventListener("click", function () {
+    document.getElementById("match_username_input").disabled = true;
+    document.getElementById("match_username_input").value = "";
+    document.getElementById("new_password").disabled = true;
+    document.getElementById("new_password").disabled.value = "";
+    document.getElementById("new_email").disabled = true;
+    document.getElementById("new_email").value = "";
 
-    document.getElementById("user_name_lookup_button").addEventListener("click",function()
-    {
-        let email = document.getElementById("user_name_input_lookup").value;
-        let result = fetch(`/users/getUserName/${email}`).then(function(data)
-        {
-          data.json().then(function(dataAsObject)
-          {
-            document.getElementById("email_input_lookup").value = dataAsObject[0].username
-          }
-          )
-        });
-    })
-  document.getElementById("email_lookup_button").addEventListener("click",function()
-    {
-        let username = document.getElementById("email_input_lookup").value;
-        let result = fetch(`/users/getEmail/${username}`).then(function(data)
-        {
-          data.json().then(function(dataAsObject)
-          {
-            document.getElementById("user_name_input_lookup").value = dataAsObject[0].email
-          }
-          )
-        });
-    })
+  })
+  document.getElementById("change_password_radio").addEventListener("click", function () {
+    document.getElementById("match_username_input").disabled = true;
+    document.getElementById("match_username_input").value = "";
+    document.getElementById("new_password").disabled = false;
+    document.getElementById("new_email").disabled = true;
+    document.getElementById("new_email").value = "";
+
+  })
+  document.getElementById("change_email_radio").addEventListener("click", function () {
+    document.getElementById("match_username_input").disabled = true;
+    document.getElementById("match_username_input").value = ""
+    document.getElementById("new_password").disabled = true;
+    document.getElementById("new_password").disabled.value = "";
+    document.getElementById("new_email").disabled = false;
+
+  })
+
+  document.getElementById("user_name_lookup_button").addEventListener("click", function () {
+    let email = document.getElementById("user_name_input_lookup").value;
+    let result = fetch(`/users/getUserName/${email}`).then(function (data) {
+      data.json().then(function (dataAsObject) {
+        document.getElementById("email_input_lookup").value = dataAsObject[0].username
+      }
+      )
+    });
+  })
+  document.getElementById("email_lookup_button").addEventListener("click", function () {
+    let username = document.getElementById("email_input_lookup").value;
+    let result = fetch(`/users/getEmail/${username}`).then(function (data) {
+      data.json().then(function (dataAsObject) {
+        document.getElementById("user_name_input_lookup").value = dataAsObject[0].email
+      }
+      )
+    });
+  })
 </script>

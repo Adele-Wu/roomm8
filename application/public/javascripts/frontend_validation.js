@@ -1,3 +1,21 @@
+/* ============================================================================================
+
+  * Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+  * Class: CSC-648-02 Software Engineering Final Project 
+  * Fall 2021
+  * TEAM 5 MEMBERS
+    > Edward Yun, 
+    > Jeffrey Fullmer Gradner, 
+    > Adele Wu, 
+    > Jeff Friedrich,
+    > Kris Byington, 
+    > Jose Quinteros
+  
+  * File: about_me.hbs
+  * Description: contains...
+  
+  ================================================================================================= */
+
 const registration_form = document.getElementById("registration_form");
 const first_name = document.getElementById("first_name");
 const last_name = document.getElementById("last_name");
