@@ -21,6 +21,8 @@ var flash = require("express-flash");
 var { body, validationResult } = require("express-validator");
 const session = require("express-session");
 const { sessionSave, delay } = require("../utils/promisification");
+var nodemailer = require('nodemailer');
+require('dotenv').config();
 
 /**
  * /register calls body("email").isEmail() from the express-validator library to
@@ -387,6 +389,46 @@ router.get("/:username", async (req, res, next) => {
     }
   }
 });
+router.put("/sendMessage",function(request,response,next)
+{
+  let usersEmail =request.body.usersEmail;
+  let userName = request.body.userName
+  let message = request.body.message;
+  sendMail(usersEmail,userName,message);
+  response.json({response:"message sent"});
+});
+
+
+
+
+
+EmailUserName=process.env.EmailUserName;
+EmailPassword=process.env.EmailPassword;
+
+let transporter =nodemailer.createTransport({
+  host: "roomm8.net",
+  port: 465,
+  auth: {
+    user: EmailUserName,
+    pass: EmailPassword
+  }
+});
+transporter.verify((err, success) => {
+  if (err) console.error(err);
+  if(success)console.log('Your config is correct');
+});
+function sendMail(email,Username,message)
+{
+  transporter.sendMail({
+    from: '"Message Courier" <"messagecourier@roomm8.net">', // sender address
+    to: email, // list of receivers
+    subject: "Message from"+Username, // Subject line
+    text: message
+  }).catch(function(error)
+  {
+    console.log(error);
+  });
+}
 
 
 module.exports = router;
