@@ -89,8 +89,8 @@ router.get("/browse-user", getRecentUsers, function (req, res, next) {
 /**
  * Renders edit page (only when a user is logged in)
  */
-router.get("/edit", function (req, res, next) {
-  res.render("edit-profile", {
+router.get("/edit-user", function (req, res, next) {
+  res.render("edit-user", {
     title: "Edit Profile",
     searchPost: false,
     searchUser: false,

@@ -1,9 +1,27 @@
+{{!============================================================================================
+
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: browse-room.hbs
+* Description: displays all the rooms available in the browse page for guests. 
+
+=================================================================================================}}
+
+
 <div class="relative min-h-screen md:flex">
 
     {{!-- filters panel --}}
     <div class="filter_panel" class="w-4/6">
         <div class="search ">
-            {{!-- placeholder for search --}}
             <input type="text" id="search-text" placeholder="search" class="w-11/12"></input>
             <button id="search-button">
                 <img src="/images/search_icon.png" width="20px">
@@ -25,11 +43,15 @@
             <div class="search_category">
                 <label for="privacy">Privacy:</label>
                 <div class="filter_category">
-                    <div class="item">
-                        <input type="radio" name="privacy" id="privateroom" class="filter_option" value="private" />Private Room
-                    </div>
-                    <div class="item">
-                        <input type="radio" name="privacy" id="sharedroom" class="filter_option" value="shared" />Shared Room
+                    <div class="filter_option">
+                        <div class="item">
+                            <input type="radio" name="privacy" id="privateroom" class="filter_option"
+                                value="private" />Private Room
+                        </div>
+                        <div class="item">
+                            <input type="radio" name="privacy" id="sharedroom" class="filter_option"
+                                value="shared" />Shared Room
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,9 +59,15 @@
             <div class="search_category">
                 <label for="amenities">Amenities</label>
                 <div class="filter_category">
-                    <div class="item">
-                        <input id="parking" type="checkbox" name="parking" value="parking">Parking
-                        <input id="disability" type="checkbox" name="disability" value="disability">Disability
+                    <div class="item grid grid-cols-2">
+                        <div class="filter_option">
+                            <input id="parking" type="checkbox" name="parking" value="parking">
+                            <label>Parking</label>
+                        </div>
+                        <div class="filter_option">
+                            <input id="disability" type="checkbox" name="disability" value="disability">
+                            <label>Disability</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,16 +77,14 @@
     </div>
 
     {{!-- generate all the necessary cards --}}
-    <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3" id="room_results">
+    <div class="cardGrid grid md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3" id="room_results">
         {{#each results}}
         {{> roomcard this}}
         {{/each}}
     </div>
 
-    {{!-- placeholder for map --}}
+    {{!-- placeholder for map. not: map can't use classes --}}
     {{!-- <div id="map" class=".w-screen md:w-1/3"> </div> --}}
-    <div id="map" style="width: 1000px"> </div>
+    <div id="map"> </div>
 
 </div>
-
-

@@ -1,45 +1,48 @@
-<form
-  id="registration_form"
-  action="/users/register"
-  method="POST"
-  enctype="application/x-www-form-urlencoded"
->
+{{!============================================================================================
+
+* Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
+* Class: CSC-648-02 Software Engineering Final Project 
+* Fall 2021
+* TEAM 5 MEMBERS
+  > Edward Yun, 
+  > Jeffrey Fullmer Gradner, 
+  > Adele Wu, 
+  > Jeff Friedrich,
+  > Kris Byington, 
+  > Jose Quinteros
+
+* File: registration.hbs
+* Description: this is our registration page where you can find the 
+* registration form where a guest can register and have access to special features  
+
+=================================================================================================}}
+
+<form id="registration_form" action="/users/register" method="POST" enctype="application/x-www-form-urlencoded"
+  class="container w-screen md:w-2/3 lg:w-1/2 xl:w-2/5">
+
   <div class="form-validation">
-    <label for="first_name">First Name</label>
-    <input
-      type="text"
-      class="hover_card"
-      id="first_name"
-      name="first_name"
-      placeholder="Enter first name"
-      minlength="2"
-      required
-    />
+    <label for="first_name">First Name:</label>
+    <input type="text" class="hover_card" id="first_name" name="first_name" placeholder="Enter first name" minlength="2" required />
 
     <small>Error message</small>
   </div>
   <div class="form-validation">
-    <label for="last_name">Last Name</label>
-    <input
-      type="text"
-      class="hover_card"
-      id="last_name"
-      name="last_name"
-      placeholder="Enter last name"
-      minlength="2"
-      required
-    />
+    <label for="last_name">Last Name:</label>
+    <input type="text" class="hover_card" id="last_name" name="last_name" placeholder="Enter last name" minlength="2"
+      required />
     <small>Error message</small>
   </div>
 
   <div class="form-validation">
-    <label for="gender">Gender</label>
+    <label for="gender">Gender:</label>
     <div id="gender">
-      <input type="radio" id="male" name="gender" value="Male" />
+      <input type="radio" value="male" id="male" name="gender" class="radio" />
       <label for="male">Male</label>
-      <input type="radio" id="female" name="gender" value="Female" />
+
+      <input type="radio" value="female" id="female" name="gender" value="female" class="radio" />
       <label for="female">Female</label>
-      <input type="radio" id="other" name="gender" value="Other" />
+
+      <input type="radio" value="other" id="other" name="gender" value="other" class="radio" />
       <label for="other">Other</label>
     </div>
 
@@ -47,15 +50,8 @@
   </div>
 
   <div class="form-validation">
-    <label for="date_of_birth">Birth Date</label>
-    <input
-      type="date"
-      class="hover_card"
-      id="date_of_birth"
-      name="date_of_birth"
-      value="2018-07-22"
-      required
-    />
+    <label for="date_of_birth">Birth Date:</label>
+    <input type="date" class="hover_card" id="date_of_birth" name="date_of_birth" value="2018-07-22" required />
 
     <small>Error message</small>
   </div>
@@ -63,15 +59,10 @@
   <div class="form-validation">
     <label for="occupation">Occupation</label>
     <div id="occupation">
-      <input type="radio" id="student" name="occupation" value="Student" />
+      <input type="radio" id="student" name="occupation" value="Student" class="radio"/>
       <label for="student">Student</label>
 
-      <input
-        type="radio"
-        id="professional"
-        name="occupation"
-        value="Professional"
-      />
+      <input type="radio" id="professional" name="occupation" value="Professional" class="radio"/>
       <label for="professional">Professional</label>
     </div>
 
@@ -80,10 +71,9 @@
 
   <div class="form-validation">
     <label for="fields">Fields:</label>
-    <select name="fields" id="fields" class="w-2/3" value="fields">
-      <option
-        value="Agriculture, Agriculture Operations, and Related Sciences"
-      >Agriculture, Agriculture Operations, and Related Sciences</option>
+    <select name="fields" id="fields" class="hover_card ml-4" value="fields">
+      <option value="Agriculture, Agriculture Operations, and Related Sciences">Agriculture, Agriculture Operations, and
+        Related Sciences</option>
       <option value="Architecture and Related Services">Architecture and Related
         Services</option>
       <option value="Area, Ethnic, Cultural, Gender, and Group Studies">Area,
@@ -91,23 +81,18 @@
       <option value="Aviation">Aviation</option>
       <option value="Biological and Biomedical Sciences">Biological and
         Biomedical Sciences</option>
-      <option
-        value="Business, Management, Marketing, and Related Support Services"
-      >Business, Management, Marketing, and Related Support Services</option>
-      <option
-        value="Communication, Journalism, and Related Programs"
-      >Communication, Journalism, and Related Programs</option>
-      <option
-        value="Communications Technologies/technicians and Support Services"
-      >Communications Technologies/technicians and Support Services</option>
-      <option
-        value="Computer and Information Sciences and Support Services"
-      >Computer and Information Sciences and Support Services</option>
+      <option value="Business, Management, Marketing, and Related Support Services">Business, Management, Marketing, and
+        Related Support Services</option>
+      <option value="Communication, Journalism, and Related Programs">Communication, Journalism, and Related Programs
+      </option>
+      <option value="Communications Technologies/technicians and Support Services">Communications
+        Technologies/technicians and Support Services</option>
+      <option value="Computer and Information Sciences and Support Services">Computer and Information Sciences and
+        Support Services</option>
       <option value="Construction Trades">Construction Trades</option>
       <option value="Education">Education</option>
-      <option
-        value="Engineering Technologies and Engineering-Related Fields"
-      >Engineering Technologies and Engineering-Related Fields</option>
+      <option value="Engineering Technologies and Engineering-Related Fields">Engineering Technologies and
+        Engineering-Related Fields</option>
       <option value="Engineering">Engineering</option>
       <option value="English Language and Literature/letters">English Language
         and Literature/letters</option>
@@ -158,7 +143,7 @@
 
   <div class="form-validation">
     <label for="schools">School:</label>
-    <select name="schools" id="schools" class="w-2/3" value="schools">
+    <select name="schools" id="schools" class="hover_card ml-3" value="schools">
       <option value="College of San Francisco">College of San Francisco</option>
       <option value="San Francisco State University">San Francisco State
         University</option>
@@ -171,9 +156,8 @@
       <option value="California Institute of Integral Studies">California
         Institute of Integral Studies</option>
       <option value="DeVry University">DeVry University</option>
-      <option
-        value="The Fashion Institute of Design and Merchandising (FIDM)"
-      >The Fashion Institute of Design and Merchandising (FIDM)</option>
+      <option value="The Fashion Institute of Design and Merchandising (FIDM)">The Fashion Institute of Design and
+        Merchandising (FIDM)</option>
       <option value="Golden Gate University">Golden Gate University</option>
       <option value="Heald College">Heald College</option>
       <option value="Hult International Business School">Hult International
@@ -196,68 +180,33 @@
   </div>
 
   <div class="form-validation">
-    <label for="email">Email</label>
-    <input
-      type="email"
-      class="hover_card"
-      id="email"
-      name="email"
-      placeholder="Enter valid e-mail address"
-      required
-    />
+    <label for="email">Email:</label>
+    <input type="email" class="hover_card" id="email" name="email" placeholder="Enter valid e-mail address" required />
 
     <small>Error message</small>
   </div>
 
   <div class="form-validation">
-    <label for="username">Username</label>
-    <input
-      type="text"
-      class="hover_card"
-      id="username"
-      name="username"
-      placeholder="Enter username"
-      required
-    />
+    <label for="username">Username:</label>
+    <input type="text" class="hover_card" id="username" name="username" placeholder="Enter username" required />
 
     <small>Error message</small>
   </div>
   <div class="form-validation">
-    <label for="password">Password</label>
-    <input
-      type="password"
-      class="hover_card"
-      id="password"
-      name="password"
-      placeholder="Enter password"
-      required
-    />
+    <label for="password">Password:</label>
+    <input type="password" class="hover_card" id="password" name="password" placeholder="Enter password" required />
 
     <small>Error message</small>
   </div>
   <div class="form-validation">
-    <label for="confirm_password">Confirm Password</label>
-    <input
-      type="password"
-      class="hover_card"
-      id="confirm_password"
-      name="confirm_password"
-      placeholder="Enter confirm password"
-      required
-    />
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" class="hover_card" id="confirm_password" name="confirm_password"
+      placeholder="Enter confirm password" required />
 
     <small>Error message</small>
   </div>
-  <button
-    type="submit"
-    class="hover_card"
-    id="registration_submit"
-    value="Submit"
-    disabled=""
-  >Submit</button>
+  <button>
+    <input type="submit" class="hover_card" id="registration_submit" value="Submit" disabled=""></input>
+    </button>
 </form>
-<script
-  defer
-  type="text/javascript"
-  src="javascripts/registration-validation.js"
-></script>
+<script defer type="text/javascript" src="javascripts/registration-validation.js"></script>
