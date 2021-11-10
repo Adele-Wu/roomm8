@@ -131,7 +131,7 @@ router.get("/search", async (req, res, next) => {
 router.get("/:id(\\d+)", async (req, res, next) => {
   try {
     let usernameTitle = "";
-    let baseSQL = `SELECT u.username, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.photopath, u.description, p.title, p.description, p.photopath, p.created, p.address, p.rent  \
+    let baseSQL = `SELECT u.username, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.photopath, u.description, p.title, p.description, p.photopath, p.created, p.address, p.rent, p.privacy  \
           FROM users u \
           JOIN posts p \
           on u.user_id = p.users_user_id \

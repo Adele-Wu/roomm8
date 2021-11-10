@@ -433,6 +433,15 @@ footer {
   box-shadow: 0 0 0 0;
 }
 
+hr {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+p#privacy {
+  margin-left: 0;
+}
+
 .filter_toggle {
   margin-top: -2rem;
 }

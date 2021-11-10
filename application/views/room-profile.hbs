@@ -41,6 +41,13 @@
           <span class="px-2">{{currentPost.description}}</span>
         </div>
 
+        <div class="post_info_category flex">
+          <label class="post_label">Privacy: </label>
+          <span class="px-2">
+            <p id="privacy"></p>
+          </span>
+        </div>
+
         <div class="post_info_category">
           <label class="post_label">Listing Created: </label>
           <span>{{currentPost.created}}</span>
@@ -140,3 +147,12 @@
     </div>
   </div>
 </div>
+
+<script>
+  if ({{ currentPost.privacy }} == 1) {
+    document.getElementById("privacy").textContent = "Private Room";
+  }
+  if ({{ currentPost.privacy }} == 0) {
+    document.getElementById("privacy").textContent = "Shared Room";
+  }
+</script>
