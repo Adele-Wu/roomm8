@@ -200,17 +200,17 @@ router.post("/logout", async (req, res, next) => {
   });
 });
 
-// router.get("/:id(\\d+)", async (req, res, next) => {
-//   let baseSQL = "SELECT * FROM users where user_id = ?;";
-//   let [results, fields] = await db.execute(baseSQL, [req.params.id]);
-//   // console.log(results);
-//   if (results && results.length) {
-//     res.render("user-profile", {
-//       title: results[0].first_name,
-//       currentUser: results[0],
-//     });
-//   }
-// });
+router.get("/:id(\\d+)", async (req, res, next) => {
+  let baseSQL = "SELECT * FROM users where user_id = ?;";
+  let [results, fields] = await db.execute(baseSQL, [req.params.id]);
+  // console.log(results);
+  if (results && results.length) {
+    res.render("user-profile", {
+      title: results[0].first_name,
+      currentUser: results[0],
+    });
+  }
+});
 
 /**
  * /search will search by a user text input with a few conditions
