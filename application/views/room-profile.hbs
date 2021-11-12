@@ -56,7 +56,7 @@
     </div>
 
     {{!-- about host --}}
-    <div class="card postcard p-4 flex">
+    <div class="card postcard p-4 sm:flex">
 
       {{!-- user photo for now --}}
       <img class="cardImage userImage max-w-screen-lg " {{!-- src="images/uploads/posts/{{photopath}}" --}}
@@ -131,7 +131,11 @@
         <label class="">Leave a Comment:</label>
         <textarea rows="5" id="comment" name="comment" cols="30" class="px-2"
           placeholder="Ask a question or write a review"></textarea>
-        <button class="commentButton" type="submit" value="Comment">Comment</button>
+          {{#if logged}}
+          <button class="commentButton" type="submit" value="Comment">Comment</button>
+          {{else}}
+          <button class="commentButton"><a href="/login">Log In To Comment</a></button>
+          {{/if}}   
       </form>
     </div>
 

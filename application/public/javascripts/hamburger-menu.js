@@ -6,7 +6,8 @@
  *
  * File: hamburger-menu.js
  *
- * Description: TBD - Adele
+ * Description: Small front end function that allows for hamburger menu 
+ * to be displayed on 768px screens or smaller upon screen resizing
  **************************************************************/
 const menu = document.getElementById("menu");
 function menuToggle() {

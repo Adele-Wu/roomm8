@@ -1,18 +1,18 @@
 {{!============================================================================================
 
 * Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
-* Class: CSC-648-02 Software Engineering Final Project 
+* Class: CSC-648-02 Software Engineering Final Project
 * Fall 2021
 * TEAM 5 MEMBERS
-  > Edward Yun, 
-  > Jeffrey Fullmer Gradner, 
-  > Adele Wu, 
-  > Jeff Friedrich,
-  > Kris Byington, 
-  > Jose Quinteros
+> Edward Yun,
+> Jeffrey Fullmer Gradner,
+> Adele Wu,
+> Jeff Friedrich,
+> Kris Byington,
+> Jose Quinteros
 
 * File: browse-room.hbs
-* Description: displays all the rooms available in the browse page for guests. 
+* Description: displays all the rooms available in the browse page for guests.
 
 =================================================================================================}}
 
@@ -31,51 +31,57 @@
         <hr>
 
         {{!-- <form action="post/filter" action="GET" class="filter_form w-56"> --}}
-        <div id="post-form" class="filter_form w-56">
+            <div id="post-form" class="filter_form w-56">
 
-            {{!-- room preferences --}}
-            <div class="search_category">
-                <label for="price">Price Range: </label>
-                <div class="range">
-                    <input id="minPriceRange" type="text" name="minPriceRange" placeholder="Min Price" class="w-5/12 mx-3">-
-                    <input id="maxPriceRange" type="text" name="maxPriceRange" placeholder="Max Price" class="w-5/12 mx-3">
+                {{!-- room preferences --}}
+                <div class="search_category">
+                    <label for="price">Price Range: </label>
+                    <div class="range">
+                        <input id="minPriceRange" type="text" name="minPriceRange" placeholder="Min Price"
+                            class="w-5/12 mx-3">-
+                        <input id="maxPriceRange" type="text" name="maxPriceRange" placeholder="Max Price"
+                            class="w-5/12 mx-3">
+                    </div>
                 </div>
-            </div>
 
-            <div class="search_category">
-                <label for="privacy">Privacy:</label>
-                <div class="filter_category">
-                    <div class="filter_option">
-                        <div class="item">
-                            <input type="radio" name="privacy" id="privateroom" class="filter_option"
-                                value="private" />Private Room
+                <div class="search_category">
+                    <label for="privacy">Privacy:</label>
+                    <div class="filter_category">
+                        <div class="filter_option">
+                            <label class="item">
+                                <input type="radio" name="privacy" id="privateroom" class="filter_option"
+                                    value="private" />Private Room
+                            </label>
                         </div>
-                        <div class="item">
-                            <input type="radio" name="privacy" id="sharedroom" class="filter_option"
-                                value="shared" />Shared Room
+                        <div>
+                            <label class="item">
+                                <input type="radio" name="privacy" id="sharedroom" class="filter_option"
+                                    value="shared" />Shared Room
+                            </label>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="search_category">
-                <label for="amenities">Amenities</label>
-                <div class="filter_category">
-                    <div class="item grid grid-cols-2">
-                        <div class="filter_option">
-                            <input id="parking" type="checkbox" name="parking" value="parking">
-                            <label>Parking</label>
-                        </div>
-                        <div class="filter_option">
-                            <input id="disability" type="checkbox" name="disability" value="disability">
-                            <label>Disability</label>
+                <div class="search_category">
+                    <label for="amenities">Amenities</label>
+                    <div class="filter_category">
+                        <div class="item grid grid-cols-2">
+                            <div class="filter_option">
+                                <label>
+                                    <input id="parking" type="checkbox" name="parking" value="parking">
+                                    Parking</label>
+                            </div>
+                            <div class="filter_option">
+                                <label>
+                                    <input id="disability" type="checkbox" name="disability" value="disability">
+                                    Disability</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <button id="filter-button" class="filterButton">Filter</button>
-        </div>
+                <button id="filter-button" class="filterButton">Filter</button>
+            </div>
     </div>
 
     {{!-- generate all the necessary cards --}}
