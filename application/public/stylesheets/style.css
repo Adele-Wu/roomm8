@@ -538,11 +538,17 @@ p#privacy {
   background-image: url("https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-repeat: no-repeat;
   background-position-x: center;
-  background-position-y: bottom;
-  /* background-position-y: center; */
+  background-position-y: center;
   background-size: cover;
   margin: 0.25rem;
   background-attachment: fixed;
+}
+
+@media screen and (min-width: 1280px) {
+  .home_sect1_background {
+    /* larger sf skyline image for large screens */
+    background-image: url("https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg?"); 
+  }
 }
 
 .home_sect1 {
