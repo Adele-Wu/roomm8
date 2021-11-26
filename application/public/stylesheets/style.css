@@ -466,7 +466,7 @@ p#privacy {
   margin-top: -2rem;
 }
 
-.filter_panel {
+/* .filter_panel {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 1rem;
   margin: 0.25rem;
@@ -477,6 +477,13 @@ p#privacy {
   backdrop-filter: blur(10px);
   height: max-content;
   min-width: 17.5rem;
+} */
+
+@media only screen and (max-width: 600px) {
+  .filter_panel {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+  }
 }
 
 .search {
@@ -501,6 +508,17 @@ p#privacy {
   background-color: transparent;
   box-shadow: 0 0 0 0;
   backdrop-filter: none;
+
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 1rem;
+  margin: 0.25rem;
+  margin-left: 0.5rem;
+  border: 0.5rem;
+  border-radius: 20px;
+  box-shadow: 5px 5px 12px 0 rgba(0, 0, 0, 0.25), -8px -8px 12px 0 rgba(255, 255, 255, 0.1), 0 0 2000px rgba(255, 255, 255, 0.5) inset;
+  backdrop-filter: blur(10px);
+  height: max-content;
+  min-width: 17.5rem;
 }
 
 .range {
@@ -547,7 +565,7 @@ p#privacy {
 @media screen and (min-width: 1500px) {
   .home_sect1_background {
     /* larger sf skyline image for large screens */
-    background-image: url("https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg?"); 
+    background-image: url("https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg?");
   }
 }
 

@@ -20,68 +20,65 @@
 <div class="relative min-h-screen md:flex">
 
     {{!-- filters panel --}}
-    <div class="filter_panel" class="w-4/6">
-        <div class="search ">
+    <div class="" class="w-4/6">
+        <div class="search filter_form">
             <input type="text" id="search-text" placeholder="search" class="w-11/12"></input>
             <button id="search-button">
                 <img src="/images/search_icon.png" width="20px">
             </button>
         </div>
 
-        <hr>
+        <div id="post-form" class="filter_form w-56">
 
-        {{!-- <form action="post/filter" action="GET" class="filter_form w-56"> --}}
-            <div id="post-form" class="filter_form w-56">
-
-                {{!-- room preferences --}}
-                <div class="search_category">
-                    <label for="price">Price Range: </label>
-                    <div class="range">
-                        <input id="minPriceRange" type="text" name="minPriceRange" placeholder="Min Price"
-                            class="w-5/12 mx-3">-
-                        <input id="maxPriceRange" type="text" name="maxPriceRange" placeholder="Max Price"
-                            class="w-5/12 mx-3">
-                    </div>
+            {{!-- room preferences --}}
+            <div class="search_category">
+                <label for="price">Price Range: </label>
+                <div class="range">
+                    <input id="minPriceRange" type="text" name="minPriceRange" placeholder="Min Price"
+                        class="w-5/12 mx-3">-
+                    <input id="maxPriceRange" type="text" name="maxPriceRange" placeholder="Max Price"
+                        class="w-5/12 mx-3">
                 </div>
-
-                <div class="search_category">
-                    <label for="privacy">Privacy:</label>
-                    <div class="filter_category">
-                        <div class="filter_option">
-                            <label class="item">
-                                <input type="radio" name="privacy" id="privateroom" class="filter_option"
-                                    value="private" />Private Room
-                            </label>
-                        </div>
-                        <div>
-                            <label class="item">
-                                <input type="radio" name="privacy" id="sharedroom" class="filter_option"
-                                    value="shared" />Shared Room
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="search_category">
-                    <label for="amenities">Amenities</label>
-                    <div class="filter_category">
-                        <div class="item grid grid-cols-2">
-                            <div class="filter_option">
-                                <label>
-                                    <input id="parking" type="checkbox" name="parking" value="parking">
-                                    Parking</label>
-                            </div>
-                            <div class="filter_option">
-                                <label>
-                                    <input id="disability" type="checkbox" name="disability" value="disability">
-                                    Disability</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <button id="filter-button" class="filterButton">Filter</button>
             </div>
+
+            <div class="search_category">
+                <label for="privacy">Privacy:</label>
+                <div class="filter_category">
+                    <div class="filter_option">
+                        <label class="item">
+                            <input type="radio" name="privacy" id="privateroom" class="filter_option"
+                                value="private" />Private Room
+                        </label>
+                    </div>
+                    <div>
+                        <label class="item">
+                            <input type="radio" name="privacy" id="sharedroom" class="filter_option"
+                                value="shared" />Shared Room
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search_category">
+                <label for="amenities">Amenities</label>
+                <div class="filter_category">
+                    <div class="item grid grid-cols-2">
+                        <div class="filter_option">
+                            <label>
+                                <input id="parking" type="checkbox" name="parking" value="parking">
+                                Parking</label>
+                        </div>
+                        <div class="filter_option">
+                            <label>
+                                <input id="disability" type="checkbox" name="disability" value="disability">
+                                Disability</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="filter-button" class="filterButton">Filter</button>
+        </div>
     </div>
 
     {{!-- generate all the necessary cards --}}

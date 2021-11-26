@@ -22,7 +22,7 @@
   {{! filters panel }}
   <div class="filter_panel min-w-4/6 m-1 pt-10 md:pt-4">
 
-    <button id="filter_toggle" class="filter_toggle md:hidden center relative float-right px-3 py-2"
+    <button id="filter_toggle" class="inline-block filter_toggle md:hidden center relative float-right px-3 py-2"
       onclick="toggleOpen()">
       {{!-- <svg class="h-3 w-3 noHover" viewBox="0 0 20 20">
         <path fill="currentColor" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
@@ -30,17 +30,15 @@
       <img src="https://static.thenounproject.com/png/1701541-200.png" width="20px">
     </button>
 
-    <div id="filters_panel" class="hidden md:block m-4 md:m-0">
-      <div class="search">
+    <div id="filters_panel" class="inline-block	hidden md:block m-4 md:m-0">
+      <div class="search filter_form center">
         <input type="text" id="search-text" placeholder="search" class="w-11/12"></input>
         <button id="search-button">
           <img src="/images/search_icon.png" width="30px">
         </button>
       </div>
 
-      <hr>
-
-      <form action="/users/filter" class="filter_form w-56" method="GET">
+      <form action="/users/filter" class="filter_form w-56 center" method="GET">
 
         {{! roommate preferances }}
         <div class="search_category">
