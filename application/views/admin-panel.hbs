@@ -36,6 +36,14 @@
           </span>
           <input type="text" id="new_email" name="new_email" placeholder="Enter new email" disabled="true" />
         </div>
+        {{!-----------------------change user type input------------------------}}
+        <div class="form_section sm:flex justify-between">
+          <span>
+            <input type="radio" id="change_user_type_radio" name="operation_selector" value="change-user-type" />
+            <label for="change_user_type_radio">Change user type</label>
+          </span>
+          <input type="text" id="new_user_type" name="new_user_type" placeholder="Enter admin or user " disabled="true" />
+        </div>
         {{!-----------------------delete user input------------------------}}
         <div class="form_section">
           <input type="radio" id="delete_user_radio" name="operation_selector" value="delete-user" />
@@ -81,39 +89,77 @@
 </div>
 
 <script>
-  document.getElementById("match_radio").addEventListener("click", function () {
-    document.getElementById("match_username_input").disabled = false;
-    document.getElementById("new_password").disabled = true;
-    document.getElementById("new_password").disabled.value = "";
-    document.getElementById("new_email").disabled = true;
-    document.getElementById("new_email").value = "";
+    document.getElementById("match_radio").addEventListener("click", function () 
+    {
+      document.getElementById("match_username_input").disabled = false;
+
+      document.getElementById("new_password").disabled = true;
+      document.getElementById("new_password").value = "";
+
+      document.getElementById("new_user_type").disabled = true;
+      document.getElementById("new_user_type").value = "";
+
+      document.getElementById("new_email").disabled = true;
+      document.getElementById("new_email").value = "";
   })
 
   document.getElementById("delete_user_radio").addEventListener("click", function () {
     document.getElementById("match_username_input").disabled = true;
     document.getElementById("match_username_input").value = "";
+
     document.getElementById("new_password").disabled = true;
-    document.getElementById("new_password").disabled.value = "";
+    document.getElementById("new_password").value = "";
+
+    document.getElementById("new_user_type").disabled = true;
+    document.getElementById("new_user_type").value = "";
+
     document.getElementById("new_email").disabled = true;
     document.getElementById("new_email").value = "";
 
   })
   document.getElementById("change_password_radio").addEventListener("click", function () {
+    document.getElementById("new_password").disabled = false;
+
     document.getElementById("match_username_input").disabled = true;
     document.getElementById("match_username_input").value = "";
-    document.getElementById("new_password").disabled = false;
+
+    document.getElementById("new_user_type").disabled = true;
+    document.getElementById("new_user_type").value = "";
+
     document.getElementById("new_email").disabled = true;
     document.getElementById("new_email").value = "";
 
   })
   document.getElementById("change_email_radio").addEventListener("click", function () {
-    document.getElementById("match_username_input").disabled = true;
-    document.getElementById("match_username_input").value = ""
-    document.getElementById("new_password").disabled = true;
-    document.getElementById("new_password").disabled.value = "";
     document.getElementById("new_email").disabled = false;
 
+    document.getElementById("match_username_input").disabled = true;
+    document.getElementById("match_username_input").value = ""
+
+    document.getElementById("new_password").disabled = true;
+    document.getElementById("new_password").value = "";
+
+    document.getElementById("new_user_type").disabled = true;
+    document.getElementById("new_user_type").value = "";
   })
+
+  document.getElementById("change_user_type_radio").addEventListener("click", function () {
+    document.getElementById("new_user_type").disabled = false;
+
+    document.getElementById("match_username_input").disabled = true;
+    document.getElementById("match_username_input").value = ""
+
+    document.getElementById("new_password").disabled = true;
+    document.getElementById("new_password").value = "";
+
+    document.getElementById("new_email").disabled = true;
+    document.getElementById("new_email").value = "";
+  })
+
+
+
+
+
 
   document.getElementById("user_name_lookup_button").addEventListener("click", function () {
     let email = document.getElementById("user_name_input_lookup").value;
