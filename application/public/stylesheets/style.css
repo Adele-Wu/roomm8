@@ -144,6 +144,26 @@ form {
   backdrop-filter: blur(10px);
 }
 
+.noFormCSS {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+}
+
+.messageClass {
+  display: grid;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+}
+
 .lookUpUserSection {
   display: grid;
   /* width: 600px; */
@@ -433,6 +453,15 @@ footer {
   box-shadow: 0 0 0 0;
 }
 
+hr {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+p#privacy {
+  margin-left: 0;
+}
+
 .filter_toggle {
   margin-top: -2rem;
 }
@@ -505,13 +534,21 @@ footer {
 /* home page */
 
 .home_sect1_background {
-  background-image: url("https://images.unsplash.com/photo-1595526051245-4506e0005bd0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80");
+  /* background-image: url("https://images.unsplash.com/photo-1595526051245-4506e0005bd0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80"); */
+  background-image: url("https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   background-repeat: no-repeat;
   background-position-x: center;
-  background-position-y: bottom;
+  background-position-y: center;
   background-size: cover;
   margin: 0.25rem;
   background-attachment: fixed;
+}
+
+@media screen and (min-width: 1500px) {
+  .home_sect1_background {
+    /* larger sf skyline image for large screens */
+    background-image: url("https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg?"); 
+  }
 }
 
 .home_sect1 {
@@ -619,15 +656,6 @@ input.checkbox {
 .commentSection {
   height: max-content;
   max-height: 70rem;
-}
-
-.noFormCSS {
-  margin: 0;
-  padding: 0;
-  border-radius: 0;
-  background-color: rgba(0, 0, 0, 0);
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  backdrop-filter: blur(0px);
 }
 
 /* for commenting on post */

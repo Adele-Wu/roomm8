@@ -1,15 +1,15 @@
 {{!============================================================================================
 
 * Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
-* Class: CSC-648-02 Software Engineering Final Project 
+* Class: CSC-648-02 Software Engineering Final Project
 * Fall 2021
 * TEAM 5 MEMBERS
-  > Edward Yun, 
-  > Jeffrey Fullmer Gradner, 
-  > Adele Wu, 
-  > Jeff Friedrich,
-  > Kris Byington, 
-  > Jose Quinteros
+> Edward Yun,
+> Jeffrey Fullmer Gradner,
+> Adele Wu,
+> Jeff Friedrich,
+> Kris Byington,
+> Jose Quinteros
 
 * File: browse-user.hbs
 * Description: displays all the rooms available in the browse page for users.
@@ -38,6 +38,8 @@
         </button>
       </div>
 
+      <hr>
+
       <form action="/users/filter" class="filter_form w-56" method="GET">
 
         {{! roommate preferances }}
@@ -46,16 +48,19 @@
           <div class="filter_category">
             <div class="item grid grid-cols-2">
               <div class="filter_option">
-                <input type="radio" name="gender" id="female" class="filter_option" value="Female" />
-                <label>Female</label>
+                <label>
+                  <input type="radio" name="gender" id="female" class="filter_option " value="Female" />
+                  Female</label>
               </div>
               <div class="filter_option">
-                <input type="radio" name="gender" id="male" class="filter_option" value="Male" />
-                <label>Male</label>
+                <label>
+                  <input type="radio" name="gender" id="male" class="filter_option " value="Male" />
+                  Male</label>
               </div>
               <div class="filter_option">
-                <input type="radio" name="gender" id="other" class="filter_option" value="Other" />
-                <label>Other</label>
+                <label>
+                  <input type="radio" name="gender" id="other" class="filter_option " value="Other" />
+                  Other</label>
               </div>
             </div>
           </div>
@@ -74,18 +79,20 @@
           <label for="occupation">Occupation:</label>
           <div class="filter_category">
             <div class="filter_option">
-              <div class="item">
-                <input type="radio" name="occupation" id="student" class="occupation" value="Student" />
-                <label>Student</label>
-              </div>
+              <label>
+                <input type="radio" name="occupation" id="student" class="occupation " value="Student" />
+                Student</label>
+            </div>
 
-              <div class="filter_option">
-                <input type="radio" name="occupation" id="professional" class="occupation" value="Professional" />
-                <label>Professional</label>
-              </div>
+            <div class="filter_option">
+              <label>
+                <input type="radio" name="occupation" id="professional" class="occupation "
+                  value="Professional" />
+                Professional</label>
             </div>
           </div>
         </div>
+
         <div class="search_category">
           <label for="fields" class="filterMenuDropdownLabel">Fields:</label>
           <select name="fields" id="fields" class="w-2/3">
@@ -207,24 +214,29 @@
           <div class="filter_category">
             <div class="item grid grid-cols-2">
               <div class="filter_option">
-                <input type="checkbox" name="pets" id="dog" class="filter_option" value="dog" />
-                <label>Dog</label>
+                <label>
+                  <input type="checkbox" name="pets" id="dog" class="filter_option" value="dog" />
+                  Dog</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="pets" id="cat" class="filter_option" value="cat" />
-                <label>Cat</label>
+                <label>
+                  <input type="checkbox" name="pets" id="cat" class="filter_option" value="cat" />
+                  Cat</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="pets" id="fish" class="filter_option" value="fish" />
-                <label>Fish</label>
+                <label>
+                  <input type="checkbox" name="pets" id="fish" class="filter_option" value="fish" />
+                  Fish</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="pets" id="reptile" class="filter_option" value="reptile" />
-                <label>Reptile</label>
+                <label>
+                  <input type="checkbox" name="pets" id="reptile" class="filter_option" value="reptile" />
+                  Reptile</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="pets" id="bird" class="filter_option" value="bird" />
-                <label>Bird</label>
+                <label>
+                  <input type="checkbox" name="pets" id="bird" class="filter_option" value="bird" />
+                  Bird</label>
               </div>
             </div>
           </div>
@@ -234,13 +246,16 @@
           <label for="smoking">Smoking:
             <div class="filter_category grid grid-cols-2">
               <div class="filter_option">
-                <input type="radio" name="smoke" id="yessmoke" class="filter_option" value="smoking" />
-                <label>Yes</label>
+                <label>
+                  <input type="radio" name="smoke" id="yessmoke" class="filter_option " value="smoking" />
+                  Yes</label>
               </div>
               <div class="filter_option">
-                <input type="radio" name="smoke" id="nosmoke" class="filter_option" />
-                <label>No</label>
+                <label>
+                  <input type="radio" name="smoke" id="nosmoke" class="filter_option " />
+                  No</label>
               </div>
+            </div>
           </label>
         </div>
 
@@ -248,12 +263,17 @@
           <label for="lifestyle">Lifestyle:
             <div class="filter_category grid grid-cols-2">
               <div class="filter_option">
-                <input type="radio" name="lifestyle" id="clean" class="filter_option" value="clean" />Clean
+                <label>
+                  <input type="radio" name="lifestyle" id="clean" class="filter_option " value="clean" />
+                  Clean</label>
               </div>
 
               <div class="filter_option">
-                <input type="radio" name="lifestyle" id="messy" class="filter_option" value="messy" />Messy
+                <label>
+                  <input type="radio" name="lifestyle" id="messy" class="filter_option " value="messy" />
+                  Messy</label>
               </div>
+            </div>
           </label>
         </div>
 
@@ -261,14 +281,15 @@
           <label for="schedule">Schedule:
             <div class="filter_category grid grid-cols-2">
               <div class="filter_option">
-                <input type="radio" name="schedule" id="earlybird" {{!-- class="filter_option" --}}
-                  value="early bird" />
-                <label>Early Bird</label>
+                <label>
+                  <input type="radio" name="schedule" id="earlybird" class="filter_option "
+                    value="early bird" />
+                  Early Bird</label>
               </div>
-
               <div class="filter_option">
-                <input type="radio" name="schedule" id="nightowl" {{!-- class="filter_option" --}} value="night owl" />
-                <label>Night Owl</label>
+                <label>
+                  <input type="radio" name="schedule" id="nightowl" class="filter_option " value="night owl" />
+                  Night Owl</label>
               </div>
             </div>
           </label>
@@ -360,24 +381,29 @@
           <div class="filter_category">
             <div class="item grid grid-cols-2" id="interestBlarg">
               <div class="filter_option">
-                <input type="checkbox" name="interests" id="art" class="filter_option" value="art" />
-                <label>Art</label>
+                <label>
+                  <input type="checkbox" name="interests" id="art" class="filter_option" value="art" />
+                  Art</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="interests" id="cooking" class="filter_option" value="cooking" />
-                <label>Cooking</label>
+                <label>
+                  <input type="checkbox" name="interests" id="cooking" class="filter_option" value="cooking" />
+                  Cooking</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="interests" id="exercising" class="filter_option" value="exercising" />
-                <label>Exercising</label>
+                <label>
+                  <input type="checkbox" name="interests" id="exercising" class="filter_option" value="exercising" />
+                  Exercising</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="interests" id="gaming" class="filter_option" value="gaming" />
-                <label>Gaming</label>
+                <label>
+                  <input type="checkbox" name="interests" id="gaming" class="filter_option" value="gaming" />
+                  Gaming</label>
               </div>
               <div class="filter_option">
-                <input type="checkbox" name="interests" id="music" class="filter_option" value="music" />
-                <label>Music</label>
+                <label>
+                  <input type="checkbox" name="interests" id="music" class="filter_option" value="music" />
+                  Music</label>
               </div>
             </div>
           </div>
@@ -386,14 +412,13 @@
       </form>
     </div>
   </div>
-</div>
-</div>
 
-{{! generate all the necessary cards }}
-<div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3" id="room_results">
-  {{#each results}}
-  {{> usercard this}}
-  {{/each}}
+  {{! generate all the necessary cards }}
+  <div class="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3" id="room_results">
+    {{#each results}}
+    {{> usercard this}}
+    {{/each}}
+  </div>
 </div>
 
 <script>

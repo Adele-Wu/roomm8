@@ -1,15 +1,15 @@
 {{!============================================================================================
 
 * Project: ROOMM8 (Room and Roommate Finder for College Students & Professionals)
-* Class: CSC-648-02 Software Engineering Final Project 
+* Class: CSC-648-02 Software Engineering Final Project
 * Fall 2021
 * TEAM 5 MEMBERS
-  > Edward Yun, 
-  > Jeffrey Fullmer Gradner, 
-  > Adele Wu, 
-  > Jeff Friedrich,
-  > Kris Byington, 
-  > Jose Quinteros
+> Edward Yun,
+> Jeffrey Fullmer Gradner,
+> Adele Wu,
+> Jeff Friedrich,
+> Kris Byington,
+> Jose Quinteros
 
 * File: user-profile.hbs
 * Description: this page shows a user's profile page
@@ -34,6 +34,11 @@
       </div>
 
       <div class="post_info_category">
+        <label class="post_label">Birthday: </label>
+        <span>{{currentUser.dob}}</span>
+      </div>
+
+      <div class="post_info_category">
         <label class="post_label">Field: </label>
         <span>{{currentUser.fields}}</span>
       </div>
@@ -43,10 +48,10 @@
         <span>{{currentUser.school}}</span>
       </div>
 
-      <div class="post_info_category">
+      {{!-- <div class="post_info_category">
         <label class="post_label">Email: </label>
         <span>{{currentUser.email}}</span>
-      </div>
+      </div> --}}
 
       <div class="post_info_category">
         <label class="post_label">Username: </label>
@@ -58,10 +63,15 @@
 
   <div class="card commentSection w-full lg:w-1/3 p-4">
     <div class="myComment">
+      <div class="messageClass">
         <label class="">Send a message to the user:</label>
-        <textarea rows="5" id="comment" name="comment" cols="30" class="px-2"
-          placeholder="send a message"></textarea>
-        <button class="commentButton" type="submit" id="sendMessageButton"value="Message">Send message</button>
+        <textarea rows="5" id="comment" name="comment" cols="30" class="px-2" placeholder="Send a message"></textarea>
+        {{#if logged}}
+        <button class="commentButton" type="submit" id="sendMessageButton" value="Message">Send message</button>
+        {{else}}
+        <button class="commentButton"><a href="/login">Log In To Message</a></button>
+        {{/if}} 
+      </div>
     </div>
 
     <div class="othersComments">
@@ -75,26 +85,24 @@
   </div>
 </div>
 
-<input type = "text" id ="emailValue" hidden disabled value ="{{currentUser.email}}">
-<input type = "text" id ="userNameValue" hidden disabled value ="{{currentUser.username}}">
+<input type="text" id="emailValue" hidden disabled value="{{currentUser.email}}">
+<input type="text" id="userNameValue" hidden disabled value="{{currentUser.username}}">
 
 <script>
-  document.getElementById("sendMessageButton").addEventListener("click",function()
-  {
+  document.getElementById("sendMessageButton").addEventListener("click", function () {
     usersEmail = document.getElementById("emailValue").value;
     userName = document.getElementById("userNameValue").value;
     usersMessage = document.getElementById("comment").value;
-    const myDataObject = {"usersEmail": usersEmail,"userName":userName,message:usersMessage};
-    
-    fetch("/users/sendMessage",{
-      method:'PUT',
-      headers:{
-      'Content-Type':'application/json'
-    },body:JSON.stringify(myDataObject)}).then(function(response)
-    {
+    const myDataObject = { "usersEmail": usersEmail, "userName": userName, message: usersMessage };
+
+    fetch("/users/sendMessage", {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      }, body: JSON.stringify(myDataObject)
+    }).then(function (response) {
       return response.json();
-    }).then(function(data)
-    {
+    }).then(function (data) {
       alert(data.response);
     });
   });

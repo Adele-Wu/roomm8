@@ -263,8 +263,8 @@ router.get("/filter", async (req, res, next) => {
 });
 
 
-router.get("/admin-panel", function (req, res, next) {
-  console.log("lolololol");
+router.get("/admin-panel", function (req, res, next) 
+{
   res.render("admin-panel", {
     title: "Admin Panel",
     searchPost: false,
@@ -320,17 +320,40 @@ router.post("/AdminAction",async function(request,response,next)
     }
     case "change-password":
     {
-      let new_password= request.body.password;
-      let hashed_password = bcrypt.hash(password, 10);
-      let baseSQL = `UPDATE users SET password = ${hashed_password} WHERE username = ${userName}`
-      db.execute(baseSQL);
-      next;
+      let new_password= request.body.new_password;
+      console.log(new_password)
+      bcrypt.hash(new_password, 10).then(function(hashed_password)
+      {
+        let baseSQL = `UPDATE users SET password = '${hashed_password}' WHERE username = '${userName}'`
+        console.log(baseSQL);
+        db.execute(baseSQL);
+      });
+      
+      response.redirect("/users/admin-panal");
       break;
     }
     case "match-user":
       {
 
       }
+    case "change-user-type":
+    {
+      let new_user_type = request.body.new_user_type;
+      let userTypeIntValue=1;
+      if(new_user_type=="user")
+      {
+        userTypeIntValue=1;
+      }
+      if(new_user_type=="admin")
+      {
+        userTypeIntValue=0;
+      }
+        let baseSQL = `UPDATE users SET usertype = ${userTypeIntValue} WHERE username = '${userName}'`
+        db.execute(baseSQL);
+        console.log(new_user_type);
+        response.redirect("/users/admin-panel")
+        break;
+    }
   }
 });
 
