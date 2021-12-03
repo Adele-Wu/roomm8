@@ -23,7 +23,6 @@ const session = require("express-session");
 const { sessionSave, delay } = require("../utils/promisification");
 var nodemailer = require("nodemailer");
 require("dotenv").config();
-
 /**
  * /register calls body("email").isEmail() from the express-validator library to
  * validate/sanitize the client's email. express-validator also has many different
@@ -344,10 +343,204 @@ router.get("/getEmail/:username", async function (request, response, next) {
   });
 });
 
-router.post("/edit-user", async (req, res, next) => {
-  res.redirect("/");
-  //dummy redirect, needs DB logic per case from Delete_this
-});
+  router.post("/edit-user", async (req, res, next) => {
+    //do I need db.execute or db.query 
+    //imperitvie that the query is in an array in the order sql will fill in that statements 
+    console.log(req.session);
+    console.log(req.body);
+    const sessionsUsername = req.session.username;
+    const updateItem = req.body.update_this;
+    
+    //lines 105 through 128 in Users in the authenticate function 
+    //they have the .then promise chain flow you need to catch errors correctly 
+
+    if(updateItem == 'delete'){
+      let baseSQL = `DELETE FROM users WHERE username = '${sessionsUsername}'`;
+      db.execute(baseSQL)
+      .then(async ([results, field]) => {
+        console.log(sessionsUsername + " is deleted");
+      })
+      .catch((err) => Promise.reject(err));;
+      res.redirect("/");
+    }
+
+    if(updateItem == 'first_name'){
+      let new_first_name = req.body.first_name;
+      let baseSQL = `UPDATE users SET first_name = ? WHERE username = ?`;
+      return db
+      .query(baseSQL,[new_first_name,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect( sessionsUsername);
+        //res.render("user/" + sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'last_name'){
+      let new_last_name = req.body.last_name;
+      let baseSQL = `UPDATE users SET last_name = ? WHERE username = ?`;
+      return db
+      .query(baseSQL,[new_last_name,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'gender'){
+      let new_gender = req.body.gender;
+      let baseSQL = `UPDATE users SET gender = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_gender,sessionsUsername]);
+      return db
+      .query(baseSQL,[new_gender,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'birth_date'){
+      let new_birth_date = req.body.date_of_birth;
+      let baseSQL = `UPDATE users SET dob = ? WHERE username = ?`;
+      return db
+      .query(baseSQL,[new_birth_date,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'field'){
+      let new_fields = req.body.fields;
+      let baseSQL = `UPDATE users SET fields = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_fields,sessionsUsername]); 
+      return db
+      .query(baseSQL,[new_fields,sessionsUsername])
+      .then(async ([results, field]) => {
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'school'){
+      let new_schools = req.body.schools;
+      let baseSQL = `UPDATE users SET school = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_schools,sessionsUsername]);
+      return db
+      .query(baseSQL,[new_schools,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'email' ){
+      try{
+        if (await User.emailExists(req.body.username)) {
+          throw new UserError(
+            "update Failed: Email already exist",
+            "/",
+            200
+          );
+        }
+      }catch (err) {
+        if (err instanceof UserError) {
+          errorPrint(err.getMessage());
+          req.flash("error", err.getMessage());
+          res.redirect(err.getRedirectURL());
+        } else {
+          next(err);
+        }
+      }
+      let new_email = req.body.email;
+      let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_email,sessionsUsername]);
+      return db
+      .query(baseSQL,[new_email,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'username'){
+      try {
+        if (await User.usernameExists(sessionsUsername)) {
+          throw new UserError(
+            "update Failed: Username already exist",
+            "/",
+            200
+          );
+        }
+      }catch (err) {
+        if (err instanceof UserError) {
+          errorPrint("User couldn't be made", err);
+          errorPrint(err.getMessage());
+          req.flash("error", err.getMessage());
+          res.redirect(err.getRedirectURL());
+        } else {
+          next(err);
+        }
+      }
+      let new_username = req.body.username;
+      let baseSQL = `UPDATE users SET username = ? WHERE username = ?`;
+      let results = await db.query(baseSQL, [new_username, sessionsUsername]);
+      console.log(results);
+      if(results && results.length){
+      //req.session.username = new_username; 
+      //await sessionSave(req.session);//does not update the session
+      res.redirect(new_username);
+    }
+     
+      // return db
+      // .query(baseSQL,[new_username,sessionsUsername])
+      // .then(async ([results, field]) => {
+      //   // if(results && results.length == 1){
+      //   //   console.log(updateItem + " changed succesfully");
+      //   // }
+      //   console.log(updateItem + " changed succesfully");
+      //   res.redirect(new_username);
+      // }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem =='password' && req.body.password == req.body.confirm_password){
+      let new_password= req.body.password;
+      let hashed_password = bcrypt.hash(password, 10);
+      let baseSQL = `UPDATE users SET password = ? WHERE username = ?`;
+      //db.execute(baseSQL,[hashed_password,sessionsUsername]);
+      return db
+      .query(baseSQL,[hashed_password,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+      next;
+    }
+    //dummy redirect, needs DB logic per case from Delete_this
+    res.redirect('/edit-user');
+  });
+
 // Interesting bug. Looks like /:params has priority over /filter, therefore it's necessary to have this
 // route after
 router.get("/:username", async (req, res, next) => {
@@ -397,10 +590,12 @@ let transporter = nodemailer.createTransport({
     pass: EmailPassword,
   },
 });
+
 transporter.verify((err, success) => {
   if (err) console.error(err);
   if (success) console.log("Your config is correct");
 });
+
 function sendMail(email, Username, message) {
   transporter
     .sendMail({
