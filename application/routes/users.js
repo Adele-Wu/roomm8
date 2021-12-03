@@ -99,7 +99,6 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       successPrint("Registration Success: User was created!");
       req.session.save((err) => {
         res.redirect("/login");
-        console.log(res);
       });
 
       // res.redirect("/login");
@@ -143,9 +142,8 @@ router.post("/login", async (req, res, next) => {
   userInfo = await User.authenticate(username, password);
   let loggedUserId = userInfo[0];
   let usertype = userInfo[1];
-
   try {
-    if (loggedUserId <= 0) {
+    if (!loggedUserId) {
       throw new UserError(
         "Login failed: User doesn't exist or password doesn't match.",
         "/login",
