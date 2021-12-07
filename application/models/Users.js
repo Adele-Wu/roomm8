@@ -357,4 +357,13 @@ const filterUserModularized = (obj, baseSQL, age, fields, flag) => {
   return [baseSQL, fields];
 };
 
+
+
+
+const adminActionChangeEmail = function(new_email,userName)
+{
+  
+  let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
+  db.query(baseSQL, [new_email, userName]);
+};
 module.exports = User;
