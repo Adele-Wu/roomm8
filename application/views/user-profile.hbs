@@ -96,7 +96,7 @@
     const myDataObject = { "usersEmail": usersEmail, "userName": userName, message: usersMessage };
 
     fetch("/users/sendMessage", {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       }, body: JSON.stringify(myDataObject)
