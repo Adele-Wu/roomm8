@@ -21,8 +21,11 @@ var flash = require("express-flash");
 var { body, validationResult } = require("express-validator");
 const session = require("express-session");
 const { sessionSave, delay } = require("../utils/promisification");
-var nodemailer = require('nodemailer');
-require('dotenv').config();
+require("dotenv").config();
+let aws = require("aws-sdk");
+var ses = new aws.SES({ region: "us-east-2" ,accessKeyId:process.env.AWS_ACCESS_KEY_ID ,
+secretAccessKey: process.env.AWS_SECRECT_ACCESS_KEY});
+
 
 /**
  * /register calls body("email").isEmail() from the express-validator library to
@@ -100,7 +103,6 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
       successPrint("Registration Success: User was created!");
       req.session.save((err) => {
         res.redirect("/login");
-        console.log(res);
       });
 
       // res.redirect("/login");
@@ -140,13 +142,12 @@ router.post("/register", [body("email").isEmail()], async (req, res, next) => {
  */
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
-  
-  userInfo= await User.authenticate(username, password);
-  const loggedUserId =userInfo[0];
-  let usertype = userInfo[1];
 
+  userInfo = await User.authenticate(username, password);
+  let loggedUserId = userInfo[0];
+  let usertype = userInfo[1];
   try {
-    if (loggedUserId <= 0) {
+    if (!loggedUserId) {
       throw new UserError(
         "Login failed: User doesn't exist or password doesn't match.",
         "/login",
@@ -158,7 +159,6 @@ router.post("/login", async (req, res, next) => {
     res.locals.logged = true; // hide things in navbar
     req.session.usertype = usertype;
     successPrint(`${username} is logged in.`);
-
     // whenever you're storing sessions
     // req.session.save((err) => {
     //   res.redirect("/");
@@ -200,17 +200,17 @@ router.post("/logout", async (req, res, next) => {
   });
 });
 
-// router.get("/:id(\\d+)", async (req, res, next) => {
-//   let baseSQL = "SELECT * FROM users where user_id = ?;";
-//   let [results, fields] = await db.execute(baseSQL, [req.params.id]);
-//   // console.log(results);
-//   if (results && results.length) {
-//     res.render("user-profile", {
-//       title: results[0].first_name,
-//       currentUser: results[0],
-//     });
-//   }
-// });
+router.get("/:id(\\d+)", async (req, res, next) => {
+  let baseSQL = "SELECT * FROM users where user_id = ?;";
+  let [results, fields] = await db.execute(baseSQL, [req.params.id]);
+  // console.log(results);
+  if (results && results.length) {
+    res.render("user-profile", {
+      title: results[0].first_name,
+      currentUser: results[0],
+    });
+  }
+});
 
 /**
  * /search will search by a user text input with a few conditions
@@ -272,48 +272,39 @@ router.get("/admin-panel", function (req, res, next)
   });
 });
 
-router.post("/AdminAction",async function(request,response,next)
-{
+router.post("/AdminAction", async function (request, response, next) {
   const { admin_username, admin_password } = request.body;
   let loggedUserId = await User.authenticate(admin_username, admin_password);
-  try 
-  {
-    if (loggedUserId <= 0) 
-    {
+  try {
+    if (loggedUserId <= 0) {
       throw new UserError(
-        "Login failed: User doesn't exist or password doesn't match.","/login",200);
-      }
+        "Login failed: User doesn't exist or password doesn't match.",
+        "/login",
+        200
+      );
     }
-  catch (err) 
-  {
-    if (err instanceof UserError) 
-    {
-        errorPrint(err.getMessage());
-        // flash on browser | will not work without session
-        req.flash("error", err.getMessage());
-        res.status(err.getStatus());
-        res.redirect("/login");
-    } 
-    else 
-    {
-        next(err);
+  } catch (err) {
+    if (err instanceof UserError) {
+      errorPrint(err.getMessage());
+      // flash on browser | will not work without session
+      req.flash("error", err.getMessage());
+      res.status(err.getStatus());
+      res.redirect("/login");
+    } else {
+      next(err);
     }
   }
 
-  let userName= request.body.username;
-  switch(request.body.operation_selector)
-  {
-    case "change-email":
-    {
-      let new_email= request.body.new_email;
-      let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
-      db.query(baseSQL,[new_email,userName]);
-      response.redirect("/users/admin-panel")
+  let userName = request.body.username;
+  switch (request.body.operation_selector) {
+    case "change-email": {
+      let new_email = request.body.new_email;
+      Users.adminActionChangeEmail(new_email,userName);
+      response.redirect("/users/admin-panel");
       break;
     }
-    case "delete-user":
-    {
-      let baseSQL=`DELETE FROM users WHERE username = '${userName}'`;
+    case "delete-user": {
+      let baseSQL = `DELETE FROM users WHERE username = '${userName}'`;
       db.execute(baseSQL);
       response.redirect("/");
       break;
@@ -334,7 +325,13 @@ router.post("/AdminAction",async function(request,response,next)
     }
     case "match-user":
       {
-
+        let userName2 = request.body.username2;
+        let baseSQL = `select email from users where username = "${userName}"; `
+        let baseSQL2 = `select email from users where username = "${userName2}"; `
+        let email = await db.query(baseSQL);
+        let email2 = await db.query(baseSQL2);
+        sesTest(email, "messageCurrior@roomm8.net", `Hey ${userName} you have been matched with ${userName2}`, `${userName}`);
+        sesTest(email2, "messageCurrior@roomm8.net", `Hey ${userName2} you have been matched with ${userName}`, `${userName2}`);
       }
     case "change-user-type":
     {
@@ -357,31 +354,227 @@ router.post("/AdminAction",async function(request,response,next)
   }
 });
 
-router.get("/getUserName/:email",async function(request,response,next)
-{
+router.get("/getUserName/:email", async function (request, response, next) {
   let baseSQL = `SELECT U.username FROM users U WHERE U.email = ?`;
-  console.log(request.params.email)
-  db.execute(baseSQL,[request.params.email]).then(function([results,fields])
-  {
-        console.log(results)
-        response.json(results);
-    });
+  console.log(request.params.email);
+  db.execute(baseSQL, [request.params.email]).then(function ([
+    results,
+    fields,
+  ]) {
+    console.log(results);
+    response.json(results);
+  });
+});
+
+router.get("/getEmail/:username", async function (request, response, next) {
+  let baseSQL = `SELECT U.email FROM users U WHERE U.username = ?`;
+  db.execute(baseSQL, [request.params.username]).then(function ([
+    results,
+    fields,
+  ]) {
+    console.log(results);
+    response.json(results);
+  });
+});
+
+  router.post("/edit-user", async (req, res, next) => {
+    //do I need db.execute or db.query 
+    //imperitvie that the query is in an array in the order sql will fill in that statements 
+    console.log(req.session);
+    console.log(req.body);
+    const sessionsUsername = req.session.username;
+    const updateItem = req.body.update_this;
+    
+    //lines 105 through 128 in Users in the authenticate function 
+    //they have the .then promise chain flow you need to catch errors correctly 
+
+    if(updateItem == 'delete'){
+      let baseSQL = `DELETE FROM users WHERE username = '${sessionsUsername}'`;
+      db.execute(baseSQL)
+      .then(async ([results, field]) => {
+        console.log(sessionsUsername + " is deleted");
+      })
+      .catch((err) => Promise.reject(err));;
+      res.redirect("/");
+    }
+
+    if(updateItem == 'first_name'){
+      let new_first_name = req.body.first_name;
+      let baseSQL = `UPDATE users SET first_name = ? WHERE username = ?`;
+      return db
+      .query(baseSQL,[new_first_name,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect( sessionsUsername);
+        //res.render("user/" + sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'last_name'){
+      let new_last_name = req.body.last_name;
+      let baseSQL = `UPDATE users SET last_name = ? WHERE username = ?`;
+      return db
+      .query(baseSQL,[new_last_name,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'gender'){
+      let new_gender = req.body.gender;
+      let baseSQL = `UPDATE users SET gender = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_gender,sessionsUsername]);
+      return db
+      .query(baseSQL,[new_gender,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'birth_date'){
+      let new_birth_date = req.body.date_of_birth;
+      let baseSQL = `UPDATE users SET dob = ? WHERE username = ?`;
+      return db
+      .query(baseSQL,[new_birth_date,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'field'){
+      let new_fields = req.body.fields;
+      let baseSQL = `UPDATE users SET fields = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_fields,sessionsUsername]); 
+      return db
+      .query(baseSQL,[new_fields,sessionsUsername])
+      .then(async ([results, field]) => {
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'school'){
+      let new_schools = req.body.schools;
+      let baseSQL = `UPDATE users SET school = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_schools,sessionsUsername]);
+      return db
+      .query(baseSQL,[new_schools,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'email' ){
+      try{
+        if (await User.emailExists(req.body.username)) {
+          throw new UserError(
+            "update Failed: Email already exist",
+            "/",
+            200
+          );
+        }
+      }catch (err) {
+        if (err instanceof UserError) {
+          errorPrint(err.getMessage());
+          req.flash("error", err.getMessage());
+          res.redirect(err.getRedirectURL());
+        } else {
+          next(err);
+        }
+      }
+      let new_email = req.body.email;
+      let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
+      //db.query(baseSQL,[new_email,sessionsUsername]);
+      return db
+      .query(baseSQL,[new_email,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem == 'username'){
+      try {
+        if (await User.usernameExists(sessionsUsername)) {
+          throw new UserError(
+            "update Failed: Username already exist",
+            "/",
+            200
+          );
+        }
+      }catch (err) {
+        if (err instanceof UserError) {
+          errorPrint("User couldn't be made", err);
+          errorPrint(err.getMessage());
+          req.flash("error", err.getMessage());
+          res.redirect(err.getRedirectURL());
+        } else {
+          next(err);
+        }
+      }
+      let new_username = req.body.username;
+      let baseSQL = `UPDATE users SET username = ? WHERE username = ?`;
+      let results = await db.query(baseSQL, [new_username, sessionsUsername]);
+      console.log(results);
+      if(results && results.length){
+      //req.session.username = new_username; 
+      //await sessionSave(req.session);//does not update the session
+      res.redirect(new_username);
+    }
+     
+      // return db
+      // .query(baseSQL,[new_username,sessionsUsername])
+      // .then(async ([results, field]) => {
+      //   // if(results && results.length == 1){
+      //   //   console.log(updateItem + " changed succesfully");
+      //   // }
+      //   console.log(updateItem + " changed succesfully");
+      //   res.redirect(new_username);
+      // }).catch((err) => Promise.reject(err));
+    }
+
+    if(updateItem =='password' && req.body.password == req.body.confirm_password){
+      let new_password= req.body.password;
+      let hashed_password = bcrypt.hash(password, 10);
+      let baseSQL = `UPDATE users SET password = ? WHERE username = ?`;
+      //db.execute(baseSQL,[hashed_password,sessionsUsername]);
+      return db
+      .query(baseSQL,[hashed_password,sessionsUsername])
+      .then(async ([results, field]) => {
+        // if(results && results.length == 1){
+        //   console.log(updateItem + " changed succesfully");
+        // }
+        console.log(updateItem + " changed succesfully");
+        res.redirect(sessionsUsername);
+      }).catch((err) => Promise.reject(err));
+      next;
+    }
+    //dummy redirect, needs DB logic per case from Delete_this
+    res.redirect('/edit-user');
   });
 
-router.get("/getEmail/:username",async function(request,response,next)
-{
-  let baseSQL = `SELECT U.email FROM users U WHERE U.username = ?`
-  db.execute(baseSQL,[request.params.username]).then(function([results,fields])
-  {
-        console.log(results)
-        response.json(results);
-    });
-});
-
-router.post("/edit-user", async (req, res, next) => {
-  res.redirect("/");
-  //dummy redirect, needs DB logic per case from Delete_this
-});
 // Interesting bug. Looks like /:params has priority over /filter, therefore it's necessary to have this
 // route after
 router.get("/:username", async (req, res, next) => {
@@ -412,46 +605,42 @@ router.get("/:username", async (req, res, next) => {
     }
   }
 });
-router.put("/sendMessage",function(request,response,next)
-{
-  let usersEmail =request.body.usersEmail;
-  let userName = request.body.userName
+router.post("/sendMessage", async function (request, response, next) {
+  let usersEmail = request.body.usersEmail;
+  let userName = request.body.userName;
   let message = request.body.message;
-  sendMail(usersEmail,userName,message);
-  response.json({response:"message sent"});
+  
+  sesTest(usersEmail,"messageCurrior@roomm8.net",message,userName);
+  //mailer.sendEmail(usersEmail, userName, message);
+  response.json({ response: "message sent" });
 });
+function sesTest(emailTo, emailFrom, message, name) {
 
 
 
 
+  var params = {
+    Destination: {
+      ToAddresses: [emailTo]
+    },
+    Message: {
+      Body: {
+        Text: { Data: "From Contact Form: " + name + "\n " + message }
+      },
 
-EmailUserName=process.env.EmailUserName;
-EmailPassword=process.env.EmailPassword;
+      Subject: { Data: "From: " + emailFrom }
+    },
+    Source: "messageCurrior@roomm8.net"
+  };
+  
 
-let transporter =nodemailer.createTransport({
-  host: "roomm8.net",
-  port: 465,
-  auth: {
-    user: EmailUserName,
-    pass: EmailPassword
-  }
-});
-transporter.verify((err, success) => {
-  if (err) console.error(err);
-  if(success)console.log('Your config is correct');
-});
-function sendMail(email,Username,message)
-{
-  transporter.sendMail({
-    from: '"Message Courier" <"messagecourier@roomm8.net">', // sender address
-    to: email, // list of receivers
-    subject: "Message from"+Username, // Subject line
-    text: message
+
+  return ses.sendEmail(params).promise().then(function(sucess)
+  {
+      console.log(sucess);
   }).catch(function(error)
   {
-    console.log(error);
+      console.log(error);
   });
 }
-
-
 module.exports = router;

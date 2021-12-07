@@ -79,7 +79,8 @@ gender.addEventListener("click", (e) => {
   }
 });
 
-date_of_birth.addEventListener("input", (e) => {
+date_of_birth.addEventListener("click", (e) => {
+  console.log("BOOOOM");
   setSuccessFor(date_of_birth);
   final_test_before_sql_query[4] = true;
 });
@@ -339,42 +340,38 @@ function readyToSubmit()
     {
         return true;
     }
-    if( update_gender.checked && 
+    if( update_birth_date.checked && 
         final_test_before_sql_query[4] )
     {
+      console.log("in herrrrr")
         return true;
     }
-    if( update_birth_date.checked && 
+    if( update_field.checked && 
         final_test_before_sql_query[5] )
     {
         return true;
     }
-    if( update_field.checked && 
+    if( update_school.checked && 
         final_test_before_sql_query[6] )
     {
         return true;
     }
-    if( update_school.checked && 
+    if( update_email.checked && 
         final_test_before_sql_query[7] )
     {
         return true;
     }
-    if( update_email.checked && 
+    if( update_username.checked && 
         final_test_before_sql_query[8] )
     {
         return true;
     }
-    // if( update_username.checked && 
-    //     final_test_before_sql_query[9] )
-    // {
-    //     return true;
-    // }
    // edit-user-validation.js:367 Uncaught TypeError:
    // Cannot read properties of null (reading 'checked')
    // at readyToSubmit (edit-user-validation.js:367)
    // at HTMLFormElement.<anonymous> (edit-user-validation.js:167)
     if( update_password.checked && 
-        final_test_before_sql_query[10] )
+        final_test_before_sql_query[9] )
     {
         return true;
     }

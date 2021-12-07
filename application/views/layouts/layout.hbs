@@ -36,15 +36,22 @@
     ></script>
     {{#if searchPost}}
     <script defer src="javascripts/google-map.js"></script>
-   <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUQ84KIyy3GqKppaP1-GI_MTZ5-mhrhgQ&callback=initMap&libraries=&v=weekly"
-  ></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUQ84KIyy3GqKppaP1-GI_MTZ5-mhrhgQ&callback=initMap&libraries=&v=weekly"></script>
     <script defer src="javascripts/search-post.js"></script>
     <script defer src="javascripts/filter-post.js"></script>
     {{/if}}
     {{#if searchUser}}
     <script defer src="javascripts/search-user.js"></script>
     {{/if}}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3EFR69JCG8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3EFR69JCG8');
+    </script>
     <script defer src="javascripts/radio-button-deselect.js"></script>
   </head>
 

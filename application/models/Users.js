@@ -87,7 +87,6 @@ User.create = async (
       if (results && results.affectedRows) {
         // results.insertId is the id of the new user and will always be greater than one.
         // insertId is a keyword used for mySql
-        // console.log(results);
         return results.insertId;
       } else {
         return -1;
@@ -104,15 +103,17 @@ User.authenticate = async (username, password) => {
   let usertype;
   return db
     .execute(baseSQL, [username])
-    .then(([results, field]) => {
+    .then(async ([results, field]) => {
+      
       // here we want a result from our query then have the id persist through once logged in.
       if (results && results.length == 1) {
+        console.log("password");
         userId = results[0].user_id;
         usertype = results[0].usertype;
         // To learn more about bcrypt, you can go to this link https://github.com/kelektiv/node.bcrypt.js
         // ctrl + f compare
         // we pass in the password and hashed password returning a bool
-        return bcrypt.compare(password, results[0].password);
+        return await bcrypt.compare(password, results[0].password);
       } else {
         return false;
       }
@@ -120,7 +121,7 @@ User.authenticate = async (username, password) => {
     .then((passwordsMatched) => {
       if (passwordsMatched) {
         // TODO note that promise resolve and reject is outdated. find new.
-        return [userId,usertype];
+        return [userId, usertype];
       } else {
         return -1;
       }
@@ -194,7 +195,6 @@ const partitionObj = (parseObject, column) => {
  * @returns row results of the selected filter options
  */
 User.filter = async (parseObject, parseObjectKey) => {
-  console.log("print this in filter");
   let age = false;
   let baseSQL =
     "SELECT DISTINCT u.user_id, u.first_name, u.last_name, u.gender, u.dob, u.occupation, u.fields, u.school, u.email, u.username, u.description, u.photopath FROM users u ";
@@ -357,4 +357,13 @@ const filterUserModularized = (obj, baseSQL, age, fields, flag) => {
   return [baseSQL, fields];
 };
 
+
+
+
+const adminActionChangeEmail = function(new_email,userName)
+{
+  
+  let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
+  db.query(baseSQL, [new_email, userName]);
+};
 module.exports = User;
