@@ -21,7 +21,6 @@ var flash = require("express-flash");
 var { body, validationResult } = require("express-validator");
 const session = require("express-session");
 const { sessionSave, delay } = require("../utils/promisification");
-const mailer = require("../nodeMailer/mailer")
 require("dotenv").config();
 let aws = require("aws-sdk");
 var ses = new aws.SES({ region: "us-east-2" ,accessKeyId:process.env.AWS_ACCESS_KEY_ID ,
@@ -302,8 +301,7 @@ router.post("/AdminAction", async function (request, response, next) {
   switch (request.body.operation_selector) {
     case "change-email": {
       let new_email = request.body.new_email;
-      let baseSQL = `UPDATE users SET email = ? WHERE username = ?`;
-      db.query(baseSQL, [new_email, userName]);
+      Users.adminActionChangeEmail(new_email,userName);
       response.redirect("/users/admin-panel");
       break;
     }
