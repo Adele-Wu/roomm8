@@ -325,7 +325,13 @@ router.post("/AdminAction", async function (request, response, next) {
     }
     case "match-user":
       {
-
+        let userName2 = request.body.username2;
+        let baseSQL = `select email from users where username = "${userName}"; `
+        let baseSQL2 = `select email from users where username = "${userName2}"; `
+        let email = await db.query(baseSQL);
+        let email2 = await db.query(baseSQL2);
+        sesTest(email, "messageCurrior@roomm8.net", `Hey ${userName} you have been matched with ${userName2}`, `${userName}`);
+        sesTest(email2, "messageCurrior@roomm8.net", `Hey ${userName2} you have been matched with ${userName}`, `${userName2}`);
       }
     case "change-user-type":
     {

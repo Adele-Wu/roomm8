@@ -35,6 +35,7 @@ var usersRouter = require("./routes/users");
 var aboutRouter = require("./routes/about");
 var postRouter = require("./routes/post");
 
+
 var requestPrint = require("./helpers/debug/debugprinters").requestPrint;
 
 app.engine(
@@ -51,6 +52,11 @@ app.engine(
     },
   })
 );
+app.use("/terms",function(request,response,next)
+{
+  response.render("termsAndPrivacy");
+
+});
 
 // https://www.npmjs.com/package/express-mysql-session
 // session store will create a connection pool which will handle the connection
