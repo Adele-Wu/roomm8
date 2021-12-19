@@ -108,7 +108,7 @@ class GoogleMap {
 
 // google_map_submit.addEventListener("click", () => {
 //   let BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-//   let API_KEY = "AIzaSyDIE-MIgEos6ePPbsLh9gQ7nJqEX_TwfuU";
+//   let API_KEY = "<API key here>";
 //   let url = BASE_URL + google_map_address.value + "&key=" + API_KEY;
 //   let lat, long;
 //   axios
